@@ -1441,6 +1441,10 @@ body:not(.communities-visible) .social-tabs{display:none;}
 
         <div class="settings-group-title">Приложение</div>
         <div class="card" style="margin-bottom:12px;">
+          <div class="settings-row" id="install-row">
+            <div><b>Установить приложение</b><span id="install-detail">Значок на главном экране, работает как обычное приложение</span></div>
+            <button type="button" class="btn btn-primary btn-sm" id="install-btn">Установить</button>
+          </div>
           <div class="settings-row">
             <div><b>Внешний вид</b><span>Выберите один из трёх вариантов оформления</span></div>
             <div class="segmented" id="theme-seg">
@@ -1563,6 +1567,17 @@ body:not(.communities-visible) .social-tabs{display:none;}
 <div class="toast" id="toast"></div>
 
 <script src="/connection-config.js"></script>
+<script>
+// Сервер по умолчанию. Его можно сменить в настройках приложения (раздел «Серверы»).
+// Если приложение открыто с домашнего или локального сервера, по умолчанию используется он сам.
+(function(){
+  var DEFAULT_SERVER='https://dis-ser-1.onrender.com/api';
+  var local=/^https?:$/.test(location.protocol)&&/^(localhost|127\.|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.|\[::1\])/i.test(location.hostname);
+  if(!window.DISCIPLINE_CONFIG) window.DISCIPLINE_CONFIG={};
+  if(!window.DISCIPLINE_CONFIG.standard&&!local) window.DISCIPLINE_CONFIG.standard=DEFAULT_SERVER;
+  window.DISCIPLINE_CONFIG.defaultServer=DEFAULT_SERVER;
+})();
+</script>
 <script src="../shared/connection.js"></script>
 <!-- Progress logic ships with this page so a stale/missing external asset cannot break saving. -->
 <script>
@@ -5670,6 +5685,30 @@ body:not(.communities-visible) .social-tabs{display:none;}
       '<small>'+(over?'Продлите тариф, чтобы приглашать учеников и отправлять задания.':'Осталось '+hours+' ч · до '+billingDate(until)+'. Продлите, чтобы ученики не потеряли доступ.')+'</small></span>'+
       '<button type="button" class="btn btn-primary btn-sm" data-action="open-tariffs">Продлить</button></div>';
   }
+
+  /* ---------- Установка приложения на устройство ---------- */
+  (function(){
+    var btn=document.getElementById('install-btn'), det=document.getElementById('install-detail'), deferred=null; if(!btn||!det) return;
+    var standalone=(window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;
+    var ios=/iphone|ipad|ipod/i.test(navigator.userAgent), server=(window.DISCIPLINE_CONFIG&&window.DISCIPLINE_CONFIG.defaultServer||'').replace(/\/api$/,'');
+    function state(text,label,hide){ det.textContent=text; btn.textContent=label||'Установить'; btn.hidden=!!hide; }
+    if(standalone){ state('Приложение уже установлено на этом устройстве','',true); return; }
+    if(!/^https?:$/.test(location.protocol)){ state('Сейчас приложение открыто как файл — так установить нельзя. Откройте его по адресу сервера.','Открыть'); btn.addEventListener('click',function(){ location.href=server+'/'; }); return; }
+    if(location.protocol==='http:'&&!/^(localhost|127\.)/.test(location.hostname)) state('Для установки нужен защищённый адрес (https). Откройте приложение по адресу сервера.','Как установить');
+    else if(ios) state('На iPhone: нажмите «Поделиться», затем «На экран “Домой”»','Как установить');
+    else state('Значок на главном экране, работает как обычное приложение','Установить');
+    window.addEventListener('beforeinstallprompt',function(e){ e.preventDefault(); deferred=e; state('Готово к установке — нажмите «Установить»','Установить'); });
+    window.addEventListener('appinstalled',function(){ deferred=null; state('Приложение установлено','',true); showToast('Приложение установлено'); });
+    btn.addEventListener('click',function(){
+      if(deferred){ deferred.prompt(); deferred.userChoice.then(function(){ deferred=null; }).catch(function(){}); return; }
+      openModal('<div class="auth-hero"><i aria-hidden="true">📲</i><h2>Как установить</h2><p>Установка делается через меню браузера</p></div>'+
+        '<div class="gm-prog" style="cursor:default;"><span class="gm-emoji">🤖</span><span class="gm-t"><b>Android · Chrome</b><small>Меню «⋮» → «Установить приложение» или «Добавить на главный экран»</small></span></div>'+
+        '<div class="gm-prog" style="cursor:default;"><span class="gm-emoji">🍎</span><span class="gm-t"><b>iPhone · Safari</b><small>Кнопка «Поделиться» → «На экран “Домой”»</small></span></div>'+
+        '<div class="gm-prog" style="cursor:default;"><span class="gm-emoji">💻</span><span class="gm-t"><b>Компьютер · Chrome или Edge</b><small>Значок установки справа в адресной строке или меню «⋮» → «Установить»</small></span></div>'+
+        '<p class="gm-note">Приложение должно быть открыто по адресу сервера'+(server?': <b>'+escapeHtml(server)+'</b>':'')+', а не как файл с компьютера, и не в режиме инкогнито.</p>'+
+        '<div class="modal-actions"><button type="button" class="btn btn-ghost btn-block" data-action="close-modal">Понятно</button></div>');
+    });
+  })();
 
   /* ---------- Уведомления: настройки и события (друзья, ученики, тренер) ---------- */
   var DPNotify=(function(){
