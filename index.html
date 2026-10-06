@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
 <title>Дисциплина Pro</title>
 <meta name="description" content="Трекер привычек и тренировок с оффлайн-режимом и синхронизацией">
 <meta name="theme-color" content="#6d5bff">
@@ -363,7 +363,7 @@
   .modal-card h2{font-size:18px; margin-bottom:16px;}
   .field{margin-bottom:14px;}
   .field label{display:block; font-size:12.5px; font-weight:700; color:var(--text-dim); margin-bottom:6px;}
-  .field input[type=text], .field input[type=password], .field input[type=number], .field input[type=date], .field textarea, .field select{
+  .field input[type=text], .field input[type=tel], .field input[type=email], .field input[type=password], .field input[type=number], .field input[type=date], .field textarea, .field select{
     width:100%; padding:12px 13px; border-radius:12px; border:1px solid var(--card-border); background:var(--bg);
     color:var(--text); font-family:inherit; font-size:14.5px;
   }
@@ -485,7 +485,7 @@
   /* Spacious tablet and desktop workspace. Keep mobile layouts compact. */
   .desktop-intro{display:none;}
   button:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--accent);outline-offset:4px;}
-  @media (min-width:900px), (min-width:768px) and (orientation:landscape){
+  @media (min-width:900px), (min-width:600px) and (orientation:landscape){
     .app-shell{display:grid;grid-template-columns:210px minmax(0,1fr);max-width:1600px;margin:0 auto;}
     .app-shell > div{min-width:0;}
     .sidebar{display:flex;flex-direction:column;gap:7px;position:sticky;top:0;height:100dvh;overflow-y:auto;padding:28px 16px 20px;border-right:1px solid var(--card-border);background:var(--bg-elevated);}
@@ -554,7 +554,7 @@
     .topbar{padding-left:44px;padding-right:44px;}
     .desktop-intro h2{font-size:36px;}
   }
-  @media (min-width:768px) and (max-width:1050px) and (orientation:landscape){
+  @media (min-width:600px) and (max-width:1050px) and (orientation:landscape){
     .app-shell{grid-template-columns:184px minmax(0,1fr);}
     .sidebar{padding:20px 10px;}
     .sidebar .brand{gap:6px;padding:0;}
@@ -575,10 +575,9 @@
 .training-role-control{display:flex;align-items:center;gap:10px;position:relative;flex:none;font-size:12px;font-weight:600;cursor:pointer}.training-role-control input{position:absolute;right:0;opacity:0;width:44px;height:44px;margin:0;cursor:pointer}.training-switch{width:44px;height:26px;border-radius:20px;background:var(--card-border);position:relative;pointer-events:none;transition:background .2s}.training-switch:after{content:'';position:absolute;left:3px;top:3px;width:20px;height:20px;background:var(--text);border-radius:50%;transition:transform .2s}.training-role-control input:checked+.training-switch{background:var(--accent)}.training-role-control input:checked+.training-switch:after{transform:translateX(18px);background:white}.training-role-control input:focus-visible+.training-switch{outline:3px solid var(--accent);outline-offset:4px}.training-intro{padding:20px;margin-bottom:20px}.training-intro p,.training-assignment p{color:var(--text-dim);font-size:12px;line-height:1.6;margin:6px 0 14px}.training-assignment{display:flex;align-items:center;gap:12px;padding:16px;margin-bottom:10px}.training-assignment>div{flex:1;min-width:0;overflow-wrap:anywhere}.training-assignment p{margin-bottom:0}.training-assignment-icon{font-size:24px}.bottom-nav .nav-btn{min-width:0;flex:1;padding-left:2px;padding-right:2px}.bottom-nav .nav-btn span{font-size:9px}.sidebar .nav-btn[data-view="trainer"]{order:2}@media(max-width:380px){.training-assignment{flex-wrap:wrap}.training-assignment button{margin-left:auto}.training-role-control{gap:5px}.training-role-control>span:first-child{font-size:10px}}
  </style>
 <style>
-  @media(max-width:899px){.topbar>.row-inline{display:none}.bottom-nav{display:flex;align-items:center;justify-content:stretch;gap:0;padding:7px 8px calc(7px + var(--safe-bottom));background:color-mix(in srgb,var(--bg-elevated) 94%,transparent);backdrop-filter:blur(18px);box-shadow:0 -8px 28px rgba(20,24,45,.07)}.dock-group{display:flex;flex:1;min-width:0;align-items:center;justify-content:space-around;gap:0}.dock-center{position:relative;display:flex;width:68px;height:48px;flex:0 0 68px;align-items:center;justify-content:center}.bottom-nav .nav-btn{flex:1;width:50%;min-width:0;min-height:48px;padding:4px 1px;border-radius:12px;gap:4px}.bottom-nav .nav-btn svg{width:21px;height:21px}.bottom-nav .nav-btn span{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:9px;line-height:1.2}.dock-plus{position:absolute;top:-21px;left:50%;display:flex;width:52px;height:52px;flex:none;flex-direction:column;align-items:center;justify-content:center;gap:0;border:4px solid var(--bg-elevated);border-radius:50%;margin:0;padding:0;background:linear-gradient(145deg,var(--accent),var(--accent-2));color:#fff;box-shadow:0 5px 16px var(--accent-soft);cursor:pointer;transform:translateX(-50%);transition:transform .18s ease,filter .18s ease}.dock-plus>span{font-size:29px;font-weight:400;line-height:24px}.dock-plus small{font-size:7px;line-height:9px;font-weight:700;letter-spacing:.04em}.dock-plus:active{transform:translateX(-50%) scale(.93)}.dock-plus.is-open{filter:saturate(.8);transform:translateX(-50%) rotate(45deg)}.dock-plus.is-open small{transform:rotate(-45deg)}.quick-menu{position:absolute;z-index:35;bottom:calc(100% + 12px);left:50%;width:min(290px,calc(100vw - 28px));padding:8px;border:1px solid var(--card-border);border-radius:18px;background:var(--bg-elevated);box-shadow:0 16px 48px rgba(15,23,42,.18);transform:translateX(-50%);animation:quickMenuIn .16s ease both}.quick-menu[hidden]{display:none!important}.quick-action{display:flex;width:100%;min-height:58px;align-items:center;gap:12px;border:0;border-radius:12px;background:transparent;padding:8px;text-align:left;color:var(--text);cursor:pointer}.quick-action:hover,.quick-action:focus-visible{background:var(--accent-soft)}.quick-action+.quick-action{border-top:1px solid var(--card-border)}.quick-action>span:last-child{min-width:0}.quick-action b,.quick-action small{display:block}.quick-action b{font-size:12px}.quick-action small{margin-top:3px;color:var(--text-dim);font-size:10px}.quick-icon{display:grid;width:36px;height:36px;flex:none;place-items:center;border-radius:11px;background:var(--accent-soft);color:var(--accent);font-size:20px}.quick-action:first-child .quick-icon{background:linear-gradient(145deg,var(--accent),var(--accent-2));color:white}.bottom-nav .nav-btn.active{background:var(--accent-soft)}.main{padding-bottom:calc(var(--nav-h) + var(--safe-bottom) + 38px)}}
+  @media (max-width:899px) and (orientation:portrait), (max-width:599px){.topbar>.row-inline{display:none}.bottom-nav{display:flex;align-items:center;justify-content:stretch;gap:0;padding:7px 8px calc(7px + var(--safe-bottom));background:color-mix(in srgb,var(--bg-elevated) 94%,transparent);backdrop-filter:blur(18px);box-shadow:0 -8px 28px rgba(20,24,45,.07)}.dock-group{display:flex;flex:1;min-width:0;align-items:center;justify-content:space-around;gap:0}.dock-center{position:relative;display:flex;width:68px;height:48px;flex:0 0 68px;align-items:center;justify-content:center}.bottom-nav .nav-btn{flex:1;width:50%;min-width:0;min-height:48px;padding:4px 1px;border-radius:12px;gap:4px}.bottom-nav .nav-btn svg{width:21px;height:21px}.bottom-nav .nav-btn span{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:9px;line-height:1.2}.dock-plus{position:absolute;top:-21px;left:50%;display:flex;width:52px;height:52px;flex:none;flex-direction:column;align-items:center;justify-content:center;gap:0;border:4px solid var(--bg-elevated);border-radius:50%;margin:0;padding:0;background:linear-gradient(145deg,var(--accent),var(--accent-2));color:#fff;box-shadow:0 5px 16px var(--accent-soft);cursor:pointer;transform:translateX(-50%);transition:transform .18s ease,filter .18s ease}.dock-plus>span{font-size:29px;font-weight:400;line-height:24px}.dock-plus small{font-size:7px;line-height:9px;font-weight:700;letter-spacing:.04em}.dock-plus:active{transform:translateX(-50%) scale(.93)}.dock-plus.is-open{filter:saturate(.8);transform:translateX(-50%) rotate(45deg)}.dock-plus.is-open small{transform:rotate(-45deg)}.quick-menu{position:absolute;z-index:35;bottom:calc(100% + 12px);left:50%;width:min(290px,calc(100vw - 28px));padding:8px;border:1px solid var(--card-border);border-radius:18px;background:var(--bg-elevated);box-shadow:0 16px 48px rgba(15,23,42,.18);transform:translateX(-50%);animation:quickMenuIn .16s ease both}.quick-menu[hidden]{display:none!important}.quick-action{display:flex;width:100%;min-height:58px;align-items:center;gap:12px;border:0;border-radius:12px;background:transparent;padding:8px;text-align:left;color:var(--text);cursor:pointer}.quick-action:hover,.quick-action:focus-visible{background:var(--accent-soft)}.quick-action+.quick-action{border-top:1px solid var(--card-border)}.quick-action>span:last-child{min-width:0}.quick-action b,.quick-action small{display:block}.quick-action b{font-size:12px}.quick-action small{margin-top:3px;color:var(--text-dim);font-size:10px}.quick-icon{display:grid;width:36px;height:36px;flex:none;place-items:center;border-radius:11px;background:var(--accent-soft);color:var(--accent);font-size:20px}.quick-action:first-child .quick-icon{background:linear-gradient(145deg,var(--accent),var(--accent-2));color:white}.bottom-nav .nav-btn.active{background:var(--accent-soft)}.main{padding-bottom:calc(var(--nav-h) + var(--safe-bottom) + 38px)}}
   @media(max-width:380px){.bottom-nav{padding-left:4px;padding-right:4px}.dock-center{width:58px;flex-basis:58px}.dock-plus{width:49px;height:49px}.bottom-nav .nav-btn span{font-size:8px}}
-  @media(min-width:768px) and (max-width:899px) and (orientation:landscape){.app-shell{display:block;max-width:none;margin:0}.sidebar{display:none}.main{width:min(100%,900px);max-width:none;margin:0 auto;padding:26px 34px calc(var(--nav-h) + var(--safe-bottom) + 40px)}.bottom-nav{width:min(100%,720px);left:50%;right:auto;transform:translateX(-50%);border:1px solid var(--card-border);border-bottom:0;border-radius:18px 18px 0 0}.topbar{padding-left:34px;padding-right:34px}}
-  @media(prefers-reduced-motion:reduce){.dock-plus,.quick-menu{animation:none;transition:none}}
+    @media(prefers-reduced-motion:reduce){.dock-plus,.quick-menu{animation:none;transition:none}}
   @keyframes quickMenuIn{from{opacity:0;translate:0 6px}to{opacity:1;translate:0 0}}
 </style>
 <style>
@@ -956,6 +955,213 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
 .fx-switch{flex:none;width:52px;height:30px;border-radius:100px;border:none;background:var(--card-border);position:relative;cursor:pointer;transition:background .2s;padding:0;}
 .fx-switch i{position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.3);}
 .fx-switch.on{background:var(--success);} .fx-switch.on i{transform:translateX(22px);}
+/* ---------- Как Android-приложение ---------- */
+html{touch-action:manipulation;-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+html,body{overscroll-behavior:none;}
+img,svg,a{-webkit-user-drag:none;user-drag:none;-webkit-touch-callout:none;}
+a{-webkit-tap-highlight-color:transparent;}
+#view-settings .settings-group-title.acc-head.account-row{margin:0 0 4px;border-color:var(--accent);background:linear-gradient(130deg,var(--accent-soft),var(--card));cursor:pointer;text-align:left;color:var(--text);font:inherit;font-weight:700;}
+.account-row .gi{background:linear-gradient(145deg,var(--accent),var(--accent-2));color:#fff;font-weight:800;border-radius:50%;}
+.account-row .gi.guest{background:var(--card);border:1px solid var(--card-border);}
+.acc-x{width:36px;height:36px;border:0;border-radius:50%;background:var(--bg-elevated);color:var(--text-dim);font-size:16px;cursor:pointer;}
+/* компьютерный режим на телефоне, повёрнутом боком */
+@media (orientation:landscape) and (min-width:600px) and (max-height:520px){
+  .sidebar{padding:12px 8px;gap:3px;}
+  .sidebar .brand{margin-bottom:10px;}
+  .sidebar .brand-text span{display:none;}
+  .sidebar .nav-btn{min-height:40px;padding:8px 12px;font-size:12px;}
+  .sidebar .nav-btn[data-view="calendar"]{margin-top:0;}
+  .sidebar .sync-pill{padding-top:6px;padding-bottom:6px;font-size:10px;order:4;margin-top:6px;}
+  .topbar{min-height:56px;padding-top:8px;padding-bottom:8px;}
+  .desktop-intro{display:none;}
+  .main{padding-top:16px;}
+}
+.field label .opt{font-weight:500;color:var(--text-dim);font-size:11px;margin-left:4px;}
+.auth-opt-note{font-size:12px;line-height:1.5;color:var(--text-dim);margin:-2px 0 12px;}
+.acc-find{margin-top:14px;} .acc-find>small{display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-dim);}
+.acc-find .acc-code,.fr-hint .acc-code{margin-top:8px;} .acc-find .acc-code b,.fr-hint .acc-code b{overflow-wrap:anywhere;text-align:right;letter-spacing:.02em;}
+/* ---------- Карточка группы тренера ---------- */
+.grp-card{position:relative;margin-bottom:12px;padding:14px;border-radius:20px;cursor:pointer;overflow:hidden;transition:transform .15s ease,border-color .2s ease,box-shadow .2s ease;touch-action:pan-y;}
+.grp-card:active{transform:scale(.99);}
+.grp-card:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+.grp-card.editing{border-color:var(--accent);box-shadow:0 8px 26px var(--accent-soft);}
+.grp-card::after{content:'';position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 22%,transparent),color-mix(in srgb,var(--accent-2) 30%,transparent));border-right:3px solid var(--accent);opacity:0;pointer-events:none;}
+.grp-card.grp-holding::after{animation:grp-hold 1.6s cubic-bezier(.3,.1,.3,1) .4s forwards;}
+.grp-card.grp-holding{transform:scale(.985);}
+.grp-card.editing{animation:grp-pop .32s ease;}
+@keyframes grp-pop{0%{transform:scale(.985)}55%{transform:scale(1.015)}100%{transform:scale(1)}}
+@keyframes grp-hold{from{width:0;opacity:1}to{width:100%;opacity:1}}
+.grp-main{display:flex;align-items:center;gap:12px;}
+.grp-ava{flex:none;width:46px;height:46px;border-radius:15px;display:grid;place-items:center;font-size:19px;font-weight:800;color:#fff;background:linear-gradient(145deg,var(--accent),var(--accent-2));}
+.grp-t{flex:1;min-width:0;} .grp-t b{display:block;font-size:15.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.grp-t small{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:12.5px;color:var(--text-dim);margin-top:2px;overflow-wrap:anywhere;}
+.grp-count{flex:none;text-align:center;padding:6px 10px;border-radius:12px;background:var(--accent-soft);} .grp-count b{display:block;font-size:15px;color:var(--accent);line-height:1.1;} .grp-count small{font-size:10px;color:var(--text-dim);}
+.grp-chev{flex:none;font-size:22px;color:var(--text-dim);transition:transform .2s;} .grp-card.editing .grp-chev{transform:rotate(90deg);color:var(--accent);}
+.grp-code{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;padding:9px 12px;border-radius:12px;background:var(--bg);border:1px dashed var(--card-border);font-size:12px;color:var(--text-dim);}
+.grp-code code{font-size:13.5px;font-weight:700;letter-spacing:.08em;color:var(--text);background:none;}
+.grp-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;animation:quickMenuIn .18s ease both;} .grp-actions[hidden]{display:none;}
+.grp-act{display:flex;align-items:center;gap:8px;min-height:46px;padding:10px 12px;border:1px solid var(--card-border);border-radius:14px;background:var(--bg-elevated);color:var(--text);font:inherit;font-size:13px;font-weight:600;text-align:left;cursor:pointer;}
+.grp-act i{font-style:normal;font-size:16px;flex:none;} .grp-act:active{transform:scale(.97);}
+.grp-act.danger{color:var(--danger);border-color:color-mix(in srgb,var(--danger) 35%,var(--card-border));background:color-mix(in srgb,var(--danger) 8%,var(--bg-elevated));}
+.grp-act.done{grid-column:1/-1;justify-content:center;background:linear-gradient(145deg,var(--accent),var(--accent-2));color:#fff;border:0;}
+@media (prefers-reduced-motion:reduce){.grp-card.grp-holding::after{animation:none;}.grp-actions{animation:none;}}
+.grp-add{flex:none;width:42px;height:42px;border:0;border-radius:50%;background:linear-gradient(145deg,var(--accent),var(--accent-2));color:#fff;font-size:26px;font-weight:400;line-height:1;cursor:pointer;box-shadow:0 4px 12px var(--accent-soft);display:grid;place-items:center;padding:0 0 3px;}
+.grp-add:active{transform:scale(.92);}
+.gi-code{margin-top:14px;padding:14px;border-radius:16px;background:var(--accent-soft);}
+.gi-code>small{display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-dim);}
+.gi-code-row{display:flex;align-items:center;gap:10px;margin:8px 0 10px;} .gi-code-row code{flex:1;min-width:0;padding:10px 12px;border-radius:12px;background:var(--card);font-size:16px;font-weight:800;letter-spacing:.1em;color:var(--text);}
+.gi-code p{font-size:12px;line-height:1.5;color:var(--text-dim);margin-top:10px;}
+.tariff-end{display:flex;align-items:center;gap:12px;margin-bottom:14px;padding:14px;border-radius:20px;border:1px solid color-mix(in srgb,#f59e0b 45%,var(--card-border));background:linear-gradient(130deg,color-mix(in srgb,#f59e0b 16%,var(--card)),var(--card));box-shadow:0 8px 24px color-mix(in srgb,#f59e0b 14%,transparent);animation:quickMenuIn .25s ease both;}
+.tariff-end.over{border-color:color-mix(in srgb,var(--danger) 45%,var(--card-border));background:linear-gradient(130deg,color-mix(in srgb,var(--danger) 14%,var(--card)),var(--card));box-shadow:0 8px 24px color-mix(in srgb,var(--danger) 12%,transparent);}
+.te-ic{flex:none;width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:22px;background:var(--card);}
+.te-t{flex:1;min-width:0;} .te-t b{display:block;font-size:14.5px;} .te-t small{display:block;font-size:12px;line-height:1.45;color:var(--text-dim);margin-top:2px;}
+/* ---------- Окно группы ---------- */
+.gm-tabs{margin:0 0 12px;}
+.gm-task,.gm-st{border:1px solid var(--card-border);border-radius:16px;background:var(--bg-elevated);margin-bottom:8px;overflow:hidden;}
+.gm-task.open{border-color:var(--accent);}
+.gm-task-head,.gm-st-main,.gm-prog{display:flex;align-items:center;gap:12px;width:100%;border:0;background:transparent;color:var(--text);font:inherit;text-align:left;cursor:pointer;padding:12px;}
+.gm-st{display:flex;align-items:center;gap:6px;padding-right:10px;} .gm-st-main{flex:1;min-width:0;}
+.gm-emoji,.gm-ava{flex:none;width:42px;height:42px;border-radius:13px;display:grid;place-items:center;font-size:21px;background:var(--accent-soft);}
+.gm-ava{border-radius:50%;font-size:16px;font-weight:800;color:#fff;background:linear-gradient(145deg,var(--accent),var(--accent-2));} .gm-ava.sm{width:34px;height:34px;font-size:13px;}
+.gm-t{flex:1;min-width:0;} .gm-t b{display:block;font-size:14px;overflow-wrap:anywhere;} .gm-t small{display:block;font-size:11.5px;color:var(--text-dim);margin-top:2px;}
+.gm-chev{flex:none;font-size:20px;color:var(--text-dim);transition:transform .2s;} .gm-task.open .gm-chev{transform:rotate(90deg);color:var(--accent);}
+.gm-task-body{padding:0 12px 12px;border-top:1px solid var(--card-border);}
+.gm-sub{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-dim);margin:12px 0 6px;}
+.gm-prog{padding:8px;border-radius:12px;background:var(--card);margin-bottom:6px;border:1px solid var(--card-border);}
+.gm-days{flex:none;font-size:11px;color:var(--text-dim);text-align:right;} .gm-days b{font-size:16px;color:var(--text-dim);} .gm-days.on b{color:var(--success,#2f9e44);}
+.gm-assign{display:flex;gap:8px;} .gm-assign select{flex:1;min-width:0;padding:10px 12px;border-radius:12px;border:1px solid var(--card-border);background:var(--card);color:var(--text);font:inherit;font-size:13px;}
+.gm-task-actions{display:flex;gap:8px;margin-top:12px;} .gm-task-actions .btn{flex:1;}
+.gm-ic{flex:none;width:36px;height:36px;border:1px solid var(--card-border);border-radius:50%;background:var(--card);font-size:15px;cursor:pointer;}
+.gm-note{font-size:12.5px;color:var(--text-dim);padding:10px 0;}
+.gm-empty{text-align:center;padding:26px 14px;border:1px dashed var(--card-border);border-radius:16px;} .gm-empty i{display:block;font-style:normal;font-size:30px;} .gm-empty b{display:block;margin-top:6px;font-size:14px;} .gm-empty small{display:block;margin-top:4px;font-size:12px;color:var(--text-dim);}
+/* ---------- Друзья: строки и переключатель ---------- */
+.cal-friend{padding:14px;margin-bottom:10px;border:1px solid var(--card-border);border-radius:18px;background:var(--card);}
+.cal-day[data-friends-day]{cursor:pointer;}
+.go-group+.go-group{margin-top:18px;padding-top:14px;border-top:1px solid var(--card-border);}
+.go-chips{display:flex;flex-wrap:wrap;gap:6px;} .go-chip{padding:7px 11px;border-radius:999px;background:var(--bg-elevated);border:1px solid var(--card-border);font-size:12.5px;font-weight:600;} .go-chip.me{border-color:var(--accent);color:var(--accent);}
+.friends-source[hidden]{display:none!important;} .friends-source{margin-left:auto;} .friends-source+.friend-actions.view-mode-seg{margin-left:0;}
+.friends-source button.active,.friends-source button[aria-pressed="true"]{background:var(--card);color:var(--accent);box-shadow:0 2px 6px rgba(0,0,0,.08);}
+.social-visible #view-mode-seg{display:none;}
+.fp-head{margin:2px 2px 10px;} .fp-head b{display:block;font-size:16px;} .fp-head small{display:block;font-size:12px;line-height:1.5;color:var(--text-dim);margin-top:2px;}
+.fp-row{display:flex;align-items:center;gap:10px;padding:12px;margin-bottom:8px;border:1px solid var(--card-border);border-radius:18px;background:var(--card);}
+.fp-ava{flex:none;width:44px;height:44px;border-radius:15px;display:grid;place-items:center;font-size:22px;background:var(--accent-soft);}
+.fp-t{flex:1;min-width:0;} .fp-t b{display:block;font-size:14.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;} .fp-t small{display:block;font-size:12px;color:var(--text-dim);margin-top:1px;}
+.fp-state{flex:none;font-size:11.5px;font-weight:700;padding:6px 10px;border-radius:999px;background:var(--bg-elevated);color:var(--text-dim);} .fp-state.on{background:color-mix(in srgb,#2f9e44 16%,var(--card));color:#2f9e44;}
+/* шапка в одну строку: дата слева, кнопки справа */
+.topbar{flex-wrap:nowrap!important;gap:8px;}
+.top-date-txt{flex:0 1 auto!important;min-width:0;width:auto!important;overflow:hidden;text-overflow:ellipsis;display:block;line-height:34px;}
+.calendar-visible .top-date-txt,.social-visible .top-date-txt{flex-basis:auto!important;width:auto!important;}
+.topbar>.view-mode-seg,.topbar>.calendar-source,.topbar>.friend-actions{flex:none;}
+.calendar-visible #view-mode-seg{margin-left:0;}
+/* ---------- Дата в шапке ---------- */
+.top-date-txt{flex:none!important;margin-right:auto;display:inline-flex;align-items:center;min-height:44px;padding:4px 16px;border-radius:13px;background:var(--bg-elevated);border:1px solid var(--card-border);color:var(--text);font-size:13px;font-weight:700;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.04);}
+/* кнопка «Новая группа» живёт в меню «+»; большая кнопка остаётся только там, где нижней панели нет */
+.quick-action[hidden]{display:none!important;}
+.quick-icon.qi-newgroup{background:linear-gradient(145deg,var(--accent),var(--accent-2));color:#fff;}
+@media (max-width:899px) and (orientation:portrait), (max-width:599px){#create-group-btn{display:none!important;}}
+.nf-when{flex:none;font-size:11.5px;font-weight:700;padding:5px 9px;border-radius:999px;background:var(--bg-elevated);color:var(--text-dim);} .nf-when.on{background:color-mix(in srgb,#2f9e44 16%,var(--card));color:#2f9e44;}
+/* ---------- Кнопка «Обновить» рядом с датой ---------- */
+.top-refresh{flex:none;margin-right:auto;width:34px;height:34px;border:0;border-radius:50%;display:grid;place-items:center;background:var(--bg-elevated);color:var(--text-dim);cursor:pointer;transition:background .25s,color .25s,transform .12s;padding:0;}
+.top-refresh svg{width:17px;height:17px;}
+.top-refresh:active{transform:scale(.9);}
+.top-refresh.ok{background:color-mix(in srgb,#2f9e44 18%,var(--bg-elevated));color:#2f9e44;box-shadow:inset 0 0 0 1.5px color-mix(in srgb,#2f9e44 45%,transparent);}
+.top-refresh.err{background:color-mix(in srgb,var(--danger) 16%,var(--bg-elevated));color:var(--danger);box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--danger) 45%,transparent);}
+.top-refresh.busy{color:var(--accent);box-shadow:inset 0 0 0 1.5px var(--accent-soft);} .top-refresh.busy svg{animation:top-spin .8s linear infinite;}
+@keyframes top-spin{to{transform:rotate(360deg)}}
+.topbar .top-date-txt{margin-right:0;}
+@media (min-width:900px), (min-width:600px) and (orientation:landscape){.top-refresh{width:46px;height:46px;border:1px solid var(--card-border);} .top-refresh svg{width:20px;height:20px;}}
+@media (prefers-reduced-motion:reduce){.top-refresh.busy svg{animation-duration:2s;}}
+/* дата и кнопка обновления на одной общей подложке */
+.top-date-wrap{flex:0 1 auto;min-width:0;margin-right:auto;display:flex;align-items:center;height:34px;border-radius:11px;background:var(--bg-elevated);overflow:hidden;}
+.topbar .top-date-wrap .top-date-txt{background:none;border:0;border-radius:0;height:auto;line-height:34px;padding-right:4px;flex:0 1 auto;min-width:0;}
+.top-date-wrap .top-refresh,.top-date-wrap .top-refresh.ok,.top-date-wrap .top-refresh.err,.top-date-wrap .top-refresh.busy{margin:0;width:32px;height:34px;border:0;border-radius:0;background:none;box-shadow:none;}
+.top-date-wrap .top-refresh{color:var(--text-dim);} .top-date-wrap .top-refresh.ok{color:#69db7c;} .top-date-wrap .top-refresh.err{color:#ff8787;} .top-date-wrap .top-refresh.busy{color:var(--accent);}
+@media (min-width:900px), (min-width:600px) and (orientation:landscape){.top-date-wrap{height:46px;border:1px solid var(--card-border);} .topbar .top-date-wrap .top-date-txt{line-height:44px;} .top-date-wrap .top-refresh{width:42px;height:44px;}}
+/* сообщение об обновлении — тонкая полоса на самом верху на 1 секунду */
+.sync-banner{left:0;right:0;top:0;max-width:none;margin:0;display:block;padding:calc(var(--safe-top) + 3px) 12px 4px;border-radius:0;box-shadow:none;text-align:center;font-size:11.5px;font-weight:700;line-height:1.3;transform:translateY(-100%);transition:transform .2s ease;pointer-events:none;}
+.sync-banner.show{transform:none;}
+.sync-banner.ok{background:#2f9e44;} .sync-banner.err{background:#e03131;}
+.ntf-card .settings-row{align-items:center;} .ntf-card .settings-row:last-child{border-bottom:0;}
+.ntf-card .training-role-control{width:44px;height:26px;}
+/* форма задачи: только нужное */
+.goal-editor.forced>label.settings-row input[type=checkbox]{display:none;}
+.goal-editor.forced>label.settings-row{pointer-events:none;padding-top:0;}
+.hf-details{margin:0 0 14px;border:1px solid var(--card-border);border-radius:16px;background:var(--bg-elevated);overflow:hidden;}
+.hf-details>summary{display:flex;align-items:center;gap:10px;padding:13px 14px;cursor:pointer;list-style:none;font-size:13.5px;font-weight:700;}
+.hf-details>summary::-webkit-details-marker{display:none;}
+.hf-details>summary::after,.hf-details>summary::before{content:none!important;display:none!important;}
+.hf-details>summary span{flex:none;} .hf-details>summary small{flex:1;min-width:0;text-align:right;font-size:12px;font-weight:500;color:var(--text-dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.hf-details>summary i{flex:none;font-style:normal;font-size:18px;color:var(--text-dim);transition:transform .2s;} .hf-details[open]>summary i{transform:rotate(90deg);color:var(--accent);}
+.hf-details .hf-basic{margin:0;border:0;border-top:1px solid var(--card-border);border-radius:0;background:none;} .hf-details .hf-basic-title{display:none;}
+/* ---------- Заметки и задачи ---------- */
+.sidebar .nav-btn.side-notes{order:2;}
+.quick-icon.qi-notes{background:linear-gradient(145deg,#fbbf24,#f97316);color:#fff;}
+body.nt-open{overflow:hidden;}
+.nt-screen{position:fixed;inset:0;z-index:60;display:flex;flex-direction:column;background:var(--bg);padding:calc(10px + env(safe-area-inset-top)) 0 env(safe-area-inset-bottom);animation:nt-in .22s ease both;}
+@keyframes nt-in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.nt-top{display:flex;align-items:center;gap:12px;padding:6px 16px 10px;}
+.nt-title{flex:1;min-width:0;} .nt-title b{display:block;font-size:20px;letter-spacing:-.02em;} .nt-title small{display:block;font-size:12px;color:var(--text-dim);margin-top:2px;}
+.nt-x{flex:none;width:40px;height:40px;border:0;border-radius:50%;background:var(--danger);color:#fff;font-size:16px;font-weight:700;cursor:pointer;display:grid;place-items:center;}
+.nt-tabs{display:flex;gap:4px;margin:0 16px 10px;padding:4px;border-radius:14px;background:var(--bg-elevated);border:1px solid var(--card-border);}
+.nt-tabs button{flex:1;min-height:38px;border:0;border-radius:10px;background:transparent;color:var(--text-dim);font:inherit;font-size:13px;font-weight:700;cursor:pointer;}
+.nt-tabs button[aria-pressed="true"]{background:var(--card);color:var(--accent);box-shadow:0 2px 8px rgba(0,0,0,.08);}
+.nt-body{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:2px 16px 20px;width:100%;max-width:640px;margin:0 auto;}
+.nt-sec{display:flex;align-items:baseline;justify-content:space-between;margin:10px 2px 8px;} .nt-sec b{font-size:15px;} .nt-sec small{font-size:12px;color:var(--text-dim);}
+.nt-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:10px;}
+.nt-tile{position:relative;aspect-ratio:1;display:flex;align-items:flex-start;justify-content:flex-start;padding:10px;border:1px solid rgba(0,0,0,.06);border-radius:18px;background:var(--nt-bg);color:#1f2433;font:inherit;text-align:left;cursor:pointer;overflow:hidden;box-shadow:0 4px 12px rgba(15,23,42,.06);transition:transform .12s ease;}
+.nt-tile:active{transform:scale(.96);}
+.nt-tile:focus-visible{outline:3px solid var(--accent);outline-offset:2px;}
+.nt-tile.c0,.nt-editor.c0{--nt-bg:#fff3bf;} .nt-tile.c1,.nt-editor.c1{--nt-bg:#d3f9d8;} .nt-tile.c2,.nt-editor.c2{--nt-bg:#d0ebff;} .nt-tile.c3,.nt-editor.c3{--nt-bg:#ffe3e3;} .nt-tile.c4,.nt-editor.c4{--nt-bg:#e5dbff;} .nt-tile.c5,.nt-editor.c5{--nt-bg:#ffe8cc;}
+.nt-tile.empty{background:var(--card);border:1.5px dashed var(--card-border);box-shadow:none;align-items:center;justify-content:center;}
+.nt-plus{font-size:26px;font-weight:300;color:var(--text-dim);}
+.nt-text{font-size:12.5px;line-height:1.35;font-weight:600;white-space:pre-wrap;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden;}
+.nt-tile.task .nt-text{padding-top:28px;-webkit-line-clamp:4;}
+.nt-tile.done .nt-text{text-decoration:line-through;opacity:.55;}
+.nt-check{position:absolute;top:8px;left:8px;width:24px;height:24px;border-radius:50%;border:2px solid rgba(31,36,51,.45);background:rgba(255,255,255,.7);display:grid;place-items:center;font-size:13px;font-weight:800;color:#fff;}
+.nt-tile.done .nt-check{background:#2f9e44;border-color:#2f9e44;}
+.nt-editor{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(10,12,18,.55);backdrop-filter:blur(4px);}
+.nt-ed-card{width:100%;max-width:460px;max-height:100%;display:flex;flex-direction:column;gap:12px;padding:16px;border-radius:24px;background:var(--nt-bg);color:#1f2433;box-shadow:0 20px 60px rgba(0,0,0,.3);animation:nt-in .18s ease both;}
+.nt-ed-head{display:flex;align-items:center;justify-content:space-between;} .nt-ed-head b{font-size:16px;}
+.nt-ed-card textarea{width:100%;min-height:min(42dvh,300px);border:0;border-radius:16px;padding:14px;background:rgba(255,255,255,.65);color:#1f2433;font:inherit;font-size:16px;line-height:1.5;resize:none;-webkit-user-select:text;user-select:text;}
+.nt-ed-card textarea:focus{outline:2px solid rgba(31,36,51,.35);}
+.nt-ed-done{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:700;} .nt-ed-done input{width:22px;height:22px;accent-color:#2f9e44;}
+.nt-ed-actions{display:flex;gap:10px;} .nt-ed-actions .btn{flex:1;} .nt-ed-actions .btn-ghost{background:rgba(255,255,255,.6);color:#1f2433;border-color:rgba(0,0,0,.08);}
+@media (min-width:700px){.nt-grid{gap:14px;}.nt-text{font-size:14px;}.nt-tile{padding:14px;}}
+@media (orientation:landscape) and (max-height:520px){.nt-body{max-width:none;}.nt-grid{grid-template-columns:repeat(6,minmax(0,1fr));}}
+@media (prefers-reduced-motion:reduce){.nt-screen,.nt-ed-card{animation:none;}}
+/* ---------- Друзья: без лишних заголовков ---------- */
+body:not(.communities-visible) .social-tabs{display:none;}
+@media (max-width:480px){.top-date-txt{padding:4px 11px;font-size:12px;min-height:40px;}}
+
+#view-friends>.section-title{display:none;}
+.social-tabs:has(button:only-child){display:none;}
+/* дата в шапке — точно как группы кнопок справа */
+.topbar .top-date-txt{display:block;box-sizing:border-box;height:34px;min-height:0;line-height:34px;padding:0 12px;border:0;border-radius:11px;background:var(--bg-elevated);box-shadow:none;color:var(--text);font-size:13px;font-weight:700;}
+@media (min-width:900px), (min-width:600px) and (orientation:landscape){.topbar .top-date-txt{height:46px;line-height:44px;padding:0 16px;border:1px solid var(--card-border);}}
+@media (max-width:480px){.topbar .top-date-txt{font-size:12px;padding:0 10px;}}
+/* заметки на компьютере: во всю ширину, 6 в ряд */
+@media (min-width:900px){
+  .nt-screen .nt-top{padding:14px 32px 12px;} .nt-screen .nt-title b{font-size:24px;}
+  .nt-screen .nt-tabs{margin:0 32px 14px;max-width:520px;}
+  .nt-screen .nt-body{max-width:none;padding:4px 32px 32px;}
+  .nt-screen .nt-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:18px;margin-bottom:22px;}
+  .nt-screen .nt-tile{padding:16px;border-radius:22px;} .nt-screen .nt-text{font-size:15px;-webkit-line-clamp:8;} .nt-screen .nt-tile.task .nt-text{-webkit-line-clamp:6;}
+  .nt-screen .nt-sec b{font-size:18px;} .nt-screen .nt-plus{font-size:34px;}
+  .nt-screen .nt-tile:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(15,23,42,.12);}
+}
+@media (min-width:1500px){.nt-screen .nt-tile{max-height:300px;}}
+/* боковая панель на компьютере: аккуратный список, настройки внизу, без строки синхронизации */
+.sidebar .sync-pill{display:none!important;}
+.sidebar .nav-btn{order:0!important;margin-top:0!important;border-radius:14px;transition:background .15s,color .15s;}
+.sidebar .nav-btn:hover{background:var(--accent-soft);}
+.sidebar .nav-btn.side-notes{order:5!important;color:var(--text-dim);font-weight:600;}
+.sidebar .nav-btn[data-view="settings"]{order:9!important;margin-top:auto!important;position:relative;}
+.sidebar .nav-btn[data-view="settings"]::before{content:'';position:absolute;left:8px;right:8px;top:-8px;height:1px;background:var(--card-border);}
+.sidebar .brand{margin-bottom:22px!important;padding-bottom:18px!important;border-bottom:1px solid var(--card-border);}
+/* заметки на широком экране: боковая панель остаётся, заметки занимают только правую часть */
+@media (min-width:900px), (min-width:600px) and (orientation:landscape){.nt-screen{left:210px;border-left:1px solid var(--card-border);animation:none;} body.nt-open{overflow:auto;} body.nt-open .sidebar .nav-btn.active{background:transparent;color:inherit;box-shadow:none;} body.nt-open .sidebar .nav-btn.side-notes{background:var(--accent-soft);color:var(--accent);box-shadow:inset 3px 0 var(--accent);}}
+@media (min-width:1280px){.nt-screen{left:250px;}}
+@media (min-width:600px) and (max-width:1050px) and (orientation:landscape){.nt-screen{left:184px;}}
 /* ---------- Аккаунт и вход ---------- */
 .acc-card{padding:18px;}
 .tariff-top-card .btn{justify-content:center;}
@@ -1049,14 +1255,16 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
     <button class="nav-btn" data-view="stats"></button>
     <button class="nav-btn" data-view="trainer" style="display:none;"></button>
     <button class="nav-btn" data-view="settings"></button>
+    <button type="button" class="nav-btn side-notes" id="side-notes"><span aria-hidden="true" style="font-size:18px;width:20px;text-align:center;">📝</span><span>Заметки и задачи</span></button>
     <div class="sync-pill" id="sync-indicator-side"></div>
   </aside>
 
   <div>
     <div class="topbar">
-      <span id="top-date" class="top-date-txt"></span>
-      <div class="calendar-source view-mode-seg" id="calendar-source" role="group" aria-label="Выбор календаря" hidden><button type="button" id="calendar-source-mine" title="Мои задачи" aria-label="Мои задачи" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 21v-2a7 7 0 0 1 14 0v2"/></svg></button><button type="button" id="calendar-source-trainer" title="Задания от тренера" aria-label="Задания от тренера" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 21v-2a6 6 0 0 1 12 0v2M16 5a3 3 0 0 1 0 6M17 15a5 5 0 0 1 4 5"/></svg></button></div>
+      <span class="top-date-wrap"><span id="top-date" class="top-date-txt"></span><button type="button" id="top-refresh" class="top-refresh" aria-label="Обновить с сервера" title="Обновить с сервера"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.3-4.3L4 8.5"/><path d="M4 4v4.5h4.5"/><path d="M4 13a8 8 0 0 0 14.3 4.3L20 15.5"/><path d="M20 20v-4.5h-4.5"/></svg></button></span>
+      <div class="calendar-source view-mode-seg" id="calendar-source" role="group" aria-label="Выбор календаря" hidden><button type="button" id="calendar-source-mine" title="Мои задачи" aria-label="Мои задачи" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 21v-2a7 7 0 0 1 14 0v2"/></svg></button><button type="button" id="calendar-source-friends" title="Друзья" aria-label="Задания друзей" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 21v-2a6 6 0 0 1 12 0v2M16 5a3 3 0 0 1 0 6M17 15a5 5 0 0 1 4 5"/></svg></button><button type="button" id="calendar-source-trainer" title="Задания от тренера" aria-label="Задания от тренера" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="2.8"/><circle cx="4.8" cy="9.5" r="2.1"/><circle cx="19.2" cy="9.5" r="2.1"/><path d="M7 20v-1.5a5 5 0 0 1 10 0V20M1.5 19v-1a3.3 3.3 0 0 1 4.3-3.1M22.5 19v-1a3.3 3.3 0 0 0-4.3-3.1"/></svg></button></div>
       <div id="social-toolbar" class="social-toolbar" hidden><button type="button" data-action="social-chats" title="Все чаты">💬<span>Чаты</span></button><button type="button" data-action="social-invites" title="Приглашения">♧<span>Приглашения</span><b id="social-invite-count"></b></button><button type="button" data-action="social-groups" title="Общие группы">👥<span>Группы</span></button><button type="button" data-action="social-settings" title="Настройки общения">⚙</button></div>
+      <div class="friends-source view-mode-seg" id="friends-source" role="group" aria-label="Что показывать" hidden><button type="button" data-friends-tab="mine" title="Личные задания" aria-label="Личные задания" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 21v-2a7 7 0 0 1 14 0v2"/></svg></button><button type="button" data-friends-tab="friends" title="Друзья" aria-label="Друзья" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 21v-2a6 6 0 0 1 12 0v2M16 5a3 3 0 0 1 0 6M17 15a5 5 0 0 1 4 5"/></svg></button></div>
       <div class="friend-actions view-mode-seg" id="friend-actions" role="group" aria-label="Действия" hidden>
         <button type="button" id="friend-add-btn" aria-label="Добавить друга" title="Добавить друга"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
         <button type="button" id="head-chat-btn" aria-label="Чаты" title="Чаты"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><i class="fa-badge" id="head-chat-badge" hidden></i></button>
@@ -1173,8 +1381,7 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
       <section class="view" id="view-settings">
         <div class="section-title">Настройки</div>
 
-        <div class="settings-group-title">Регистрация и вход</div>
-        <div class="card acc-card" style="margin-bottom:12px;" id="account-card"></div>
+        <button type="button" class="settings-group-title acc-head account-row" id="account-row" aria-haspopup="dialog"><span class="gi" id="account-row-ava" aria-hidden="true">👤</span><span class="gt">Регистрация и вход<small id="account-row-sub">Вы не вошли · нажмите, чтобы войти</small></span><span class="gc" aria-hidden="true">›</span></button>
 
         <div class="settings-group-title">Тарифы</div>
         <div id="tariff-top-card" class="tariff-top-card"><button class="btn btn-primary" data-action="open-tariffs">Тариф Start</button></div>
@@ -1220,6 +1427,16 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
             <div><b>Сообщения</b><span id="messages-detail">Переписка с друзьями и тренером</span></div>
             <button class="btn btn-ghost btn-sm" data-action="open-messages">Открыть</button>
           </div>
+        </div>
+
+        <div class="settings-group-title">Уведомления</div>
+        <div class="card ntf-card" style="margin-bottom:12px;">
+          <div class="settings-row"><div><b>Пуш-уведомления</b><span id="ntf-push-detail">Показывать уведомления на этом устройстве</span></div><label class="training-role-control"><input type="checkbox" role="switch" data-ntf="push" aria-label="Пуш-уведомления"><span class="training-switch"></span></label></div>
+          <div class="settings-row"><div><b>Друг выполнил цель</b><span>Когда друг отметил личное задание</span></div><label class="training-role-control"><input type="checkbox" role="switch" data-ntf="friendGoal" aria-label="Друг выполнил цель"><span class="training-switch"></span></label></div>
+          <div class="settings-row"><div><b>Ученик выполнил задание</b><span>Для тренера: отметки учеников</span></div><label class="training-role-control"><input type="checkbox" role="switch" data-ntf="studentGoal" aria-label="Ученик выполнил задание"><span class="training-switch"></span></label></div>
+          <div class="settings-row"><div><b>Тренер дал задание</b><span>Когда тренер назначил новое задание</span></div><label class="training-role-control"><input type="checkbox" role="switch" data-ntf="trainerTask" aria-label="Тренер дал задание"><span class="training-switch"></span></label></div>
+          <div class="settings-row"><div><b>Заявки в друзья</b><span>Новые заявки и приглашения в друзья</span></div><label class="training-role-control"><input type="checkbox" role="switch" data-ntf="friendRequest" aria-label="Заявки в друзья"><span class="training-switch"></span></label></div>
+          <div class="settings-row"><div><b>Приглашения тренера</b><span>Приглашения в группы тренеров</span></div><label class="training-role-control"><input type="checkbox" role="switch" data-ntf="trainerInvite" aria-label="Приглашения тренера"><span class="training-switch"></span></label></div>
         </div>
 
         <div class="settings-group-title">Приложение</div>
@@ -1324,8 +1541,10 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
     <div class="dock-center">
       <div class="quick-menu" id="quick-menu" hidden>
         <button type="button" class="quick-action" data-quick-action="add"><span class="quick-icon">＋</span><span><b>Добавить задачу</b><small>Новая привычка или задание</small></span></button>
+        <button type="button" class="quick-action" data-quick-action="new-group" id="qa-new-group" hidden><span class="quick-icon qi-newgroup">👥</span><span><b>Новая группа</b><small>Создать группу для учеников</small></span></button>
         <button type="button" class="quick-action" data-quick-action="trainer-msgs"><span class="quick-icon qi-trainer">💬</span><span class="qa-text"><b>Сообщения от тренера</b><small id="qa-trainer-sub">Переписка и группа тренера</small></span><span class="qa-badge" id="qa-trainer-badge" hidden></span></button>
         <button type="button" class="quick-action" data-quick-action="group-chat"><span class="quick-icon qi-group">📣</span><span class="qa-text"><b>Общая группа</b><small id="qa-group-sub">Чат всех пользователей приложения</small></span><span class="qa-badge" id="qa-group-badge" hidden></span></button>
+        <button type="button" class="quick-action" data-quick-action="notes"><span class="quick-icon qi-notes">📝</span><span><b>Заметки и задачи</b><small>12 заметок и 12 задач под рукой</small></span></button>
         <button type="button" class="quick-action" data-quick-view="stats"><span class="quick-icon">▥</span><span><b>Статистика</b><small>Мой прогресс и серии</small></span></button>
         <button type="button" class="quick-action" data-quick-view="settings"><span class="quick-icon">⚙</span><span><b>Настройки</b><small>Тема, сервер и режим</small></span></button>
       </div>
@@ -1778,6 +1997,7 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
   function setQuickMenu(open){
     var menu=document.getElementById('quick-menu'),button=document.getElementById('dock-plus');
     if(!menu||!button)return;
+    var ng=document.getElementById('qa-new-group');if(ng)ng.hidden=!(currentView==='trainer'&&typeof trainingMode==='function'&&trainingMode()==='trainer'&&typeof isLoggedIn==='function'&&isLoggedIn()&&currentUser.role==='TRAINER');
     menu.hidden=!open;button.setAttribute('aria-expanded',open?'true':'false');
     button.setAttribute('aria-label',open?'Закрыть меню действий':'Открыть меню действий');
     button.classList.toggle('is-open',open);
@@ -1806,6 +2026,7 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
     document.querySelectorAll('.nav-btn').forEach(function(btn){
       var key = btn.getAttribute('data-view');
       var item = NAV.filter(function(n){return n.key===key;})[0];
+      if(!item) return;
       var label = key==='trainer' ? (trainingMode()==='trainer'?'Ученики':'Тренер') : (key==='calendar' ? MONTH_NAMES[calViewDate.getMonth()] : item.label);
       btn.innerHTML = ICONS[key] + '<span>' + label + '</span>';
       btn.classList.toggle('active', key===currentView);
@@ -1827,6 +2048,7 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
   }
 
   function renderCurrentView(){
+    if(typeof apiCache==='object'&&apiCache) apiCache.begin();
     if(currentView==='today') renderToday();
     else if(currentView==='calendar') renderCalendar();
     else if(currentView==='stats') renderStats();
@@ -1858,11 +2080,11 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
   function coachCalendarSelected(){return calendarFilter==='trainer'&&trainingMode()==='trainer';}
   function calendarChoiceKey(){return trainingPreferenceKey()+':calendar:'+trainingMode();}
   function syncCalendarChoice(){
-    var key=calendarChoiceKey();if(calendarChoiceOwner!==key){calendarChoiceOwner=key;calendarFilter=localStorage.getItem(key)==='trainer'?'trainer':'mine';}
+    var key=calendarChoiceKey();if(calendarChoiceOwner!==key){calendarChoiceOwner=key;var savedCal=localStorage.getItem(key);calendarFilter=savedCal==='trainer'||savedCal==='friends'?savedCal:'mine';}
     var mine=document.getElementById('calendar-source-mine'),trainer=document.getElementById('calendar-source-trainer');
     var label=trainingMode()==='trainer'?'Задачи для учеников':'Задания от тренера';trainer.title=label;trainer.setAttribute('aria-label',label);
-    mine.classList.toggle('active',calendarFilter==='mine');trainer.classList.toggle('active',calendarFilter==='trainer');mine.setAttribute('aria-pressed',String(calendarFilter==='mine'));trainer.setAttribute('aria-pressed',String(calendarFilter==='trainer'));
-    var social=currentView==='friends';document.getElementById('social-toolbar').hidden=true;var fa=document.getElementById('friend-actions');if(fa)fa.hidden=!(social||currentView==='trainer');if(typeof updateFriendBell==='function')updateFriendBell();document.body.classList.toggle('social-visible',social);var visible=currentView==='calendar'||currentView==='dayfull';document.getElementById('calendar-source').hidden=!visible;document.body.classList.toggle('calendar-visible',visible);
+    var frb=document.getElementById('calendar-source-friends');if(frb&&frb.classList){frb.classList.toggle('active',calendarFilter==='friends');frb.setAttribute('aria-pressed',String(calendarFilter==='friends'));}mine.classList.toggle('active',calendarFilter==='mine');trainer.classList.toggle('active',calendarFilter==='trainer');mine.setAttribute('aria-pressed',String(calendarFilter==='mine'));trainer.setAttribute('aria-pressed',String(calendarFilter==='trainer'));
+    var social=currentView==='friends';document.getElementById('social-toolbar').hidden=true;var fa=document.getElementById('friend-actions');if(fa)fa.hidden=!(social||currentView==='trainer');var fs=document.getElementById('friends-source');if(fs)fs.hidden=!social;if(typeof updateFriendBell==='function')updateFriendBell();document.body.classList.toggle('social-visible',social);var visible=currentView==='calendar'||currentView==='dayfull';document.getElementById('calendar-source').hidden=!visible;document.body.classList.toggle('calendar-visible',visible);
   }
   function calendarTasks(){
     if(coachCalendarSelected())return coachCalendar.owner===calendarChoiceKey()?coachCalendar.tasks:[];
@@ -2127,6 +2349,7 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
     var startOffset = (first.getDay()+6)%7; // Monday-first
     var daysInMonth = new Date(y,m+1,0).getDate();
     var tk = todayKey();
+    if(calendarFilter==='friends'&&typeof renderFriendsCalendar==='function'){ renderFriendsCalendar(y,m,startOffset,daysInMonth,tk); return; }
     var cells = '';
     for(var i=0;i<startOffset;i++) cells += '<div class="cal-day empty"></div>';
     for(var d=1; d<=daysInMonth; d++){
@@ -2151,6 +2374,7 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
     grid.classList.toggle('trainer-mode', calendarFilter==='trainer');
     var monthTasks=calendarTasks().filter(function(h){for(var day=1;day<=daysInMonth;day++){if(tasksOnDate([h],y+'-'+pad(m+1)+'-'+pad(day)).length)return true;}return false;});
     document.getElementById('calendar-month-tasks').innerHTML='<div class="section-title" style="margin-top:24px">'+(calendarFilter==='mine'?'Мои задачи':trainingMode()==='trainer'?'Задачи для учеников':'Задания от тренера')+' · '+monthTasks.length+'</div>'+monthTasks.map(function(h){var dates=[];for(var day=1;day<=daysInMonth;day++)if(tasksOnDate([h],y+'-'+pad(m+1)+'-'+pad(day)).length)dates.push(day);return '<button class="calendar-month-task" data-action="open-day" data-date="'+y+'-'+pad(m+1)+'-'+pad(dates[0])+'"><b>'+escapeHtml(h.emoji||'🎯')+' '+escapeHtml(h.name)+'</b><small>'+(coachCalendarSelected()?escapeHtml(h.groupName)+' · '+escapeHtml(h.targetName||'Вся группа')+'<br>':'')+'Дни: '+dates.join(', ')+'</small></button>';}).join('')+(monthTasks.length?'':'<p class="calendar-hint">В этом месяце задач пока нет.</p>');
+    if(calendarFilter==='trainer'&&isLoggedIn()) document.getElementById('calendar-month-tasks').insertAdjacentHTML('beforeend','<button type="button" class="btn btn-ghost btn-block" data-cal-group style="margin-top:10px;">👥 Участники и задания группы</button>');
     attachCalHold();
   }
   function shiftCalMonth(n){
@@ -2179,7 +2403,7 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
     if(!isLoggedIn()){serverFriendsCache={friends:[],incoming:[],outgoing:[]};serverCommunitiesCache=[];block.innerHTML='<div class="card social-welcome"><h3>Двигайтесь к целям вместе</h3><p>Войдите в аккаунт, чтобы найти друзей, получать приглашения и общаться.</p><button class="btn btn-primary" data-action="social-login">Войти</button></div>';list.innerHTML='';return;}
     block.innerHTML='<div class="social-search-card"><form id="social-search-form"><span aria-hidden="true">⌕</span><input id="social-search" aria-label="Поиск друзей" placeholder="Имя, фамилия, псевдоним или код" minlength="2" maxlength="80"><button class="btn btn-primary btn-sm" type="submit">Найти</button></form><small>Личные цели видят ваши подтверждённые друзья. Задания тренера, тренировки и питание остаются закрытыми.</small><div id="social-search-results" aria-live="polite"></div></div><details id="social-invitations"><summary>Приглашения <span id="social-invitations-total"></span></summary><p class="social-note">Принимая приглашение, вы открываете друг другу личные цели и их выполнение.</p><div id="friend-requests-block"></div></details><div class="social-tabs"><button data-action="social-friends">Друзья</button><button data-action="social-groups">Общие группы</button></div>';
     document.getElementById('social-search-form').addEventListener('submit',function(e){e.preventDefault();searchSocialFriends();});
-    list.innerHTML='<p class="social-note">Загружаем друзей…</p>';refreshFriendsAndCommunities();
+    if(!list.firstElementChild||list.querySelector('.social-note:only-child'))list.innerHTML='<p class="social-note">Загружаем друзей…</p>';refreshFriendsAndCommunities();
   }
   function searchSocialFriends(){
     var input=document.getElementById('social-search'),result=document.getElementById('social-search-results'),q=input.value.trim(),version=++socialSearchVersion,owner=currentUser&&currentUser.id;
@@ -2190,11 +2414,11 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
   }
   function renderSocialFriends(){
     var list=document.getElementById('friends-list');if(!list)return;
-    list.classList.add('social-friend-grid');list.dataset.socialView=cardViewMode;
-    list.innerHTML=serverFriendsCache.friends.length?serverFriendsCache.friends.map(function(u){return '<article class="social-friend-card"><div class="social-person-row"><span class="social-avatar">'+escapeHtml(u.avatarEmoji||'🙂')+'</span><div><b>'+escapeHtml(u.displayName||u.username)+'</b><small>@'+escapeHtml(u.username)+'</small></div></div><p class="social-note">Личные цели и история выполнения</p><div class="row-inline"><button class="btn btn-primary btn-sm" data-social-goals="'+u.id+'">Цели друга</button><button class="btn btn-ghost btn-sm" data-social-chat="'+u.id+'">Написать</button></div></article>';}).join(''):'<div class="card social-welcome"><h3>Ваши друзья будут здесь</h3><p>Найдите человека по имени или псевдониму и отправьте приглашение.</p></div>';
+    list.classList.remove('social-friend-grid');
+    var html=friendsPaneHtml(); if(list.__html===html&&list.firstElementChild) return; list.__html=html; list.innerHTML=html;
   }
   function socialGoals(id){
-    var owner=currentUser&&currentUser.id;openModal('<h2>Цели друга</h2><div id="social-goals-body">Загрузка…</div>');var body=document.getElementById('social-goals-body');
+    var owner=currentUser&&currentUser.id;openModal('<h2>Прогресс друга</h2><div id="social-goals-body">Загрузка…</div><div class="modal-actions"><button type="button" class="btn btn-ghost btn-block" data-action="close-modal">Закрыть</button></div>');var body=document.getElementById('social-goals-body');
     api.get('/friends/'+id+'/goals').then(function(d){if(!body.isConnected||!currentUser||owner!==currentUser.id)return;
       body.innerHTML='<div class="social-person-row"><span class="social-avatar">'+escapeHtml(d.user.avatarEmoji||'🙂')+'</span><div><b>'+escapeHtml(d.user.displayName)+'</b><small>@'+escapeHtml(d.user.username)+'</small></div></div><p class="social-note">Личные цели · '+d.goals.length+' · данные с сервера</p>'+d.goals.map(function(g){var latest=g.progress[0],amount=g.totalAmount!=null?g.totalAmount:latest?latest.amount:0,pct=g.target?Math.min(100,Math.round(amount/g.target*100)):0;return '<article class="social-goal-card"><b>'+escapeHtml(g.emoji||'✓')+' '+escapeHtml(g.name)+'</b><p>'+g.completedDays+' выполненных дней'+(g.target?' · '+amount+' / '+g.target+' '+escapeHtml(g.unit):'')+'</p>'+(g.target?'<div class="social-progress"><i style="width:'+pct+'%"></i></div>':'')+'<details><summary>История выполнения</summary>'+g.history.filter(function(r){return r.done;}).map(function(r){return '<small>✓ '+escapeHtml(r.date)+'</small>';}).join('')+g.progress.map(function(r){return '<small>'+escapeHtml(r.date)+' · '+(g.type==='checklist'?r.doneCount+' / '+g.itemCount:g.type==='zikr'?'Счёт: '+r.count:g.type==='timer'?'Прогресс за день':r.amount+(g.target?' / '+g.target:''))+'</small>';}).join('')+(!g.history.length&&!g.progress.length?'<small>Пока нет отметок</small>':'')+'</details></article>';}).join('')+(!d.goals.length?'<p class="social-note">Пока нет личных целей для показа.</p>':'');
     }).catch(function(e){if(body.isConnected)body.textContent=e.message;});
@@ -2545,6 +2769,8 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
     return true;
   }
   function openHabitTypeModalGated(date){
+    if(typeof addTaskForStudents==='function'&&addTaskForStudents(date)) return;
+    if(currentView==='friends'&&typeof friendsTab!=='undefined'){ friendsTab='mine'; try{ localStorage.setItem('disciplinePro:friendsTab','mine'); }catch(e){} }
     newHabitStartDate=date||(currentView==='dayfull'?currentFullDayKey:null);
     if(personalHabitLimitReached()){ habitLimitPaywallModal(); return; }
     habitTypeModal();
@@ -2882,13 +3108,43 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
       if(native) form.insertBefore(native,actions);
       if(ge) form.insertBefore(ge,actions);
       if(preset&&preset.mode==='gym'){ var wg=document.getElementById('workout-type-grid'); if(wg&&wg.closest('.field')) wg.closest('.field').hidden=true; }
-      if(!existing && type!=='assignment' && !(preset && preset.goal)){
-        if(gcb) gcb.checked=false;
-        if(ge && type==='simple' && !preset) ge.hidden=true;
+      // Каждому виду задачи — только свои настройки, без лишних блоков.
+      var hasGoal=!!(existing&&existing.config&&existing.config.goal&&existing.config.goal.enabled);
+      var modes=existing&&existing.config&&existing.config.modes||{};
+      var gymLike=(preset&&(preset.mode==='gym'||preset.mode==='workout'))||(existing&&type==='workout');
+      var goalMain=!gymLike&&((preset&&preset.goal)||(existing&&hasGoal)||(existing&&modes.goals&&modes.goals.enabled));
+      if(ge&&gcb){
+        if(goalMain){
+          if(!existing||(preset&&preset.goal)) gcb.checked=true;
+          ge.classList.add('forced'); var gt=ge.querySelector('label.settings-row b'), gs=ge.querySelector('label.settings-row small');
+          if(gt) gt.textContent=type==='assignment'?'Кнопки выполнения':'Цель и кнопки'; if(gs) gs.textContent='Сколько нужно сделать и какими кнопками отмечать';
+        } else if(gymLike&&typeof document.querySelector==='function'){
+          // Спортзал и тренировка: при выполнении всегда есть кнопка «+1 подход», цель считается по подходам.
+          ge.hidden=true;
+          if(!existing||!hasGoal){
+            gcb.checked=true; form._gymGoal=true;
+          }
+        } else { if(!existing||!hasGoal) gcb.checked=false; ge.hidden=true; }
+      }
+      // «Основное» (повторение и сроки) свёрнуто в одну строку, чтобы не отвлекать от главного.
+      var hb=form.querySelector('.hf-basic');
+      if(hb&&!hb.closest('details')&&typeof document.createElement==='function'){
+        var det=document.createElement('details'); det.className='hf-details'; det.innerHTML='<summary><span>🗓 Повторение и сроки</span><small id="hf-basic-sum"></small><i aria-hidden="true">›</i></summary>';
+        hb.parentNode.insertBefore(det,hb); det.appendChild(hb); form.insertBefore(det,actions);
+        var sum=function(){ var rp=hb.querySelector('[data-hf-repeat].selected'), st=hb.querySelector('input[type=date]'), t=[]; if(rp) t.push(rp.textContent); if(st&&st.value) t.push('с '+st.value.split('-').reverse().join('.')); var el=document.getElementById('hf-basic-sum'); if(el) el.textContent=t.join(' · ')||'Без срока'; };
+        hb.addEventListener('click',function(){ setTimeout(sum,0); }); hb.addEventListener('input',sum); sum();
+        det.open=type==='simple'&&!preset;
       }
     })();
     if(!existing && preset && !existing){ var em=document.querySelector('#emoji-grid .emoji-btn[data-emoji="'+preset.emoji+'"]'); if(em){ selectedEmoji=preset.emoji; document.querySelectorAll('#emoji-grid .emoji-btn').forEach(function(b){ b.classList.toggle('selected', b===em); }); } else selectedEmoji=preset.emoji; document.getElementById('hf-emoji').textContent=selectedEmoji; }
     var readGoal=wireGoalEditor(document.getElementById('habit-form'));
+    (function(){ var form=document.getElementById('habit-form'); if(!form||!form._gymGoal) return;
+      var el=function(n){ return form.elements.namedItem(n); }, gcb=el('goalEnabled'); if(gcb.onchange) gcb.onchange();
+      el('goalMode').value='count'; el('goalRepeat').value='daily'; if(el('goalMode').onchange) el('goalMode').onchange();
+      el('goalUnit').value='подх.'; document.getElementById('goal-buttons-editor').innerHTML=goalButtonRow({value:1,label:'Подход'});
+      function sync(){ var si=form.querySelector('[name=modef_gym_sets],[name=modef_workout_sets]'), n=Math.max(1,Math.round(Number(si&&si.value)||3)); el('goalTotal').value=n; el('goalDaily').value=n; }
+      form.addEventListener('input',sync); sync();
+    })();
     var readBasic=wireBasicFields(document.getElementById('habit-form'),existing,type);
     var readZikrRows = null, readChecklistRows = null, readAssignmentButtons = null;
     var selectedRepeat = (existing && existing.config && existing.config.repeat) || 'daily';
@@ -3096,6 +3352,44 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
       document.body.appendChild(ta); ta.focus(); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
     }catch(e){}
   }
+  var apiCache = {
+    KEY:'disciplinePro:apiCache', active:0, bypassUntil:0, fresh:{}, mem:null, memUid:null, timer:null,
+    SKIP:/^\/(notes|me\/state|messages|auth|data|sync|announcement|announcements|health|friends\/search|payment|billing\/orders?)(\/|\?|$)/,
+    load:function(uid){
+      if(this.memUid!==uid){ this.memUid=uid; this.mem={}; this.fresh={}; try{ var raw=JSON.parse(localStorage.getItem(this.KEY)||'null'); if(raw&&raw.uid===uid&&raw.items) this.mem=raw.items; }catch(e){} }
+      return this.mem;
+    },
+    // Кэш используется только пока рисуется экран; опросы, окна и действия идут прямо на сервер.
+    usable:function(path){ return this.active>0&&Date.now()>this.bypassUntil&&!this.SKIP.test(path); },
+    read:function(uid,path){ var m=this.load(uid); return m[path]||null; },
+    put:function(uid,path,data){
+      if(this.SKIP.test(path)) return false;
+      var text; try{ text=JSON.stringify(data); }catch(e){ return false; }
+      var m=this.load(uid); if(m[path]===text) return false;
+      if(text.length>300000){ delete m[path]; return true; }
+      m[path]=text; this.save(); return true;
+    },
+    save:function(){
+      var self=this; clearTimeout(this.timer);
+      this.timer=setTimeout(function(){
+        var keys=Object.keys(self.mem); if(keys.length>80) keys.slice(0,keys.length-80).forEach(function(k){ delete self.mem[k]; });
+        try{ localStorage.setItem(self.KEY,JSON.stringify({uid:self.memUid,items:self.mem})); }catch(e){ try{ localStorage.removeItem(self.KEY); }catch(x){} }
+      },400);
+    },
+    // После любого действия пользователя ненадолго отключаем кэш, чтобы сразу показать результат.
+    touch:function(){ this.bypassUntil=Date.now()+3000; this.fresh={}; },
+    begin:function(){ var self=this; this.active++; setTimeout(function(){ self.active--; },0); },
+    changed:function(){
+      var self=this; clearTimeout(this.rt);
+      this.rt=setTimeout(function(){
+        var ov=document.getElementById('modal-overlay')||document.querySelector('.modal-overlay');
+        if(ov&&ov.classList.contains('open')) return;
+        var y=window.scrollY; if(typeof renderCurrentView==='function') renderCurrentView();
+        setTimeout(function(){ window.scrollTo(0,y); },0);
+        setTimeout(function(){ self.fresh={}; },4000);
+      },60);
+    }
+  };
   var api = {
     request: function(method, path, body){
       var headers = {};
@@ -3118,11 +3412,27 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
         throw err;
       });
     },
-    get: function(path){ return this.request('GET', path); },
-    post: function(path, body){ return this.request('POST', path, body===undefined?{}:body); },
-    put: function(path, body){ return this.request('PUT', path, body===undefined?{}:body); },
-    patch: function(path, body){ return this.request('PATCH', path, body===undefined?{}:body); },
-    del: function(path){ return this.request('DELETE', path); },
+    // «Умная» загрузка: экран сразу показывает то, что было в прошлый раз, а свежие данные
+    // подтягиваются с сервера незаметно. Экран перерисовывается, только если что-то изменилось.
+    get: function(path){
+      var self=this, uid=currentUser&&currentUser.id;
+      if(!uid||!apiCache.usable(path)) return this.request('GET', path).then(function(d){ if(uid&&currentUser&&currentUser.id===uid) apiCache.put(uid,path,d); return d; });
+      var hit=apiCache.read(uid,path);
+      if(!hit) return this.request('GET', path).then(function(d){ if(currentUser&&currentUser.id===uid) apiCache.put(uid,path,d); return d; });
+      if(!apiCache.fresh[path]){
+        apiCache.fresh[path]=Date.now();
+        self.request('GET', path).then(function(d){
+          if(!currentUser||currentUser.id!==uid) return;
+          apiCache.fresh[path]=Date.now();
+          if(apiCache.put(uid,path,d)) apiCache.changed();
+        }).catch(function(){ delete apiCache.fresh[path]; });
+      }
+      return Promise.resolve(JSON.parse(hit));
+    },
+    post: function(path, body){ apiCache.touch(); return this.request('POST', path, body===undefined?{}:body); },
+    put: function(path, body){ apiCache.touch(); return this.request('PUT', path, body===undefined?{}:body); },
+    patch: function(path, body){ apiCache.touch(); return this.request('PATCH', path, body===undefined?{}:body); },
+    del: function(path){ apiCache.touch(); return this.request('DELETE', path); },
     upload: function(path, formData){
       var headers = {};
       if(authToken) headers['Authorization'] = 'Bearer ' + authToken;
@@ -3151,6 +3461,7 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
       '<form id="auth-form">'+
         (mode==='register' ? '<div class="field"><label>Ваше имя</label><input type="text" name="displayName" maxlength="60" placeholder="Как вас видят друзья" required></div>' : '')+
         '<div class="field"><label>Имя пользователя</label><input type="text" name="username" maxlength="32" placeholder="латиница, цифры, _ . -" required autocomplete="username"></div>'+
+        (mode==='register'?'<div class="field"><label>Номер телефона <small class="opt">по желанию</small></label><input type="tel" name="phone" maxlength="20" inputmode="tel" placeholder="+7 999 123-45-67" autocomplete="tel"></div><div class="field"><label>Электронная почта <small class="opt">по желанию</small></label><input type="email" name="email" maxlength="120" placeholder="name@mail.ru" autocomplete="email"></div><p class="auth-opt-note">По номеру или почте друзья смогут найти вас. Можно оставить пустым и добавить позже.</p>':'')+
         '<div class="field"><label for="auth-password">Пароль</label><div class="auth-password-wrap"><input id="auth-password" type="password" name="password" '+(mode==='register'?'minlength="4"':'')+' placeholder="'+(mode==='register'?'От 4 символов — буквы или цифры':'Введите пароль')+'" required autocomplete="'+(mode==='login'?'current-password':'new-password')+'"><button type="button" class="auth-password-toggle" data-password-for="auth-password" aria-label="Показать пароль" aria-pressed="false">Показать</button></div></div>'+
         (mode==='register'?'<div class="field"><label for="auth-password-repeat">Повторите пароль</label><div class="auth-password-wrap"><input id="auth-password-repeat" type="password" name="passwordRepeat" minlength="4" placeholder="Введите пароль ещё раз" required autocomplete="new-password"><button type="button" class="auth-password-toggle" data-password-for="auth-password-repeat" aria-label="Показать повтор пароля" aria-pressed="false">Показать</button></div></div>':'')+
         '<p id="auth-error" style="color:var(--danger);font-size:12.5px;display:none;margin-bottom:10px;"></p>'+
@@ -3176,6 +3487,7 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
         if(Array.from(payload.password).length<4){errEl.textContent='Введите пароль от 4 символов.';errEl.style.display='';f.password.focus();return;}
         if(payload.password!==f.passwordRepeat.value){errEl.textContent='Пароли не совпадают. Повторите пароль.';errEl.style.display='';f.passwordRepeat.focus();return;}
         payload.displayName=f.displayName.value.trim();
+        payload.phone=f.phone.value.trim(); payload.email=f.email.value.trim();
       }
       var submitBtn = f.querySelector('button[type=submit]');
       submitBtn.disabled = true;
@@ -3247,6 +3559,7 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
     pushTimer = setTimeout(pushRemote, 600);
   }
   function applyServerState(remote, skipRerender){
+    var snap=function(){ try{ return JSON.stringify([state.habits,state.logs,state.workouts,state.progress,state.totals]); }catch(e){ return String(Math.random()); } }, before=snap();
     applyingRemote = true;
     state.habits = Array.isArray(remote.habits) ? remote.habits : [];
     state.logs = remote.logs && typeof remote.logs === 'object' ? remote.logs : {};
@@ -3256,7 +3569,8 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
     state.updatedAt = remote.updatedAt || Date.now();
     if(Number.isSafeInteger(remote.version))localStorage.setItem(versionKey(),String(remote.version));
     saveLocal();
-    if(!skipRerender) renderCurrentView();
+    // Экран перерисовывается, только если с сервера пришло что-то новое.
+    if(!skipRerender && snap()!==before) renderCurrentView();
     applyingRemote = false;
   }
   function pushRemote(){
@@ -3307,6 +3621,7 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
 
   /* ---------- Аккаунт / карточки в настройках ---------- */
   function renderAccountCard(){
+    if(typeof renderAccountRow==='function') renderAccountRow();
     var el = document.getElementById('account-card');
     if(!el) return;
     if(isLoggedIn()){
@@ -3314,8 +3629,8 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
       el.innerHTML =
         '<div class="acc-top"><div class="acc-ava" aria-hidden="true">'+escapeHtml(String(currentUser.displayName||currentUser.username||'?').trim().charAt(0).toUpperCase())+'</div>'+
         '<div><b>'+escapeHtml(currentUser.displayName)+'</b><span>@'+escapeHtml(currentUser.username)+roleLabel+'</span></div></div>'+
-        '<div class="acc-code"><span>Ваш код для друзей</span><b>'+escapeHtml(currentUser.friendCode)+'</b></div>'+
-        '<div class="acc-btns"><button class="btn btn-ghost" data-action="account-logout">Выйти из аккаунта</button></div>';
+        '<div class="acc-find"><small>Как вас могут найти друзья</small>'+(typeof accountContactsHtml==='function'?accountContactsHtml():'<div class="acc-code"><span>Ваш код для друзей</span><b>'+escapeHtml(currentUser.friendCode)+'</b></div>')+'</div>'+
+        '<div class="acc-btns"><button class="btn btn-primary" data-action="account-edit">✎ Изменить</button><button class="btn btn-ghost" data-action="account-logout">Выйти из аккаунта</button></div>';
     } else {
       el.innerHTML =
         '<div class="acc-top"><div class="acc-ava guest" aria-hidden="true">👤</div>'+
@@ -3462,11 +3777,11 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
   });
   function renderTrainingView(){
     var mode=trainingMode(),body=document.getElementById('trainer-body');
-    document.querySelector('#view-trainer .section-title').textContent=mode==='trainer'?'Ученики':'Задания от тренера';
+    var trTitle=document.querySelector('#view-trainer .section-title');trTitle.textContent=mode==='trainer'?'Ученики':'Задания от тренера';if(trTitle.style)trTitle.style.display=mode==='trainer'?'none':'';
     if(!isLoggedIn()){body.innerHTML='<div class="empty-state"><span class="em">🤝</span><h3>'+(mode==='trainer'?'Ваши будущие ученики':'Ваш тренер всегда рядом')+'</h3><p>Войдите в аккаунт, чтобы '+(mode==='trainer'?'вести учеников и отправлять задания.':'получать задания и делиться прогрессом.')+'</p><button class="btn btn-primary" data-action="account-login">Войти в аккаунт</button></div>';return;}
     if(mode==='trainer'){
       if(currentUser.role!=='TRAINER'){body.innerHTML='<div class="empty-state"><span class="em">🏋️</span><h3>Начните вести учеников</h3><p>Для создания групп и отправки заданий нужен активный тариф тренера.</p><button class="btn btn-primary" data-action="open-tariffs">Тарифы для тренера</button></div>';return;}
-      body.innerHTML='<p>Загружаем учеников…</p>';reloadTrainerDashboard();return;
+      if(!body.querySelector||!body.querySelector('#create-group-btn')){body.__html='';body.innerHTML='<p>Загружаем учеников…</p>';}reloadTrainerDashboard();return;
     }
     var tasks=state.habits.filter(function(h){return !!h.assignedBy;});
     body.innerHTML='<div class="training-intro card"><div><b>Вместе к результату</b><p>Здесь собраны задания, которые вам отправил тренер.</p></div><div class="row-inline"><button class="btn btn-primary btn-sm" data-action="open-groups">Мой тренер</button><button class="btn btn-ghost btn-sm" data-action="open-trainer-contact">Написать тренеру</button></div></div>'+
@@ -3749,7 +4064,7 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
   }
   var billingPollBusy=false,trainerInviteSeen={};
   function refreshBillingAndInvites(){if(!isLoggedIn()||document.hidden||billingPollBusy)return;billingPollBusy=true;var owner=currentUser.id;
-    Promise.all([api.get('/plans/me'),api.get('/trainer/invitations')]).then(function(r){if(!currentUser||currentUser.id!==owner)return;var roleChanged=currentUser.role!==r[0].user.role;currentPlanCache=r[0];persistAuth(authToken,r[0].user);renderTariffCard(r[0]);if(roleChanged){renderTrainerNavVisibility();if(currentView==='trainer')renderTrainingView();}trainerInvitesCache=r[1].invitations||[];updateFriendBell();var el=document.getElementById('trainer-invite-banner');if(el)el.innerHTML=r[1].invitations.map(function(i){return '<div class="card"><b>'+escapeHtml(i.trainerName)+'</b><p>Приглашает в группу «'+escapeHtml(i.groupName)+'»</p><div class="row-inline"><button class="btn btn-primary btn-sm" data-training-decision="accept" data-invitation-id="'+i.id+'">Принять</button><button class="btn btn-ghost btn-sm" data-training-decision="decline" data-invitation-id="'+i.id+'">Отклонить</button></div></div>';}).join('');r[1].invitations.forEach(function(i){var key=owner+':'+i.id;if(!trainerInviteSeen[key]){trainerInviteSeen[key]=true;showToast('Приглашение от тренера '+i.trainerName+' — откройте раздел «Тренер»');}});
+    Promise.all([api.get('/plans/me'),api.get('/trainer/invitations')]).then(function(r){if(!currentUser||currentUser.id!==owner)return;var roleChanged=currentUser.role!==r[0].user.role;currentPlanCache=r[0];persistAuth(authToken,r[0].user);renderTariffCard(r[0]);if(roleChanged){renderTrainerNavVisibility();if(currentView==='trainer')renderTrainingView();}trainerInvitesCache=r[1].invitations||[];updateFriendBell();var el=document.getElementById('trainer-invite-banner');if(el)el.innerHTML=r[1].invitations.map(function(i){return '<div class="card"><b>'+escapeHtml(i.trainerName)+'</b><p>Приглашает в группу «'+escapeHtml(i.groupName)+'»</p><div class="row-inline"><button class="btn btn-primary btn-sm" data-training-decision="accept" data-invitation-id="'+i.id+'">Принять</button><button class="btn btn-ghost btn-sm" data-training-decision="decline" data-invitation-id="'+i.id+'">Отклонить</button></div></div>';}).join('');r[1].invitations.forEach(function(i){var key=owner+':'+i.id;if(!trainerInviteSeen[key]){trainerInviteSeen[key]=true;if(typeof DPNotify==='undefined'||DPNotify.on('trainerInvite')){if(typeof DPNotify!=='undefined')DPNotify.show('Приглашение от тренера',i.trainerName+' — откройте раздел «Тренер»','inv:'+key);else showToast('Приглашение от тренера '+i.trainerName);}}});
     }).catch(function(){}).finally(function(){billingPollBusy=false;});
   }
   setInterval(refreshBillingAndInvites,15000);window.addEventListener('focus',refreshBillingAndInvites);
@@ -3802,22 +4117,29 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
     api.get('/groups').then(function(d){
       var body = document.getElementById('trainer-body');
       if(!body||trainingMode()!=='trainer'||currentView!=='trainer') return;
-      body.innerHTML =
-        (d.billing&&d.billing.demoActive?'<p class="billing-wait">Демо до '+billingDate(d.billing.demo_until)+' · ученики без ограничения тарифа</p>':d.billing?'<p class="billing-wait">Приглашений осталось: '+d.billing.remaining+' из '+d.billing.seat_limit+' · до '+billingDate(d.billing.trainer_until)+'</p>':'')+'<div class="stat-grid"><div class="stat-box"><b>'+d.clientCount+' / '+(d.billing&&d.billing.demoActive?'∞':d.limit)+'</b><span>клиентов по тарифу</span></div><div class="stat-box"><b>'+d.groups.length+'</b><span>групп</span></div></div>'+
+      var html =
+        (typeof tariffEndingHtml==='function'?tariffEndingHtml(d.billing):'')+
         '<button type="button" class="btn btn-primary btn-block" id="create-group-btn" style="margin-bottom:14px;">+ Новая группа</button>'+
         (d.groups.length ? d.groups.map(function(g){
-          return '<div class="card" style="margin-bottom:10px;">'+
-            '<div class="row-between" style="margin-bottom:6px;"><b style="font-size:14.5px;">'+escapeHtml(g.name)+'</b><span style="font-size:12px;color:var(--text-dim);">'+g.memberCount+' участ.</span></div>'+
-            (g.description ? '<div style="font-size:12.5px;color:var(--text-dim);margin-bottom:8px;">'+escapeHtml(g.description)+'</div>' : '')+
-            '<div class="row-inline" style="margin-bottom:8px;"><code style="flex:1;background:var(--bg-elevated);padding:8px 10px;border-radius:10px;font-size:13px;">'+g.inviteCode+'</code><button type="button" class="btn btn-ghost btn-sm" data-copy-code="'+g.inviteCode+'">Копировать</button></div>'+
-            '<div class="row-inline">'+
-              '<button type="button" class="btn btn-ghost btn-sm" style="flex:1;" data-manage-group="'+g.id+'" data-group-name="'+escapeHtml(g.name)+'">Участники и задания</button>'+
-              '<button type="button" class="btn btn-ghost btn-sm" style="flex:1;" data-rename-group="'+g.id+'" data-group-name="'+escapeHtml(g.name)+'" data-group-desc="'+escapeHtml(g.description||'')+'">Изменить</button>'+
-              '<button type="button" class="btn btn-danger btn-sm" data-delete-group="'+g.id+'">Удалить</button>'+
+          var gn=escapeHtml(g.name);
+          return '<div class="card grp-card" data-grp-card="'+g.id+'" data-group-name="'+gn+'" tabindex="0" role="button" aria-label="Группа '+gn+'. Нажмите, чтобы открыть. Удерживайте 2 секунды, чтобы изменить.">'+
+            '<div class="grp-main"><span class="grp-ava" aria-hidden="true">'+escapeHtml(String(g.name||'?').trim().charAt(0).toUpperCase())+'</span>'+
+              '<span class="grp-t"><b>'+gn+'</b>'+(g.description?'<small>'+escapeHtml(g.description)+'</small>':'')+'</span>'+
+              '<span class="grp-count"><b>'+g.memberCount+'</b><small>участ.</small></span><button type="button" class="grp-add" data-grp-add="'+g.id+'" data-group-name="'+gn+'" data-code="'+g.inviteCode+'" aria-label="Добавить участника" title="Добавить участника">+</button></div>'+
+            '<div class="grp-code"><span>Код приглашения</span><code>'+g.inviteCode+'</code></div>'+
+            '<div class="grp-actions" hidden>'+
+              '<button type="button" class="grp-act" data-copy-code="'+g.inviteCode+'"><i>📋</i>Копировать код</button>'+
+              '<button type="button" class="grp-act" data-manage-group="'+g.id+'" data-group-name="'+gn+'"><i>👥</i>Участники и задания</button>'+
+              '<button type="button" class="grp-act" data-rename-group="'+g.id+'" data-group-name="'+gn+'" data-group-desc="'+escapeHtml(g.description||'')+'"><i>✎</i>Изменить</button>'+
+              '<button type="button" class="grp-act danger" data-delete-group="'+g.id+'"><i>🗑</i>Удалить</button>'+
+              '<button type="button" class="grp-act done" data-grp-done><i>✓</i>Готово</button>'+
             '</div>'+
           '</div>';
         }).join('') : '<div class="empty-state"><span class="em">🏋️</span><h3>Пока нет групп</h3><p>Создайте первую группу для клиентов.</p></div>');
+      if(body.__html===html&&body.querySelector('#create-group-btn')) return; // ничего не изменилось — экран не трогаем
+      body.__html=html; body.innerHTML=html;
 
+      if(typeof wireGroupCards==='function') wireGroupCards(body);
       body.querySelectorAll('[data-copy-code]').forEach(function(b){ b.addEventListener('click', function(){ copyTextToClipboard(b.getAttribute('data-copy-code')); showToast('Код скопирован'); }); });
       document.getElementById('create-group-btn').addEventListener('click', createGroupPrompt);
       body.querySelectorAll('[data-rename-group]').forEach(function(b){ b.addEventListener('click', function(){ renameGroupPrompt(b.getAttribute('data-rename-group'), b.getAttribute('data-group-name'), b.getAttribute('data-group-desc')); }); });
@@ -3870,24 +4192,7 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
     Promise.all([api.get('/groups/'+id+'/members'), api.get('/groups/'+id+'/habits')]).then(function(res){
       var members = res[0].members, habits = res[1].habits;
       var body = document.getElementById('manage-group-body');
-      if(!body)return;body.innerHTML =
-        '<div class="billing-invite-row"><input id="trainer-invite-user" placeholder="Псевдоним или код ученика" aria-label="Псевдоним или код ученика"><button class="btn btn-primary btn-sm" data-invite-group="'+id+'">Пригласить</button></div><p class="social-note">Место будет использовано только после принятия приглашения учеником.</p>'+
-        '<div class="field"><label>Участники ('+members.length+')</label>'+
-          (members.length ? members.map(function(m){
-            return '<div class="settings-row" style="padding:8px 0;"><div><b style="font-size:13px;">'+escapeHtml(m.displayName)+'</b><span>@'+escapeHtml(m.username)+'</span><div class="row-inline"><button class="btn btn-ghost btn-sm" data-student-progress="'+m.id+'" data-period="today">Сегодня</button><button class="btn btn-ghost btn-sm" data-student-progress="'+m.id+'" data-period="30">30 дней</button><button class="btn btn-ghost btn-sm" data-student-progress="'+m.id+'" data-period="month">Месяц</button></div></div><span class="row-inline" style="flex:none;"><button type="button" class="btn btn-ghost btn-sm" data-mute-member="'+m.id+'" data-muted="'+(m.chatMuted?'1':'0')+'" title="'+(m.chatMuted?'Разрешить писать в чат':'Запретить писать в чат')+'">'+(m.chatMuted?'🔇 Молчит':'💬 Пишет')+'</button><button type="button" class="rm-row" data-remove-member="'+m.id+'" title="Удалить из группы" aria-label="Удалить из группы">×</button></span></div>';
-          }).join('') : '<p style="color:var(--text-dim);font-size:12.5px;">Пока никого.</p>')+
-        '</div>'+
-        '<div class="field"><label>Задания группы</label>'+
-          (habits.length ? habits.map(function(h){
-            var targetLabel = h.targetUserId ? ('Лично: '+escapeHtml(h.targetName||'?')) : 'Вся группа';
-            return '<div class="settings-row" style="padding:8px 0;"><div><b style="font-size:13px;">'+h.emoji+' '+escapeHtml(h.name)+'</b><span>'+targetLabel+'</span></div>'+
-              '<div class="row-inline">'+
-                '<button type="button" class="btn btn-ghost btn-sm" data-progress-habit="'+h.id+'" data-habit-name="'+escapeHtml(h.name)+'">Прогресс</button>'+
-                '<button type="button" class="rm-row" data-remove-habit="'+h.id+'">×</button>'+
-              '</div></div>';
-          }).join('') : '<p style="color:var(--text-dim);font-size:12.5px;">Пока нет заданий.</p>')+
-          '<button type="button" class="add-row" id="add-group-habit-btn">+ Добавить задание</button>'+
-        '</div>';
+      if(!body)return;body.innerHTML = groupManageHtml(members,habits); wireGroupManage(body,id,name,members,habits);
       body.querySelectorAll('[data-mute-member]').forEach(function(b){
         b.addEventListener('click', function(){ b.disabled=true; var mute=b.getAttribute('data-muted')!=='1';
           api.patch('/groups/'+id+'/members/'+b.getAttribute('data-mute-member')+'/chat',{muted:mute}).then(function(){ showToast(mute?'Ученику запрещено писать в чат группы':'Ученик снова может писать в чат'); manageGroupModal(id, name); }).catch(function(e){ showToast(e.message); b.disabled=false; }); });
@@ -3901,7 +4206,7 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
       body.querySelectorAll('[data-progress-habit]').forEach(function(b){
         b.addEventListener('click', function(){ groupHabitProgressModal(id, name, b.getAttribute('data-progress-habit'), b.getAttribute('data-habit-name')); });
       });
-      document.getElementById('add-group-habit-btn').addEventListener('click', function(){ addGroupHabitPrompt(id, name, members); });
+      document.getElementById('add-group-habit-btn').addEventListener('click', function(){ groupHabitDate=null; addGroupHabitPrompt(id, name, members); });
     }).catch(function(){
       var body = document.getElementById('manage-group-body');
       if(body) body.innerHTML = '<p style="color:var(--danger);font-size:13px;">Не удалось загрузить данные группы.</p>';
@@ -3909,10 +4214,12 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
   }
   // Назначение задания: либо всей группе, либо одному конкретному ученику (раздел 20) —
   // target='' значит "вся группа" (targetUserId не передаётся), иначе отправляем id ученика.
+  var groupHabitDate=null;
   function addGroupHabitPrompt(groupId, groupName, members){
     members = members || [];
     openModal(
       '<h2>Новое задание</h2>'+
+      '<p class="gm-note" style="padding-top:0;">Группа «'+escapeHtml(groupName)+'»'+(groupHabitDate?' · только на '+fmtLong(groupHabitDate):'')+'</p>'+
       '<div class="field"><label>Название</label><input type="text" id="group-habit-name" placeholder="Например: Бег 20 минут"></div>'+
       '<div class="field"><label>Эмодзи</label><input type="text" id="group-habit-emoji" placeholder="🏃" maxlength="2" value="🎯"></div>'+
       '<div class="field"><label>Кому назначить</label><select id="group-habit-target" style="width:100%;">'+
@@ -3929,10 +4236,10 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
       var targetVal = document.getElementById('group-habit-target').value;
       if(!name){ showToast('Укажите название'); return; }
       var goalForm=document.getElementById('trainer-goal-form');if(!goalForm.reportValidity())return;var goal;try{goal=readTrainerGoal();}catch(err){showToast(err.message);return;}
-      var payload = {name:name, emoji:emoji, type:'simple',config:{goal:goal}};
+      var payload = {name:name, emoji:emoji, type:'simple',config:groupHabitDate?{goal:goal,schedule:{start:groupHabitDate,repeat:'once'}}:{goal:goal}};
       if(targetVal) payload.targetUserId = Number(targetVal);
       api.post('/groups/'+groupId+'/habits', payload).then(function(){
-        showToast(targetVal ? 'Задание назначено лично' : 'Задание добавлено группе');
+        showToast(targetVal ? 'Задание назначено лично' : 'Задание добавлено группе'); groupHabitDate=null; if(typeof loadCoachCalendar==='function'){ try{ coachCalendar.at=0; loadCoachCalendar(true); }catch(e){} }
         manageGroupModal(groupId, groupName);
       }).catch(function(e){ showToast(e.message); });
     });
@@ -4184,6 +4491,8 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
       else if(quickAction.getAttribute('data-quick-action')==='add')openHabitTypeModalGated();
       else if(quickAction.getAttribute('data-quick-action')==='trainer-msgs')openTrainerMessages();
       else if(quickAction.getAttribute('data-quick-action')==='group-chat')openCommonGroup();
+      else if(quickAction.getAttribute('data-quick-action')==='notes')DPNotes.open();
+      else if(quickAction.getAttribute('data-quick-action')==='new-group')createGroupPrompt();
       return;
     }
     if(!e.target.closest('.dock-center'))setQuickMenu(false);
@@ -4244,6 +4553,7 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
     else if(action==='account-register') authModal('register');
     else if(action==='account-login') authModal('login');
     else if(action==='account-logout') doLogout();
+    else if(action==='account-edit') profileEditModal();
     else if(action==='copy-friend-code'){
       copyTextToClipboard(currentUser.friendCode);
       showToast('Код скопирован');
@@ -4947,13 +5257,15 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
     function blocked(){ return busy||overlay.classList.contains('open')||!!document.querySelector('.dpd-overlay')||document.getElementById('quick-menu')&&!document.getElementById('quick-menu').hidden; }
     function place(y,anim){ ptr.classList.toggle('anim',!!anim); ptr.style.transform='translateY('+(y-70)+'px)'; ptr.style.opacity=y>4?Math.min(1,y/40):0; var svg=ptr.firstChild; if(!ptr.classList.contains('loading')) svg.style.transform='rotate('+(y*3)+'deg)'; else svg.style.transform=''; ptr.classList.toggle('ready',y>=THRESHOLD&&!busy); }
     function showBanner(ok,title,text){
+      return; // сообщения убраны: результат показывают только стрелки рядом с датой
       clearTimeout(bannerTimer); banner.className='sync-banner '+(ok?'ok':'err');
-      banner.innerHTML='<i>'+(ok?'✓':'!')+'</i><div>'+title+(text?'<small>'+text+'</small>':'')+'</div>';
+      banner.textContent=title;
       requestAnimationFrame(function(){ banner.classList.add('show'); });
-      bannerTimer=setTimeout(function(){ banner.classList.remove('show'); },ok?2600:4200);
+      bannerTimer=setTimeout(function(){ banner.classList.remove('show'); },1000);
     }
     function ring(cls){ var plus=document.getElementById('dock-plus'); if(!plus) return; clearTimeout(ringTimer); plus.classList.remove('sync-busy','sync-ok','sync-err'); if(cls){ plus.classList.add(cls); if(cls!=='sync-busy') ringTimer=setTimeout(function(){ plus.classList.remove(cls); },3000); } }
     function refresh(){
+      topRefreshState('busy');
       if(busy) return; busy=true; ptr.classList.add('loading'); place(THRESHOLD,true); ring('sync-busy');
       var started=Date.now();
       var work=api.get('/features').then(function(){
@@ -4967,11 +5279,14 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
         var wait=Math.max(0,700-(Date.now()-started));
         setTimeout(function(){
           busy=false; ptr.classList.remove('loading'); place(0,true);
+          topRefreshState(err?'err':'ok');
           if(err){ DPFx.play('error'); ring('sync-err'); showBanner(false,'Ошибка обновления с сервера',err.status===0||!navigator.onLine?'Нет связи с сервером':(err.message||'')); }
           else { DPFx.play('success'); ring('sync-ok'); showBanner(true,'Успешно обновлено с сервера',isLoggedIn()?'':'Войдите в аккаунт, чтобы синхронизировать данные'); renderCurrentView(); }
         },wait);
       });
     }
+    function topRefreshState(st){ var b=document.getElementById('top-refresh'); if(!b) return; b.classList.remove('busy','ok','err'); b.classList.add(st); b.title=st==='busy'?'Обновляется…':st==='ok'?'Обновлено с сервера · нажмите, чтобы обновить ещё раз':'Ошибка обновления · нажмите, чтобы повторить'; b.setAttribute('aria-label',b.title); }
+    (function(){ var b=document.getElementById('top-refresh'); if(b) b.addEventListener('click',function(){ refresh(); }); })();
     window.DPRefreshFromServer=refresh;
     document.addEventListener('touchstart',function(e){ startY=(e.touches.length===1&&window.scrollY<=0&&!blocked()&&!e.target.closest('.chat,.modal-card,input,textarea'))?e.touches[0].clientY:null; pull=0; },{passive:true});
     document.addEventListener('touchmove',function(e){
@@ -5004,9 +5319,9 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
   function friendNeedLogin(){ msgNeedLogin('Друзья'); }
   function friendAddModal(){
     if(!isLoggedIn()){ friendNeedLogin(); return; }
-    openModal('<div class="auth-hero"><i aria-hidden="true">🤝</i><h2>Добавить друга</h2><p>Найдите человека по имени, псевдониму или коду друга</p></div>'+
-      '<form class="fr-search" id="fr-form"><input id="fr-q" placeholder="Имя, @псевдоним или код" minlength="2" maxlength="80" autocomplete="off" aria-label="Поиск друзей"><button type="submit" class="btn btn-primary">Найти</button></form>'+
-      '<div id="fr-results"><div class="fr-hint">Ваш код для друзей: <b style="color:var(--text);letter-spacing:.05em;">'+escapeHtml(currentUser.friendCode||'—')+'</b><br>Поделитесь им, чтобы вас быстро нашли.</div></div>'+
+    openModal('<div class="auth-hero"><i aria-hidden="true">🤝</i><h2>Добавить друга</h2><p>Найдите человека по имени, псевдониму, коду друга, номеру телефона или почте</p></div>'+
+      '<form class="fr-search" id="fr-form"><input id="fr-q" placeholder="Имя, код, телефон или почта" minlength="2" maxlength="80" autocomplete="off" aria-label="Поиск друзей"><button type="submit" class="btn btn-primary">Найти</button></form>'+
+      '<div id="fr-results"><div class="fr-hint" style="text-align:left;">Вас могут найти так:'+accountContactsHtml()+'</div></div>'+
       '<div class="modal-actions"><button type="button" class="btn btn-ghost btn-block" data-action="close-modal">Закрыть</button></div>');
     var q=document.getElementById('fr-q'), box=document.getElementById('fr-results'), version=0, owner=currentUser.id;
     function search(){
@@ -5017,7 +5332,7 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
         box.innerHTML=d.users.length?d.users.map(function(u){
           var right=u.relationship==='accepted'?'<span class="badge-soft">В друзьях</span>':u.relationship==='pending'?'<small style="color:var(--text-dim);">'+(u.incoming?'Ждёт вашего ответа':'Запрос отправлен')+'</small>':'<button type="button" class="btn btn-primary btn-sm" data-fr-add="'+u.id+'">Добавить</button>';
           return '<div class="fr-row"><span class="fr-ava">'+escapeHtml(u.avatarEmoji||'🙂')+'</span><span class="fr-t"><b>'+escapeHtml(u.displayName||u.username)+'</b><small>@'+escapeHtml(u.username)+'</small></span>'+right+'</div>';
-        }).join(''):'<div class="fr-hint">Никого не нашли. Попробуйте другое имя или код друга.</div>';
+        }).join(''):'<div class="fr-hint">Никого не нашли. Попробуйте другое имя, код друга, номер телефона или почту целиком.</div>';
       }).catch(function(e){ if(v===version&&box.isConnected) box.innerHTML='<div class="fr-hint">'+escapeHtml(e.message)+'</div>'; });
     }
     document.getElementById('fr-form').addEventListener('submit',function(e){ e.preventDefault(); search(); });
@@ -5029,7 +5344,7 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
   }
   function friendRequestsModal(){
     if(!isLoggedIn()){ friendNeedLogin(); return; }
-    openModal('<div class="auth-hero"><i aria-hidden="true">🔔</i><h2>Заявки в друзья</h2><p>Приняв заявку, вы откроете друг другу личные цели</p></div><div id="frq-body"><div class="fr-hint">Загрузка…</div></div>'+
+    openModal('<div class="auth-hero"><i aria-hidden="true">🔔</i><h2>Уведомления</h2><p>Заявки в друзья и выполненные цели друзей</p></div><div class="fr-sec">Приглашения</div><div id="frq-body"><div class="fr-hint">Загрузка…</div></div><div class="fr-sec">Выполненные цели друзей</div><div id="nf-feed"><div class="fr-hint">Загрузка…</div></div>'+
       '<div class="modal-actions"><button type="button" class="btn btn-ghost btn-block" data-action="close-modal">Закрыть</button></div>');
     var body=document.getElementById('frq-body'), owner=currentUser.id;
     function paint(){
@@ -5038,6 +5353,7 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
       if(d.outgoing&&d.outgoing.length) html+='<div class="fr-sec">Вы отправили</div>'+d.outgoing.map(function(u){ return '<div class="fr-row"><span class="fr-ava">'+escapeHtml(u.avatarEmoji||'🙂')+'</span><span class="fr-t"><b>'+escapeHtml(u.displayName||u.username)+'</b><small>Ждём ответа</small></span></div>'; }).join('');
       body.innerHTML=html||'<div class="fr-hint"><span style="display:block;font-size:38px;margin-bottom:6px;">🔕</span>Новых заявок нет</div>';
     }
+    notifFeed('friends');
     function load(){ api.get('/friends').then(function(d){ if(!body.isConnected||!currentUser||currentUser.id!==owner) return; serverFriendsCache=d; updateFriendBell(); paint(); }).catch(function(e){ if(body.isConnected) body.innerHTML='<div class="fr-hint">'+escapeHtml(e.message)+'</div>'; }); }
     body.addEventListener('click',function(e){
       var b=e.target.closest('[data-frq]'); if(!b) return; b.disabled=true; var accept=b.getAttribute('data-frq')==='accept';
@@ -5115,9 +5431,10 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
   /* --- приглашения от тренера --- */
   function trainingInvitesModal(){
     if(!isLoggedIn()){ friendNeedLogin(); return; }
-    openModal('<div class="auth-hero"><i aria-hidden="true">🔔</i><h2>Приглашения</h2><p>Приглашения в группы тренеров</p></div><div id="ti-body"><div class="fr-hint">Загрузка…</div></div>'+
+    openModal('<div class="auth-hero"><i aria-hidden="true">🔔</i><h2>Уведомления</h2><p>'+(trainingMode()==='trainer'?'Приглашения и выполненные задания учеников':'Приглашения тренеров и выполненные задания')+'</p></div><div class="fr-sec">Приглашения</div><div id="ti-body"><div class="fr-hint">Загрузка…</div></div><div class="fr-sec">'+(trainingMode()==='trainer'?'Выполнили ученики':'Выполненные задания тренера')+'</div><div id="nf-feed"><div class="fr-hint">Загрузка…</div></div>'+
       '<div class="modal-actions"><button type="button" class="btn btn-ghost btn-block" data-action="close-modal">Закрыть</button></div>');
     var body=document.getElementById('ti-body'), owner=currentUser.id;
+    notifFeed('trainer');
     function load(){
       api.get('/trainer/invitations').then(function(d){
         if(!body.isConnected||!currentUser||currentUser.id!==owner) return;
@@ -5208,7 +5525,7 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
 
   /* ---------- Экспорт / импорт текстом ---------- */
   (function(){
-    var PREFS=['disciplinePro:theme','disciplinePro:fxSound','disciplinePro:fxHaptic','disciplinePro:goalStyle','disciplinePro:cardView','disciplinePro:servers','disciplinePro:serverStyle','disciplinePro:settingsOpen'];
+    var PREFS=['disciplinePro:notify','disciplinePro:theme','disciplinePro:fxSound','disciplinePro:fxHaptic','disciplinePro:goalStyle','disciplinePro:cardView','disciplinePro:servers','disciplinePro:serverStyle','disciplinePro:settingsOpen'];
     function buildText(){
       var prefs={}; PREFS.forEach(function(k){ try{ var v=localStorage.getItem(k); if(v!==null) prefs[k]=v; }catch(e){} });
       return JSON.stringify({app:'disciplinePro',version:1,date:new Date().toISOString(),state:state,prefs:prefs});
@@ -5250,10 +5567,10 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
   /* ---------- Раскрывающиеся разделы настроек ---------- */
   (function(){
     var view=document.getElementById('view-settings'); if(!view) return;
-    var META={'Регистрация и вход':['👤','Аккаунт, вход и регистрация'],'Тарифы':['💎','Подписка и оплата'],'Сообщества':['👥','Друзья и общие цели'],'Режимы':['🎛️','Поля и разделы задач'],'Тренер и ученик':['🏋️','Роль, группы и задания'],'Приложение':['📱','Тема, уведомления, вид'],'Прочее':['🧩','Экспорт, импорт и другое'],'Обслуживание':['🛠️','Обновление и очистка'],'Серверы':['🌐','Адреса, пинг, резерв']};
+    var META={'Уведомления':['🔔','Пуш: друзья, ученики, тренер'],'Регистрация и вход':['👤','Аккаунт, вход и регистрация'],'Тарифы':['💎','Подписка и оплата'],'Сообщества':['👥','Друзья и общие цели'],'Режимы':['🎛️','Поля и разделы задач'],'Тренер и ученик':['🏋️','Роль, группы и задания'],'Приложение':['📱','Тема, уведомления, вид'],'Прочее':['🧩','Экспорт, импорт и другое'],'Обслуживание':['🛠️','Обновление и очистка'],'Серверы':['🌐','Адреса, пинг, резерв']};
     var KEY='disciplinePro:settingsOpen', open={};
     try{ open=JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){}
-    var titles=Array.prototype.slice.call(view.querySelectorAll(':scope > .settings-group-title'));
+    var titles=Array.prototype.slice.call(view.querySelectorAll(':scope > .settings-group-title:not(.account-row)'));
     titles.forEach(function(t,i){
       var name=t.textContent.trim(), m=META[name]||['⚙️',''], body=document.createElement('div');
       body.className='acc-body'; body.id='acc-body-'+i;
@@ -5265,13 +5582,453 @@ button.fr-row{width:100%;font:inherit;color:var(--text);text-align:left;cursor:p
       btn.innerHTML='<span class="gi" aria-hidden="true">'+m[0]+'</span><span class="gt">'+escapeHtml(name)+(m[1]?'<small>'+m[1]+'</small>':'')+'</span><span class="gc" aria-hidden="true">›</span>';
       t.parentNode.replaceChild(btn,t);
       function set(on){ btn.setAttribute('aria-expanded',String(on)); body.classList.toggle('open',on); }
-      set(open[name]===undefined?i===0:!!open[name]);
+      set(!!open[name]);
       btn.addEventListener('click',function(){
         var on=btn.getAttribute('aria-expanded')!=='true'; set(on); open[name]=on;
         try{ localStorage.setItem(KEY,JSON.stringify(open)); }catch(e){}
         if(on) setTimeout(function(){ btn.scrollIntoView({behavior:'smooth',block:'nearest'}); },50);
       });
     });
+  })();
+
+  /* ---------- Заметки и задачи: 12 + 12 квадратных карточек на весь экран ---------- */
+  var DPNotes=(function(){
+    var N=12, screen=null, tab='notes', data=null, saveTimer=null, TABKEY='disciplinePro:notesTab';
+    function key(){ return 'disciplinePro:notes:'+(isLoggedIn()?currentUser.id:'guest'); }
+    function blank(){ var d={notes:[],tasks:[],updatedAt:0,dirty:false}; for(var i=0;i<N;i++){ d.notes.push({text:''}); d.tasks.push({text:'',done:false}); } return d; }
+    function norm(src){ var d=blank(); if(!src) return d; for(var i=0;i<N;i++){ var n=src.notes&&src.notes[i], t=src.tasks&&src.tasks[i]; if(n) d.notes[i].text=String(n.text||''); if(t){ d.tasks[i].text=String(t.text||''); d.tasks[i].done=!!t.done&&!!d.tasks[i].text; } } d.updatedAt=Number(src.updatedAt)||0; d.dirty=!!src.dirty; return d; }
+    function loadLocal(){ try{ return norm(JSON.parse(localStorage.getItem(key())||'null')); }catch(e){ return blank(); } }
+    function saveLocal(){ try{ localStorage.setItem(key(),JSON.stringify(data)); }catch(e){} }
+    function same(a,b){ return JSON.stringify([a.notes,a.tasks])===JSON.stringify([b.notes,b.tasks]); }
+    function push(){
+      if(!isLoggedIn()||!data.dirty) return; var owner=currentUser.id, sent=JSON.stringify([data.notes,data.tasks]);
+      api.put('/notes',{notes:data.notes,tasks:data.tasks}).then(function(d){ if(!currentUser||currentUser.id!==owner) return; if(JSON.stringify([data.notes,data.tasks])===sent){ data.dirty=false; data.updatedAt=d.updatedAt; saveLocal(); } status('Сохранено на сервере'); }).catch(function(){ status('Сохранено на устройстве · отправим при подключении'); });
+    }
+    function changed(){ data.dirty=true; saveLocal(); status(isLoggedIn()?'Сохраняем…':'Сохранено на этом устройстве'); clearTimeout(saveTimer); saveTimer=setTimeout(push,900); }
+    function pull(){
+      if(!isLoggedIn()) return; var owner=currentUser.id;
+      if(data.dirty){ push(); return; }
+      api.request('GET','/notes').then(function(d){ if(!currentUser||currentUser.id!==owner||data.dirty) return; var remote=norm(d); if(!same(remote,data)){ data=remote; saveLocal(); if(screen&&!screen.querySelector('.nt-editor')) render(); } status('Обновлено с сервера'); }).catch(function(){});
+    }
+    function status(t){ var el=screen&&screen.querySelector('.nt-status'); if(el) el.textContent=t; }
+    function tile(kind,i){
+      var it=data[kind][i], empty=!it.text, task=kind==='tasks';
+      return '<button type="button" class="nt-tile c'+(i%6)+(empty?' empty':'')+(task?' task':'')+(task&&it.done?' done':'')+'" data-nt="'+kind+':'+i+'" aria-label="'+(task?'Задача ':'Заметка ')+(i+1)+(empty?', пусто':'')+'">'+
+        (task&&!empty?'<span class="nt-check" data-nt-check="'+i+'" role="checkbox" aria-checked="'+it.done+'" aria-label="Выполнено">'+(it.done?'✓':'')+'</span>':'')+
+        (empty?'<span class="nt-plus">+</span>':'<span class="nt-text">'+escapeHtml(it.text)+'</span>')+'</button>';
+    }
+    function grid(kind,title){ var h=''; for(var i=0;i<N;i++) h+=tile(kind,i); var used=data[kind].filter(function(x){return x.text;}).length; return (title?'<div class="nt-sec"><b>'+title+'</b><small>'+used+' из '+N+'</small></div>':'')+'<div class="nt-grid">'+h+'</div>'; }
+    function render(){
+      if(!screen) return;
+      screen.querySelectorAll('.nt-tabs button').forEach(function(b){ b.setAttribute('aria-pressed',String(b.getAttribute('data-nt-tab')===tab)); });
+      screen.querySelector('.nt-body').innerHTML= tab==='notes'?grid('notes','Заметки') : tab==='tasks'?grid('tasks','Задачи') : grid('notes','Заметки')+grid('tasks','Задачи');
+    }
+    function edit(kind,i){
+      var it=data[kind][i], task=kind==='tasks', ed=document.createElement('div'); ed.className='nt-editor c'+(i%6);
+      ed.innerHTML='<div class="nt-ed-card"><div class="nt-ed-head"><b>'+(task?'Задача ':'Заметка ')+(i+1)+'</b><button type="button" class="nt-x" data-ed="close" aria-label="Закрыть">✕</button></div>'+
+        '<textarea maxlength="2000" placeholder="'+(task?'Что нужно сделать?':'Напишите заметку…')+'"></textarea>'+
+        (task?'<label class="nt-ed-done"><input type="checkbox"'+(it.done?' checked':'')+'> Выполнено</label>':'')+
+        '<div class="nt-ed-actions"><button type="button" class="btn btn-ghost" data-ed="clear">Очистить</button><button type="button" class="btn btn-primary" data-ed="save">Готово</button></div></div>';
+      screen.appendChild(ed); var ta=ed.querySelector('textarea'); ta.value=it.text; setTimeout(function(){ ta.focus(); },60);
+      function done(save,clear){
+        if(clear){ it.text=''; if(task) it.done=false; changed(); }
+        else if(save){ var v=ta.value.trim(), d=task?(ed.querySelector('input').checked&&!!v):false; if(v!==it.text||(task&&d!==it.done)){ it.text=v; if(task) it.done=d; changed(); } }
+        ed.remove(); render();
+      }
+      ed.addEventListener('click',function(e){ var b=e.target.closest('[data-ed]'); if(b){ var a=b.getAttribute('data-ed'); done(a==='save',a==='clear'); } else if(e.target===ed) done(true,false); });
+    }
+    function close(){ if(!screen) return; clearTimeout(saveTimer); push(); screen.remove(); screen=null; document.body.classList.remove('nt-open'); }
+    function open(){
+      if(screen) return; data=loadLocal(); try{ var t=localStorage.getItem(TABKEY); if(t==='notes'||t==='tasks'||t==='all') tab=t; }catch(e){}
+      screen=document.createElement('div'); screen.className='nt-screen'; screen.setAttribute('role','dialog'); screen.setAttribute('aria-label','Заметки и задачи');
+      screen.innerHTML='<div class="nt-top"><div class="nt-title"><b>Заметки и задачи</b><small class="nt-status">'+(isLoggedIn()?'Синхронизация с сервером':'Хранятся на этом устройстве')+'</small></div><button type="button" class="nt-x" data-nt-close aria-label="Закрыть">✕</button></div>'+
+        '<div class="nt-tabs" role="group" aria-label="Что показывать"><button type="button" data-nt-tab="notes">📝 Заметки</button><button type="button" data-nt-tab="tasks">✅ Задачи</button><button type="button" data-nt-tab="all">Все</button></div><div class="nt-body"></div>';
+      document.body.appendChild(screen); document.body.classList.add('nt-open');
+      screen.addEventListener('click',function(e){
+        if(e.target.closest('[data-nt-close]')){ close(); return; }
+        var tb=e.target.closest('[data-nt-tab]'); if(tb){ tab=tb.getAttribute('data-nt-tab'); try{ localStorage.setItem(TABKEY,tab); }catch(x){} render(); return; }
+        var ck=e.target.closest('[data-nt-check]'); if(ck){ var t=data.tasks[Number(ck.getAttribute('data-nt-check'))]; t.done=!t.done; if(window.DPFx&&DPFx.tap) try{ DPFx.tap(); }catch(x){} changed(); render(); return; }
+        var tl=e.target.closest('[data-nt]'); if(tl){ var p=tl.getAttribute('data-nt').split(':'); edit(p[0],Number(p[1])); }
+      });
+      render(); pull();
+    }
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&screen){ var ed=screen.querySelector('.nt-editor'); if(ed) ed.querySelector('[data-ed="close"]').click(); else close(); } });
+    window.addEventListener('online',function(){ if(data&&data.dirty) push(); });
+    return {open:open,close:close};
+  })();
+  document.addEventListener('click',function(e){ if(e.target.closest&&e.target.closest('.sidebar .nav-btn[data-view]')) DPNotes.close(); },true);
+  (function(){ var b=document.getElementById('side-notes'); if(b) b.addEventListener('click',function(){ DPNotes.open(); }); })();
+
+  /* ---------- Напоминание тренеру: тариф заканчивается (показывается только за сутки) ---------- */
+  function tariffEndingHtml(billing){
+    if(!billing) return '';
+    var until=Number(billing.demoActive?billing.demo_until:billing.trainer_until); if(!until) return '';
+    var left=until-Date.now(); if(left>24*3600*1000) return '';
+    var hours=Math.max(0,Math.ceil(left/3600000)), over=left<=0;
+    return '<div class="tariff-end'+(over?' over':'')+'" role="status"><span class="te-ic" aria-hidden="true">'+(over?'⛔':'⏳')+'</span>'+
+      '<span class="te-t"><b>'+(over?'Тариф закончился':(billing.demoActive?'Демо заканчивается':'Тариф заканчивается'))+'</b>'+
+      '<small>'+(over?'Продлите тариф, чтобы приглашать учеников и отправлять задания.':'Осталось '+hours+' ч · до '+billingDate(until)+'. Продлите, чтобы ученики не потеряли доступ.')+'</small></span>'+
+      '<button type="button" class="btn btn-primary btn-sm" data-action="open-tariffs">Продлить</button></div>';
+  }
+
+  /* ---------- Уведомления: настройки и события (друзья, ученики, тренер) ---------- */
+  var DPNotify=(function(){
+    var KEY='disciplinePro:notify', DEF={push:false,friendGoal:true,studentGoal:true,trainerTask:true,friendRequest:true,trainerInvite:true}, busy=false;
+    function load(){ var o={}; try{ o=JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){} var r={}; Object.keys(DEF).forEach(function(k){ r[k]=typeof o[k]==='boolean'?o[k]:DEF[k]; }); if(!('Notification' in window)||Notification.permission!=='granted') r.push=false; return r; }
+    function save(o){ try{ localStorage.setItem(KEY,JSON.stringify(o)); }catch(e){} }
+    function on(k){ return !!load()[k]; }
+    function paint(){
+      var o=load(); document.querySelectorAll('[data-ntf]').forEach(function(i){ i.checked=!!o[i.getAttribute('data-ntf')]; });
+      var d=document.getElementById('ntf-push-detail'); if(d) d.textContent=!('Notification' in window)?'Этот браузер не поддерживает уведомления':Notification.permission==='denied'?'Запрещены в настройках браузера':o.push?'Включены на этом устройстве':'Выключены · сообщения показываются только внутри приложения';
+    }
+    function show(title,body,tag){
+      showToast(title+(body?': '+body:''));
+      if(!on('push')) return;
+      var opt={body:body||'',tag:tag,icon:'icons/icon-192.png',badge:'icons/icon-192.png'};
+      try{ if(navigator.serviceWorker&&navigator.serviceWorker.controller){ navigator.serviceWorker.ready.then(function(r){ return r.showNotification(title,opt); }).catch(function(){ try{ new Notification(title,opt); }catch(e){} }); } else new Notification(title,opt); }catch(e){}
+    }
+    function seenKey(kind){ return 'disciplinePro:ntfSeen:'+kind+':'+currentUser.id; }
+    // Сравнивает текущий набор событий с уже показанными. Первый запуск только запоминает, без уведомлений.
+    function diff(kind,keys){
+      var raw=localStorage.getItem(seenKey(kind)), seen=null; try{ seen=raw?JSON.parse(raw):null; }catch(e){}
+      var fresh=seen?keys.filter(function(k){ return seen.indexOf(k)<0; }):[];
+      try{ localStorage.setItem(seenKey(kind),JSON.stringify((seen||[]).concat(keys).filter(function(k,i,a){ return a.indexOf(k)===i; }).slice(-400))); }catch(e){}
+      return fresh;
+    }
+    function check(){
+      if(busy||!isLoggedIn()||document.hidden&&!on('push')) return; busy=true; var owner=currentUser.id, today=todayKey(), jobs=[];
+      function mine(){ return currentUser&&currentUser.id===owner; }
+      if(on('trainerTask')){ var map={}; (state.habits||[]).forEach(function(h){ if(h.assignedBy) map['t:'+h.id]=h; }); diff('task',Object.keys(map)).forEach(function(k){ show('Новое задание от тренера',(map[k].emoji||'🎯')+' '+map[k].name,k); }); }
+      if(on('friendGoal')) jobs.push(api.request('GET','/friends').then(function(d){ return Promise.all((d.friends||[]).map(function(u){ return api.request('GET','/friends/'+u.id+'/goals').catch(function(){ return null; }); })); }).then(function(list){
+        if(!mine()) return; var map={}; list.forEach(function(f){ if(!f) return; f.goals.forEach(function(g){ if(g.history.some(function(r){ return r.done&&r.date===today; })) map['f:'+f.user.id+':'+g.id+':'+today]={who:f.user.displayName||f.user.username,g:g}; }); });
+        diff('friend',Object.keys(map)).forEach(function(k){ show(map[k].who+' выполнил(а) цель',(map[k].g.emoji||'🎯')+' '+map[k].g.name,k); });
+      }));
+      if(on('studentGoal')&&currentUser.role==='TRAINER'&&trainingMode()==='trainer') jobs.push(api.request('GET','/groups').then(function(d){ return Promise.all(d.groups.map(function(g){ return api.request('GET','/groups/'+g.id+'/habits').then(function(r){ return Promise.all(r.habits.map(function(h){ return api.request('GET','/groups/'+g.id+'/habits/'+h.id+'/progress').then(function(pr){ return {g:g,h:h,students:pr.students}; }); })); }); })); }).then(function(groups){
+        if(!mine()) return; var map={}; [].concat.apply([],groups).forEach(function(x){ x.students.forEach(function(st){ if(st.lastDoneDate===today) map['s:'+st.id+':'+x.h.id+':'+today]={who:st.displayName,x:x}; }); });
+        diff('student',Object.keys(map)).forEach(function(k){ show(map[k].who+' выполнил(а) задание',(map[k].x.h.emoji||'🎯')+' '+map[k].x.h.name+' · '+map[k].x.g.name,k); });
+      }));
+      Promise.all(jobs).catch(function(){}).then(function(){ busy=false; });
+    }
+    document.addEventListener('change',function(e){
+      var i=e.target.closest&&e.target.closest('[data-ntf]'); if(!i) return; var k=i.getAttribute('data-ntf'), o=load();
+      if(k==='push'&&i.checked){
+        if(!('Notification' in window)){ showToast('Этот браузер не поддерживает уведомления'); paint(); return; }
+        Notification.requestPermission().then(function(perm){ o=load(); o.push=perm==='granted'; save(o); paint(); if(perm==='granted') show('Уведомления включены','Так будут выглядеть уведомления','ntf-test'); else showToast('Разрешите уведомления в настройках браузера'); });
+        return;
+      }
+      o[k]=i.checked; save(o); paint();
+      if(k==='friendRequest'&&isLoggedIn()){ try{ localStorage.setItem(trainingPreferenceKey()+':friendAlerts',i.checked?'on':'off'); }catch(x){} }
+    });
+    setTimeout(paint,0); setTimeout(check,6000); setInterval(check,60000);
+    document.addEventListener('visibilitychange',function(){ if(!document.hidden) check(); });
+    return {on:on,show:show,check:check,paint:paint};
+  })();
+
+  /* ---------- «Добавить задачу» зависит от раздела: себе, друзьям (личная) или ученикам ---------- */
+  function addTaskForStudents(date){
+    if(!isLoggedIn()||currentUser.role!=='TRAINER'||trainingMode()!=='trainer') return false;
+    var cal=currentView==='calendar'||currentView==='dayfull';
+    if(!(currentView==='trainer'||(cal&&calendarFilter==='trainer'))) return false;
+    var day=date||(currentView==='dayfull'?currentFullDayKey:null), owner=currentUser.id;
+    openModal('<div class="auth-hero"><i aria-hidden="true">🎯</i><h2>Задание ученикам</h2><p>'+(day?'На '+fmtLong(day):'Выберите группу')+'</p></div><div id="ats-body"><p class="gm-note">Загрузка…</p></div><div class="modal-actions"><button type="button" class="btn btn-ghost btn-block" data-action="close-modal">Отмена</button></div>');
+    var body=document.getElementById('ats-body');
+    function go(g){ api.get('/groups/'+g.id+'/members').then(function(r){ if(!currentUser||currentUser.id!==owner) return; groupHabitDate=day||null; addGroupHabitPrompt(g.id,g.name,r.members); }).catch(function(e){ showToast(e.message); }); }
+    api.get('/groups').then(function(d){
+      if(!body.isConnected||!currentUser||currentUser.id!==owner) return;
+      if(!d.groups.length){ body.innerHTML='<div class="gm-empty"><i>🏋️</i><b>Сначала создайте группу</b><small>Задания назначаются группе или ученику из группы.</small></div><button type="button" class="btn btn-primary btn-block" id="ats-new" style="margin-top:10px;">+ Новая группа</button>'; document.getElementById('ats-new').addEventListener('click',createGroupPrompt); return; }
+      if(d.groups.length===1){ go(d.groups[0]); return; }
+      body.innerHTML=d.groups.map(function(g,i){ return '<button type="button" class="gm-prog" data-ats="'+i+'"><span class="gm-ava">'+escapeHtml(String(g.name||'?').trim().charAt(0).toUpperCase())+'</span><span class="gm-t"><b>'+escapeHtml(g.name)+'</b><small>'+g.memberCount+' участ.</small></span><span class="gm-chev">›</span></button>'; }).join('');
+      body.querySelectorAll('[data-ats]').forEach(function(b){ b.addEventListener('click',function(){ go(d.groups[Number(b.getAttribute('data-ats'))]); }); });
+    }).catch(function(e){ if(body.isConnected) body.innerHTML='<p class="gm-note" style="color:var(--danger);">'+escapeHtml(e.message)+'</p>'; });
+    return true;
+  }
+
+  /* ---------- Лента уведомлений: кто и что выполнил за последние 7 дней ---------- */
+  function notifFeed(kind){
+    var box=document.getElementById('nf-feed'); if(!box||!isLoggedIn()) return; var owner=currentUser.id;
+    function dayKey(off){ var d=new Date(); d.setDate(d.getDate()-off); return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
+    var since=dayKey(6), today=todayKey(), yest=dayKey(1);
+    function when(k){ return k===today?'сегодня':k===yest?'вчера':fmtShort(k); }
+    function paint(items,emptyText){
+      if(!box.isConnected||!currentUser||currentUser.id!==owner) return;
+      items.sort(function(a,b){ return a.date<b.date?1:a.date>b.date?-1:0; });
+      box.innerHTML=items.length?items.slice(0,40).map(function(i){ return '<div class="fr-row nf-row"><span class="fr-ava">'+escapeHtml(i.emoji||'🎯')+'</span><span class="fr-t"><b>'+escapeHtml(i.who)+'</b><small>✓ '+escapeHtml(i.what)+'</small></span><span class="nf-when'+(i.date===today?' on':'')+'">'+when(i.date)+'</span></div>'; }).join(''):'<div class="fr-hint"><span style="display:block;font-size:34px;margin-bottom:6px;">🌙</span>'+emptyText+'</div>';
+    }
+    function fail(e){ if(box.isConnected) box.innerHTML='<div class="fr-hint">'+escapeHtml(e.message)+'</div>'; }
+    if(kind==='friends'){
+      api.get('/friends').then(function(d){ return Promise.all((d.friends||[]).map(function(u){ return api.get('/friends/'+u.id+'/goals').catch(function(){ return {user:u,goals:[]}; }); })); }).then(function(list){
+        var items=[]; list.forEach(function(f){ f.goals.forEach(function(g){ g.history.forEach(function(r){ if(r.done&&r.date>=since) items.push({who:f.user.displayName||f.user.username,what:g.name,emoji:g.emoji,date:r.date}); }); }); });
+        paint(items,'За последние 7 дней друзья ничего не отметили');
+      }).catch(fail); return;
+    }
+    if(trainingMode()==='trainer'&&currentUser.role==='TRAINER'){
+      api.get('/groups').then(function(d){ return Promise.all(d.groups.map(function(g){ return api.get('/groups/'+g.id+'/habits').then(function(r){ return Promise.all(r.habits.map(function(h){ return api.get('/groups/'+g.id+'/habits/'+h.id+'/progress').then(function(pr){ return {g:g,h:h,students:pr.students}; }); })); }); })); }).then(function(groups){
+        var items=[]; [].concat.apply([],groups).forEach(function(x){ x.students.forEach(function(st){ var last=st.lastDoneDate||st.lastDate; if(st.doneCount&&last&&last>=since) items.push({who:st.displayName,what:x.h.name+' · '+x.g.name+' · всего '+st.doneCount+' дн.',emoji:x.h.emoji,date:last}); }); });
+        paint(items,'За последние 7 дней ученики ничего не отметили');
+      }).catch(fail); return;
+    }
+    var items=[]; (state.habits||[]).filter(function(h){ return h.assignedBy; }).forEach(function(h){ Object.keys(state.logs||{}).forEach(function(k){ if(k>=since&&state.logs[k]&&state.logs[k][h.id]) items.push({who:'Вы',what:h.name,emoji:h.emoji,date:k}); }); });
+    paint(items,'За последние 7 дней нет выполненных заданий тренера');
+  }
+
+  /* ---------- Календарь друзей: кто и что выполнил ---------- */
+  var friendCal={owner:0,at:0,loading:false,list:[],error:''};
+  function loadFriendCal(force){
+    if(!isLoggedIn()) return; var owner=currentUser.id;
+    if(friendCal.owner===owner&&(friendCal.loading||(!force&&Date.now()-friendCal.at<60000))) return;
+    var rec={owner:owner,at:0,loading:true,list:friendCal.owner===owner?friendCal.list:[],error:''}; friendCal=rec;
+    api.get('/friends').then(function(d){ return Promise.all((d.friends||[]).map(function(u){ return api.get('/friends/'+u.id+'/goals').catch(function(){ return {user:u,goals:[]}; }); })); })
+      .then(function(list){ rec.list=list; }).catch(function(e){ rec.error=e.message||'Не удалось загрузить друзей.'; })
+      .then(function(){ rec.loading=false; rec.at=Date.now(); if(currentUser&&currentUser.id===owner&&currentView==='calendar'&&calendarFilter==='friends') renderCalendar(); });
+  }
+  function friendDoneOn(k){ var out=[]; friendCal.list.forEach(function(f){ var g=f.goals.filter(function(x){ return x.history.some(function(r){ return r.done&&r.date===k; }); }); if(g.length) out.push({user:f.user,goals:g}); }); return out; }
+  function renderFriendsCalendar(y,m,startOffset,daysInMonth,tk){
+    var grid=document.getElementById('cal-grid'), box=document.getElementById('calendar-month-tasks'), status=document.getElementById('calendar-source-status');
+    grid.classList.remove('trainer-mode');
+    if(!isLoggedIn()){ status.textContent='Войдите в аккаунт, чтобы видеть задания друзей.'; grid.innerHTML=''; box.innerHTML=''; return; }
+    loadFriendCal(false);
+    status.textContent=friendCal.loading&&!friendCal.list.length?'Загружаем друзей…':friendCal.error;
+    var cells='', prefix=y+'-'+pad(m+1)+'-';
+    for(var i=0;i<startOffset;i++) cells+='<div class="cal-day empty"></div>';
+    for(var d=1;d<=daysInMonth;d++){
+      var k=prefix+pad(d), who=friendDoneOn(k), n=who.reduce(function(a,w){ return a+w.goals.length; },0);
+      cells+='<div class="cal-day'+(k===tk?' today':'')+(n?' full':'')+'" data-friends-day="'+k+'" role="button" tabindex="0"><svg class="cd-ring" viewBox="0 0 36 36"><circle class="cd-ring-fg" cx="18" cy="18" r="16"/></svg><span>'+d+'</span>'+(n?'<span class="cd-frac">'+who.length+' 👤 · '+n+'</span>':'')+'</div>';
+    }
+    grid.innerHTML=cells;
+    box.innerHTML='<div class="section-title" style="margin-top:24px">Друзья · '+friendCal.list.length+'</div>'+(friendCal.list.length?friendCal.list.map(function(f){
+      var goals=f.goals.map(function(g){ var c=g.history.filter(function(r){ return r.done&&r.date.indexOf(prefix)===0; }).length; return '<span class="go-chip'+(c?' me':'')+'">'+escapeHtml(g.emoji||'🎯')+' '+escapeHtml(g.name)+' · '+c+' дн.</span>'; }).join('');
+      return '<div class="cal-friend"><div class="fp-row" style="margin:0;border:0;padding:0;background:none;"><span class="fp-ava">'+escapeHtml(f.user.avatarEmoji||'🙂')+'</span><span class="fp-t"><b>'+escapeHtml(f.user.displayName||f.user.username)+'</b><small>'+f.goals.length+' личных заданий</small></span><button type="button" class="btn btn-primary btn-sm" data-social-goals="'+f.user.id+'">Прогресс</button></div>'+(goals?'<div class="go-chips" style="margin-top:10px;">'+goals+'</div>':'<p class="gm-note">Пока нет личных заданий.</p>')+'</div>';
+    }).join(''):(friendCal.loading?'':'<div class="card social-welcome"><h3>Пока нет друзей</h3><p>Добавьте друзей в разделе «Друзья» — здесь появится, что они выполняют по дням.</p></div>'));
+  }
+  function friendsDayModal(k){
+    var who=friendDoneOn(k);
+    openModal('<div class="day-dialog-heading"><h2>'+fmtLong(k)+'</h2><button type="button" class="btn btn-primary" data-action="open-habit-modal" data-date="'+k+'" aria-label="Добавить личную задачу на выбранный день">＋</button></div><p class="gm-note" style="padding-top:0;">Что выполнили друзья в этот день · «＋» добавит вашу личную задачу, её увидят друзья</p>'+(who.length?who.map(function(w){
+      return '<div class="cal-friend"><div class="fp-row" style="margin:0;border:0;padding:0;background:none;"><span class="fp-ava">'+escapeHtml(w.user.avatarEmoji||'🙂')+'</span><span class="fp-t"><b>'+escapeHtml(w.user.displayName||w.user.username)+'</b><small>выполнено: '+w.goals.length+'</small></span><button type="button" class="btn btn-ghost btn-sm" data-social-goals="'+w.user.id+'">Прогресс</button></div><div class="go-chips" style="margin-top:10px;">'+w.goals.map(function(g){ return '<span class="go-chip me">✓ '+escapeHtml(g.emoji||'')+' '+escapeHtml(g.name)+'</span>'; }).join('')+'</div></div>';
+    }).join(''):'<div class="gm-empty"><i>🌙</i><b>В этот день отметок нет</b><small>Никто из друзей ничего не отметил.</small></div>')+'<div class="modal-actions"><button type="button" class="btn btn-ghost btn-block" data-action="close-modal">Закрыть</button></div>');
+  }
+  document.addEventListener('click',function(e){
+    var d=e.target.closest('[data-friends-day]'); if(d){ friendsDayModal(d.getAttribute('data-friends-day')); return; }
+    if(e.target.closest('[data-cal-group]')) groupOverviewModal();
+  });
+  (function(){ var b=document.getElementById('calendar-source-friends'); if(b) b.addEventListener('click',function(){ chooseCalendar('friends'); }); })();
+
+  /* ---------- Календарь: значок «Группа» — участники и задания тренера ---------- */
+  function groupOverviewModal(){
+    if(!isLoggedIn()){ friendNeedLogin(); return; }
+    var trainer=trainingMode()==='trainer'&&currentUser.role==='TRAINER', owner=currentUser.id;
+    openModal('<div class="auth-hero"><i aria-hidden="true">👥</i><h2>'+(trainer?'Мои группы':'Моя группа')+'</h2><p>'+(trainer?'Участники и задания каждой группы':'Тренер, участники и задания')+'</p></div><div id="go-body"><p class="gm-note">Загрузка…</p></div><div class="modal-actions"><button type="button" class="btn btn-ghost btn-block" data-action="close-modal">Закрыть</button></div>');
+    var body=document.getElementById('go-body');
+    function ok(){ return body.isConnected&&currentUser&&currentUser.id===owner; }
+    function fail(e){ if(ok()) body.innerHTML='<p class="gm-note" style="color:var(--danger);">'+escapeHtml(e.message)+'</p>'; }
+    if(trainer){
+      api.get('/groups').then(function(d){ if(!ok()) return;
+        body.innerHTML=d.groups.length?d.groups.map(function(g){ return '<button type="button" class="gm-prog" data-go-group="'+g.id+'" data-name="'+escapeHtml(g.name)+'"><span class="gm-ava">'+escapeHtml(String(g.name||'?').trim().charAt(0).toUpperCase())+'</span><span class="gm-t"><b>'+escapeHtml(g.name)+'</b><small>'+g.memberCount+' участ. · нажмите, чтобы открыть</small></span><span class="gm-chev">›</span></button>'; }).join(''):'<div class="gm-empty"><i>🏋️</i><b>Пока нет групп</b><small>Создайте группу в разделе «Ученики».</small></div>';
+        body.querySelectorAll('[data-go-group]').forEach(function(b){ b.addEventListener('click',function(){ manageGroupModal(b.getAttribute('data-go-group'),b.getAttribute('data-name')); }); });
+      }).catch(fail); return;
+    }
+    api.get('/groups/mine').then(function(d){
+      if(!d.groups.length){ if(ok()) body.innerHTML='<div class="gm-empty"><i>🤝</i><b>Вы пока не в группе</b><small>Откройте раздел «Тренер», нажмите «+» и введите код приглашения.</small></div>'; return; }
+      return Promise.all(d.groups.map(function(g){ return api.get('/groups/'+g.id+'/roster'); })).then(function(list){ if(!ok()) return;
+        body.innerHTML=list.map(function(r){
+          return '<div class="go-group"><div class="fp-head"><b>'+escapeHtml(r.group.name)+'</b>'+(r.group.description?'<small>'+escapeHtml(r.group.description)+'</small>':'')+'</div>'+
+            '<div class="gm-prog" style="cursor:default;"><span class="fp-ava">'+escapeHtml(r.group.trainerEmoji||'👨‍🏫')+'</span><span class="gm-t"><b>'+escapeHtml(r.group.trainerName||'Тренер')+'</b><small>Тренер</small></span></div>'+
+            '<div class="gm-sub">Участники · '+r.members.length+'</div><div class="go-chips">'+r.members.map(function(m){ return '<span class="go-chip'+(m.me?' me':'')+'">'+escapeHtml(m.avatarEmoji||'🙂')+' '+escapeHtml(m.displayName)+(m.me?' (вы)':'')+'</span>'; }).join('')+'</div>'+
+            '<div class="gm-sub">Задания тренера · '+r.habits.length+'</div>'+(r.habits.length?r.habits.map(function(h){ return '<div class="gm-prog" style="cursor:default;"><span class="gm-emoji">'+escapeHtml(h.emoji||'🎯')+'</span><span class="gm-t"><b>'+escapeHtml(h.name)+'</b><small>'+(h.personal?'👤 Лично вам':'👥 Всей группе')+'</small></span></div>'; }).join(''):'<p class="gm-note">Тренер пока не дал заданий.</p>')+'</div>';
+        }).join('');
+      });
+    }).catch(fail);
+  }
+  (function(){ var b=document.getElementById('calendar-source-group'); if(b) b.addEventListener('click',groupOverviewModal); })();
+
+  /* ---------- Друзья: переключатель «Личные» / «Друзья» ---------- */
+  var friendsTab='friends'; try{ if(localStorage.getItem('disciplinePro:friendsTab')==='mine') friendsTab='mine'; }catch(e){}
+  function friendVisibleHabits(){
+    return (state.habits||[]).filter(function(h){
+      if(h.assignedBy||h.assigned_by||h.groupId||h.group_id) return false;
+      if(['simple','checklist','zikr','timer','assignment'].indexOf(h.type||'simple')<0) return false;
+      var m=h.config&&h.config.modes||h.modes||{}; return !['gym','diet','workout','nutrition','fitness'].some(function(k){ return m[k]; });
+    });
+  }
+  function friendsPaneHtml(){
+    document.querySelectorAll('[data-friends-tab]').forEach(function(b){ b.setAttribute('aria-pressed',String(b.getAttribute('data-friends-tab')===friendsTab)); b.classList.toggle('active',b.getAttribute('data-friends-tab')===friendsTab); });
+    if(friendsTab==='mine'){
+      var mine=friendVisibleHabits(), today=state.logs[todayKey()]||{};
+      return '<div class="fp-head"><b>Личные задания</b><small>Их видят ваши друзья. Задания тренера, тренировки и питание остаются закрытыми.</small></div>'+
+        (mine.length?mine.map(function(h){
+          var days=0; Object.keys(state.logs||{}).forEach(function(k){ if(state.logs[k]&&state.logs[k][h.id]) days++; });
+          return '<div class="fp-row"><span class="fp-ava">'+escapeHtml(h.emoji||'🎯')+'</span><span class="fp-t"><b>'+escapeHtml(h.name)+'</b><small>'+days+' выполненных дней</small></span><span class="fp-state'+(today[h.id]?' on':'')+'">'+(today[h.id]?'✓ Сегодня':'Не отмечено')+'</span></div>';
+        }).join(''):'<div class="card social-welcome"><h3>Пока нет личных заданий</h3><p>Добавьте задание для себя — друзья увидят ваш прогресс и смогут поддержать.</p></div>')+
+        '<button type="button" class="btn btn-primary btn-block" data-friends-add-task style="margin-top:10px;">+ Добавить задание</button>';
+    }
+    var fr=serverFriendsCache&&serverFriendsCache.friends||[];
+    return fr.length?'<div class="fp-head"><b>Друзья · '+fr.length+'</b><small>Нажмите «Прогресс», чтобы увидеть задания и результаты друга.</small></div>'+fr.map(function(u){
+      return '<div class="fp-row"><span class="fp-ava">'+escapeHtml(u.avatarEmoji||'🙂')+'</span><span class="fp-t"><b>'+escapeHtml(u.displayName||u.username)+'</b><small>@'+escapeHtml(u.username)+'</small></span><button type="button" class="gm-ic" data-social-chat="'+u.id+'" title="Написать" aria-label="Написать">💬</button><button type="button" class="btn btn-primary btn-sm" data-social-goals="'+u.id+'">Прогресс</button></div>';
+    }).join(''):'<div class="card social-welcome"><h3>Ваши друзья будут здесь</h3><p>Нажмите «+» вверху, найдите человека по имени, коду, телефону или почте и отправьте приглашение.</p></div>';
+  }
+  document.addEventListener('click',function(e){
+    var t=e.target.closest('[data-friends-tab]');
+    if(t){ friendsTab=t.getAttribute('data-friends-tab'); try{ localStorage.setItem('disciplinePro:friendsTab',friendsTab); }catch(x){} if(typeof renderSocialFriends==='function') renderSocialFriends(); return; }
+    if(e.target.closest('[data-friends-add-task]')) openHabitTypeModalGated();
+  });
+
+  /* ---------- Окно группы: вкладки «Задания» и «Ученики» ---------- */
+  var groupManageTab='tasks';
+  function groupManageHtml(members,habits){
+    var tasks=habits.length?habits.map(function(h){
+      return '<div class="gm-task" data-gm-task="'+h.id+'"><button type="button" class="gm-task-head" aria-expanded="false"><span class="gm-emoji">'+escapeHtml(h.emoji||'🎯')+'</span><span class="gm-t"><b>'+escapeHtml(h.name)+'</b><small>'+(h.targetUserId?'👤 Лично: '+escapeHtml(h.targetName||'?'):'👥 Вся группа')+'</small></span><span class="gm-chev" aria-hidden="true">›</span></button><div class="gm-task-body" hidden></div></div>';
+    }).join(''):'<div class="gm-empty"><i>🎯</i><b>Пока нет заданий</b><small>Добавьте первое задание — всей группе или одному ученику.</small></div>';
+    var studs=members.length?members.map(function(m){
+      return '<div class="gm-st"><button type="button" class="gm-st-main" data-student-progress="'+m.id+'" data-period="today" title="Посмотреть, что сделал ученик"><span class="gm-ava">'+escapeHtml(String(m.displayName||m.username||'?').trim().charAt(0).toUpperCase())+'</span><span class="gm-t"><b>'+escapeHtml(m.displayName)+'</b><small>@'+escapeHtml(m.username)+' · нажмите, чтобы увидеть прогресс</small></span></button>'+
+        '<button type="button" class="gm-ic" data-mute-member="'+m.id+'" data-muted="'+(m.chatMuted?'1':'0')+'" title="'+(m.chatMuted?'Разрешить писать в чат':'Запретить писать в чат')+'" aria-label="'+(m.chatMuted?'Разрешить писать в чат':'Запретить писать в чат')+'">'+(m.chatMuted?'🔇':'💬')+'</button>'+
+        '<button type="button" class="rm-row" data-remove-member="'+m.id+'" title="Удалить из группы" aria-label="Удалить из группы">×</button></div>';
+    }).join(''):'<div class="gm-empty"><i>🎓</i><b>Пока никого</b><small>Пригласите ученика через поиск или отправьте код группы.</small></div>';
+    return '<div class="nt-tabs gm-tabs" role="group"><button type="button" data-gm-tab="tasks">🎯 Задания · '+habits.length+'</button><button type="button" data-gm-tab="students">🎓 Ученики · '+members.length+'</button></div>'+
+      '<div data-gm-pane="tasks">'+tasks+'<button type="button" class="btn btn-primary btn-block" id="add-group-habit-btn" style="margin-top:10px;">+ Новое задание</button></div>'+
+      '<div data-gm-pane="students">'+studs+'<button type="button" class="btn btn-primary btn-block" id="gm-add-student" style="margin-top:10px;">+ Добавить ученика</button></div>';
+  }
+  function wireGroupManage(body,id,name,members,habits){
+    function show(tab){ groupManageTab=tab; body.querySelectorAll('[data-gm-tab]').forEach(function(b){ b.setAttribute('aria-pressed',String(b.getAttribute('data-gm-tab')===tab)); }); body.querySelectorAll('[data-gm-pane]').forEach(function(p){ p.hidden=p.getAttribute('data-gm-pane')!==tab; }); }
+    body.querySelectorAll('[data-gm-tab]').forEach(function(b){ b.addEventListener('click',function(){ show(b.getAttribute('data-gm-tab')); }); });
+    show(groupManageTab);
+    document.getElementById('gm-add-student').addEventListener('click',function(){ var c=document.querySelector('[data-grp-add="'+id+'"]'); groupInviteModal(id,name,c?c.getAttribute('data-code'):''); });
+    body.querySelectorAll('[data-gm-task]').forEach(function(card){
+      var hid=card.getAttribute('data-gm-task'), head=card.querySelector('.gm-task-head'), box=card.querySelector('.gm-task-body'), h=habits.filter(function(x){return String(x.id)===hid;})[0], loaded=false;
+      function load(){
+        box.innerHTML='<p class="gm-note">Загрузка…</p>';
+        api.get('/groups/'+id+'/habits/'+hid+'/progress').then(function(d){
+          if(!box.isConnected) return; loaded=true;
+          var rows=d.students.length?d.students.map(function(s){
+            return '<button type="button" class="gm-prog" data-student-progress="'+s.id+'" data-period="today"><span class="gm-ava sm">'+escapeHtml(String(s.displayName||'?').trim().charAt(0).toUpperCase())+'</span><span class="gm-t"><b>'+escapeHtml(s.displayName)+'</b><small>'+((s.lastDoneDate||s.lastDate)?'последняя отметка: '+fmtShort(s.lastDoneDate||s.lastDate):'ещё не приступал(а)')+'</small></span><span class="gm-days'+(s.doneCount?' on':'')+'"><b>'+s.doneCount+'</b> дн.</span></button>';
+          }).join(''):'<p class="gm-note">В группе пока нет учеников для этого задания.</p>';
+          box.innerHTML='<div class="gm-sub">Кто выполняет · нажмите на ученика</div>'+rows+
+            '<div class="gm-sub">Кому назначено</div><div class="gm-assign"><select aria-label="Кому назначено"><option value="">👥 Вся группа</option>'+members.map(function(m){ return '<option value="'+m.id+'"'+(h&&h.targetUserId===m.id?' selected':'')+'>👤 '+escapeHtml(m.displayName)+' (@'+escapeHtml(m.username)+')</option>'; }).join('')+'</select><button type="button" class="btn btn-primary btn-sm" data-gm-assign>Перенести</button></div>'+
+            '<div class="gm-task-actions"><button type="button" class="btn btn-ghost btn-sm" data-gm-rename>✎ Переименовать</button><button type="button" class="btn btn-danger btn-sm" data-gm-del>🗑 Удалить задание</button></div>';
+          box.querySelector('[data-gm-assign]').addEventListener('click',function(){ var v=box.querySelector('select').value, btn=this; btn.disabled=true;
+            api.patch('/groups/'+id+'/habits/'+hid,{targetUserId:v?Number(v):null}).then(function(){ showToast(v?'Задание перенесено ученику':'Задание назначено всей группе'); manageGroupModal(id,name); }).catch(function(e){ showToast(e.message); btn.disabled=false; }); });
+          box.querySelector('[data-gm-rename]').addEventListener('click',function(){
+            openModal('<h2>Изменить задание</h2><form id="gm-rename-form"><div class="field"><label>Значок</label><input type="text" name="emoji" maxlength="4" value="'+escapeHtml(h.emoji||'🎯')+'"></div><div class="field"><label>Название</label><input type="text" name="name" maxlength="200" required value="'+escapeHtml(h.name)+'"></div><div class="modal-actions"><button type="button" class="btn btn-ghost" id="gm-rename-cancel">Отмена</button><button type="submit" class="btn btn-primary">Сохранить</button></div></form>');
+            document.getElementById('gm-rename-cancel').addEventListener('click',function(){ manageGroupModal(id,name); });
+            document.getElementById('gm-rename-form').addEventListener('submit',function(e){ e.preventDefault(); var f=e.target; api.patch('/groups/'+id+'/habits/'+hid,{name:f.name.value.trim(),emoji:f.emoji.value.trim()}).then(function(){ showToast('Задание изменено'); manageGroupModal(id,name); }).catch(function(x){ showToast(x.message); }); });
+          });
+          var del=box.querySelector('[data-gm-del]'); del.addEventListener('click',function(){
+            if(del.getAttribute('data-armed')!=='1'){ del.setAttribute('data-armed','1'); del.textContent='Точно удалить?'; setTimeout(function(){ if(del.isConnected){ del.removeAttribute('data-armed'); del.textContent='🗑 Удалить задание'; } },3000); return; }
+            api.del('/groups/'+id+'/habits/'+hid).then(function(){ showToast('Задание удалено'); manageGroupModal(id,name); }).catch(function(e){ showToast(e.message); });
+          });
+        }).catch(function(e){ if(box.isConnected) box.innerHTML='<p class="gm-note" style="color:var(--danger);">'+escapeHtml(e.message)+'</p>'; });
+      }
+      head.addEventListener('click',function(){ var on=head.getAttribute('aria-expanded')!=='true'; head.setAttribute('aria-expanded',String(on)); box.hidden=!on; card.classList.toggle('open',on); if(on&&!loaded) load(); });
+    });
+  }
+
+  /* ---------- Добавить участника в группу: поиск + код для приглашения ---------- */
+  function groupInviteModal(groupId,name,code){
+    var owner=currentUser&&currentUser.id, text='Вступайте в мою группу «'+name+'» в приложении «Дисциплина Pro». Код приглашения: '+code;
+    openModal('<div class="auth-hero"><i aria-hidden="true">🎓</i><h2>Добавить участника</h2><p>Группа «'+escapeHtml(name)+'»</p></div>'+
+      '<form class="fr-search" id="gi-form"><input id="gi-q" placeholder="Имя, код, телефон или почта" minlength="2" maxlength="80" autocomplete="off" aria-label="Поиск участника"><button type="submit" class="btn btn-primary">Найти</button></form>'+
+      '<div id="gi-results"><div class="fr-hint">Найдите человека и отправьте приглашение — он примет его в уведомлениях 🔔</div></div>'+
+      '<div class="gi-code"><small>Код группы для приглашения</small><div class="gi-code-row"><code>'+escapeHtml(code)+'</code><button type="button" class="btn btn-ghost btn-sm" id="gi-copy">📋 Копировать</button></div>'+
+      '<button type="button" class="btn btn-primary btn-block" id="gi-share">↗ Поделиться приглашением</button><p>Отправьте код в WhatsApp, Telegram или другую соцсеть. Человек вводит его в разделе «Тренер» → «+».</p></div>'+
+      '<div class="modal-actions"><button type="button" class="btn btn-ghost btn-block" data-action="close-modal">Закрыть</button></div>');
+    var q=document.getElementById('gi-q'), box=document.getElementById('gi-results'), version=0;
+    document.getElementById('gi-copy').addEventListener('click',function(){ copyTextToClipboard(code); showToast('Код скопирован'); });
+    document.getElementById('gi-share').addEventListener('click',function(){
+      if(navigator.share){ navigator.share({text:text}).catch(function(){}); }
+      else { copyTextToClipboard(text); showToast('Приглашение скопировано — вставьте его в любой чат'); }
+    });
+    document.getElementById('gi-form').addEventListener('submit',function(e){
+      e.preventDefault(); var t=q.value.trim(); if(t.length<2){ box.innerHTML='<div class="fr-hint">Введите хотя бы 2 символа</div>'; return; }
+      var v=++version; box.innerHTML='<div class="fr-hint">Поиск…</div>';
+      api.get('/friends/search?q='+encodeURIComponent(t)).then(function(d){
+        if(v!==version||!box.isConnected||!currentUser||currentUser.id!==owner) return;
+        box.innerHTML=d.users.length?d.users.map(function(u){ return '<div class="fr-row"><span class="fr-ava">'+escapeHtml(u.avatarEmoji||'🙂')+'</span><span class="fr-t"><b>'+escapeHtml(u.displayName||u.username)+'</b><small>@'+escapeHtml(u.username)+'</small></span><button type="button" class="btn btn-primary btn-sm" data-gi-add="'+escapeHtml(u.username)+'">Пригласить</button></div>'; }).join(''):'<div class="fr-hint">Никого не нашли. Проверьте имя, код, номер телефона или почту — либо отправьте код группы.</div>';
+      }).catch(function(x){ if(v===version&&box.isConnected) box.innerHTML='<div class="fr-hint">'+escapeHtml(x.message)+'</div>'; });
+    });
+    box.addEventListener('click',function(e){
+      var b=e.target.closest('[data-gi-add]'); if(!b) return; b.disabled=true;
+      api.post('/trainer/groups/'+groupId+'/invite',{username:b.getAttribute('data-gi-add')}).then(function(){ showToast('Приглашение отправлено'); b.outerHTML='<small style="color:var(--text-dim);">Приглашён</small>'; }).catch(function(x){ showToast(x.message); b.disabled=false; });
+    });
+    setTimeout(function(){ if(q.isConnected&&window.matchMedia('(hover:hover)').matches) q.focus(); },150);
+  }
+
+  /* ---------- Карточка группы: нажатие открывает, удержание 2 секунды — изменение ---------- */
+  function wireGroupCards(root){
+    function closeAll(except){ root.querySelectorAll('.grp-card.editing').forEach(function(c){ if(c!==except){ c.classList.remove('editing'); c.querySelector('.grp-actions').hidden=true; } }); }
+    root.querySelectorAll('[data-grp-card]').forEach(function(card){
+      var actions=card.querySelector('.grp-actions'), timer=null, start=null, fired=false, downAt=0, held=0;
+      function stop(){ clearTimeout(timer); timer=null; card.classList.remove('grp-holding'); }
+      function openEdit(){ closeAll(card); card.classList.add('editing'); actions.hidden=false; if(window.DPFx&&DPFx.tap) try{ DPFx.tap(); }catch(e){} else if(navigator.vibrate) try{ navigator.vibrate(18); }catch(e){} card.scrollIntoView({behavior:'smooth',block:'nearest'}); }
+      card.addEventListener('pointerdown',function(e){
+        if(e.target.closest('.grp-actions,.grp-add')||(e.pointerType==='mouse'&&e.button!==0)) return;
+        fired=false; downAt=Date.now(); held=0; start={x:e.clientX,y:e.clientY}; card.classList.add('grp-holding');
+        timer=setTimeout(function(){ fired=true; stop(); openEdit(); },2000);
+      });
+      card.addEventListener('pointermove',function(e){ if(timer&&start&&Math.hypot(e.clientX-start.x,e.clientY-start.y)>10) stop(); });
+      ['pointerup','pointercancel','pointerleave'].forEach(function(ev){ card.addEventListener(ev,function(){ if(downAt){ held=Date.now()-downAt; downAt=0; } stop(); }); });
+      card.addEventListener('click',function(e){
+        if(e.target.closest('[data-grp-done]')){ card.classList.remove('editing'); actions.hidden=true; return; }
+        var add=e.target.closest('[data-grp-add]'); if(add){ groupInviteModal(add.getAttribute('data-grp-add'),add.getAttribute('data-group-name'),add.getAttribute('data-code')); return; }
+        if(e.target.closest('.grp-actions')) return;
+        if(fired){ fired=false; e.preventDefault(); return; }
+        if(held>450){ held=0; return; } // отпустили раньше 2 секунд — ничего не происходит
+        if(card.classList.contains('editing')){ card.classList.remove('editing'); actions.hidden=true; return; }
+        var b=card.querySelector('[data-manage-group]'); if(b) b.click();
+      });
+      card.addEventListener('keydown',function(e){ if(e.target!==card) return; if(e.key==='Enter'){ card.click(); } else if(e.key==='F2'||e.key==='ContextMenu'){ e.preventDefault(); openEdit(); } });
+    });
+  }
+
+  /* ---------- Контакты аккаунта и изменение профиля ---------- */
+  function accountContactsHtml(){
+    function row(label,value){ return '<div class="acc-code"><span>'+label+'</span><b>'+escapeHtml(value)+'</b></div>'; }
+    var h=row('Код для друзей',currentUser.friendCode||'—');
+    if(currentUser.phone) h+=row('Телефон',currentUser.phone);
+    if(currentUser.email) h+=row('Почта',currentUser.email);
+    if(!currentUser.phone&&!currentUser.email) h+='<p class="acc-note" style="margin-top:8px;">Добавьте телефон или почту через «Изменить» — друзья смогут найти вас и по ним.</p>';
+    return h;
+  }
+  function profileEditModal(){
+    if(!isLoggedIn()) return;
+    openModal('<div class="auth-hero"><i aria-hidden="true">✎</i><h2>Изменить профиль</h2><p>Телефон и почту можно оставить пустыми</p></div>'+
+      '<form id="profile-form">'+
+      '<div class="field"><label>Ваше имя</label><input type="text" name="displayName" maxlength="60" required value="'+escapeHtml(currentUser.displayName||'')+'"></div>'+
+      '<div class="field"><label>Номер телефона <small class="opt">по желанию</small></label><input type="tel" name="phone" maxlength="20" inputmode="tel" placeholder="+7 999 123-45-67" autocomplete="tel" value="'+escapeHtml(currentUser.phone||'')+'"></div>'+
+      '<div class="field"><label>Электронная почта <small class="opt">по желанию</small></label><input type="email" name="email" maxlength="120" placeholder="name@mail.ru" autocomplete="email" value="'+escapeHtml(currentUser.email||'')+'"></div>'+
+      '<p class="auth-opt-note">Имя пользователя @'+escapeHtml(currentUser.username)+' изменить нельзя — по нему вы входите.</p>'+
+      '<p id="profile-error" style="color:var(--danger);font-size:12.5px;display:none;margin-bottom:10px;"></p>'+
+      '<div class="modal-actions"><button type="button" class="btn btn-ghost" id="profile-cancel">Отмена</button><button type="submit" class="btn btn-primary">Сохранить</button></div></form>');
+    document.getElementById('profile-cancel').addEventListener('click',accountModal);
+    document.getElementById('profile-form').addEventListener('submit',function(e){
+      e.preventDefault(); var f=e.target, err=document.getElementById('profile-error'), btn=f.querySelector('button[type=submit]');
+      err.style.display='none'; btn.disabled=true;
+      api.patch('/auth/profile',{displayName:f.displayName.value.trim(),phone:f.phone.value.trim(),email:f.email.value.trim()}).then(function(d){
+        persistAuth(authToken,d.user); showToast('Профиль сохранён'); accountModal();
+      }).catch(function(x){ err.textContent=x.message; err.style.display=''; btn.disabled=false; });
+    });
+  }
+
+  /* ---------- Регистрация и вход: отдельная строка и окно ---------- */
+  function renderAccountRow(){
+    var sub=document.getElementById('account-row-sub'), ava=document.getElementById('account-row-ava'); if(!sub||!ava) return;
+    if(isLoggedIn()){
+      ava.classList.remove('guest'); ava.textContent=String(currentUser.displayName||currentUser.username||'?').trim().charAt(0).toUpperCase();
+      sub.textContent=(currentUser.displayName||'')+' · @'+currentUser.username;
+    } else { ava.textContent='👤'; ava.classList.add('guest'); sub.textContent='Вы не вошли · нажмите, чтобы войти'; }
+  }
+  function accountModal(){
+    openModal('<div class="row-between" style="margin-bottom:14px;"><h3 style="font-size:18px;">Регистрация и вход</h3><button type="button" class="acc-x" id="account-modal-x" aria-label="Закрыть">✕</button></div><div class="acc-card" id="account-card"></div>');
+    document.getElementById('account-modal-x').addEventListener('click',closeModal);
+    renderAccountCard();
+  }
+  (function(){ var r=document.getElementById('account-row'); if(r) r.addEventListener('click',accountModal); })();
+
+  /* ---------- Как приложение: без увеличения страницы ---------- */
+  (function(){
+    ['gesturestart','gesturechange','gestureend'].forEach(function(ev){ document.addEventListener(ev,function(e){ e.preventDefault(); },{passive:false}); });
+    document.addEventListener('touchmove',function(e){ if(e.touches&&e.touches.length>1) e.preventDefault(); },{passive:false});
+    document.addEventListener('wheel',function(e){ if(e.ctrlKey) e.preventDefault(); },{passive:false});
+    document.addEventListener('keydown',function(e){ if((e.ctrlKey||e.metaKey)&&['+','-','=','0'].indexOf(e.key)>=0) e.preventDefault(); });
+    document.addEventListener('dblclick',function(e){ if(!e.target.closest('input,textarea,[contenteditable="true"]')) e.preventDefault(); });
+    document.addEventListener('dragstart',function(e){ if(!e.target.closest('input,textarea')) e.preventDefault(); });
   })();
 
   /* ---------- init ---------- */
