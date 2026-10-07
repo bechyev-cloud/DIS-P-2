@@ -1161,6 +1161,13 @@ body:not(.plus-v1) .dock-plus .dock-ring{display:none;}
   .modal-card.habit-sheet #habit-card-modal-body>*{margin-top:auto;margin-bottom:auto;flex:none;}
   .modal-card.habit-sheet .modal-actions{flex:none;margin-top:12px;}
 }
+/* чужая карточка: только просмотр */
+[data-foreign-card]{cursor:pointer;}
+.ro-banner{flex:none;align-self:center;margin:0 auto 10px;padding:6px 12px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:12px;font-weight:700;text-align:center;width:max-content;max-width:100%;}
+.ro-card button:not([data-action="close-modal"]),.ro-card input,.ro-card select,.ro-card textarea{pointer-events:none;}
+.ro-card .zk-minus,.ro-card .zk-ic{visibility:hidden;}
+.ro-card .zk-plus.ro-name{font-size:18px;font-weight:800;letter-spacing:0;opacity:.95;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 16px;}
+.modal-card.zikr-full .ro-card{flex:1;min-width:0;display:flex;flex-direction:column;height:100%;position:relative;} .modal-card.zikr-full .ro-banner{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(128px + var(--safe-bottom,0px));z-index:2;margin:0;} .modal-card.zikr-full .ro-card>*:not(.ro-banner){flex:1;min-height:0;}
 /* карточки «только просмотр» и политика */
 .watch-card{cursor:default;} .watch-list{margin-bottom:4px;}
 .watch-hist{padding:8px 0;border-bottom:1px solid var(--card-border);} .watch-hist:last-child{border-bottom:0;} .watch-hist b{display:block;font-size:13px;} .watch-hist small{display:block;font-size:12px;color:var(--text-dim);margin-top:2px;line-height:1.5;}
@@ -5869,9 +5876,9 @@ body:not(.communities-visible) .social-tabs{display:none;}
         g.members.forEach(function(m){
           var k=String(m.id), p=people[k]; if(!p){ p=people[k]={id:k,me:m.me,name:m.me?'Вы':m.displayName,short:m.me?'Я':String(m.displayName).split(' ')[0],letter:m.me?'Я':String(m.displayName).trim().charAt(0).toUpperCase(),color:m.me?0:1+order.length%5,items:[],loaded:true}; order.push(p); }
           g.habits.forEach(function(h){ if(h.targetUserId&&h.targetUserId!==m.id) return; var pct=g.cells[m.id+':'+h.id]||0, rw=g.raw&&g.raw[m.id+':'+h.id];
-            if(rw&&h.config){ var pm={}; pm[today]={}; if(rw.p) pm[today][h.id]=rw.p; if(rw.before>0){ pm['1970-01-01']={}; pm['1970-01-01'][h.id]={goalAmount:rw.before}; } pct=pctForeign({id:h.id,type:h.type,config:h.config,createdAt:'1970-01-01',name:h.name},rw.done?[today]:[],pm); g.cells[m.id+':'+h.id]=pct; }
+            if(rw&&h.config){ var pm={}; pm[today]={}; if(rw.p) pm[today][h.id]=rw.p; if(rw.before>0){ pm['1970-01-01']={}; pm['1970-01-01'][h.id]={goalAmount:rw.before}; } var fk={id:h.id,type:h.type,config:h.config,createdAt:'1970-01-01',name:h.name,emoji:h.emoji}; pct=pctForeign(fk,rw.done?[today]:[],pm); g.cells[m.id+':'+h.id]=pct; if(!m.me){ var tkey='t'+m.id+':'+h.id; foreignCards[tkey]={h:fk,dates:rw.done?[today]:[],pm:pm,who:m.displayName}; var tattr=' role="button" tabindex="0" data-foreign-card="'+tkey+'"'; } }
             if(m.me){ var own=(state.habits||[]).filter(function(x){ return String(x.id)===String(h.id); })[0]; if(own) pct=Math.max(pct,Math.round(habitPercent(own,today))); }
-            p.items.push({emoji:h.emoji||'🎯',name:h.name,pct:pct,info:(pct>=100?'Выполнено':pct?'В процессе · '+pct+'%':'Сегодня не отмечено')+(groups.length>1?' · '+g.group.name:'')+(h.targetUserId?' · лично':''),attrs:m.me?' role="button" tabindex="0" data-action="open-habit-card" data-id="'+escapeHtml(h.id)+'" data-date="'+today+'"':'',hid:h.id}); });
+            p.items.push({emoji:h.emoji||'🎯',name:h.name,pct:pct,info:(pct>=100?'Выполнено':pct?'В процессе · '+pct+'%':'Сегодня не отмечено')+(groups.length>1?' · '+g.group.name:'')+(h.targetUserId?' · лично':''),attrs:m.me?' role="button" tabindex="0" data-action="open-habit-card" data-id="'+escapeHtml(h.id)+'" data-date="'+today+'"':(rw&&h.config?' role="button" tabindex="0" data-foreign-card="t'+m.id+':'+h.id+'"':''),hid:h.id}); });
         });
       });
       order.forEach(function(p){ var n=p.items.length; p.done=p.items.filter(function(i){ return i.pct>=100; }).length; p.pct=n?Math.round(p.items.reduce(function(a,i){ return a+i.pct; },0)/n):0; });
@@ -6249,6 +6256,28 @@ body:not(.communities-visible) .social-tabs{display:none;}
     },2000);
   })();
 
+  /* ---------- Карточка друга или ученика: тот же вид, что у своей, но только для просмотра ---------- */
+  var foreignCards={};
+  function openForeignCard(key){
+    var fc=foreignCards[key]; if(!fc) return;
+    var sl=state.logs, sp=state.progress, sh=state.habits, k=todayKey(), logs={}, html='', zfull=false, h=Object.assign({emoji:'🎯'},fc.h);
+    (fc.dates||[]).forEach(function(d){ logs[d]=logs[d]||{}; logs[d][h.id]=true; });
+    try{ state.logs=logs; state.progress=fc.pm||{}; state.habits=[h]; zfull=isZikrFull(h); html=zfull?buildZikrFull(h,k):buildHabitCard(h,k,true); }
+    catch(e){ html='<p class="gm-note">Не удалось показать карточку.</p>'; }
+    finally{ state.logs=sl; state.progress=sp; state.habits=sh; }
+    html=html.split('Отметить выполненным').join('Сегодня не отмечено');
+    openHabitModalId=null;
+    openModal('<div class="ro-card" id="ro-card"><div class="ro-banner">👁 '+escapeHtml(fc.who)+' · только просмотр</div>'+html+'</div>'+(zfull?'':'<div class="modal-actions"><button type="button" class="btn btn-ghost btn-block" data-action="close-modal">Закрыть</button></div>'));
+    var cls=zfull?'zikr-full':'habit-sheet'; modalCard.classList.add(cls,'ro-mode'); activeModalCleanup=function(){ modalCard.classList.remove(cls,'ro-mode'); };
+    var card=document.getElementById('ro-card');
+    card.querySelectorAll('button,input,select,textarea,[data-action]').forEach(function(el){ if(el.getAttribute('data-action')==='close-modal') return; el.setAttribute('tabindex','-1'); el.setAttribute('aria-disabled','true'); if(el.getAttribute('data-action')) el.removeAttribute('data-action'); });
+    var plus=card.querySelector('.zk-plus'); if(plus){ plus.textContent=fc.who; plus.classList.add('ro-name'); }
+  }
+  document.addEventListener('click',function(e){
+    var ro=e.target.closest&&e.target.closest('#ro-card'); if(ro&&!e.target.closest('[data-action="close-modal"]')){ e.stopPropagation(); e.preventDefault(); return; }
+    var f=e.target.closest&&e.target.closest('[data-foreign-card]'); if(f){ e.stopPropagation(); openForeignCard(f.getAttribute('data-foreign-card')); }
+  },true);
+
   /* ---------- Друзья: четыре вида раздела (Лента, Кружки, Карточки, Рейтинг) ---------- */
   var friendsView=(function(){ var v=1; try{ v=Number(localStorage.getItem('disciplinePro:friendsView'))||1; }catch(e){} return v>=1&&v<=4?v:1; })();
   var friendGoalsData={}, friendGoalsAt=0, friendGoalsBusy=false, friendsSel='me', fvOpen={};
@@ -6268,12 +6297,12 @@ body:not(.communities-visible) .social-tabs{display:none;}
   }
   function fvGoalItem(g){
     if(g.config&&Array.isArray(g.rawProgress)){
-      var k=todayKey(), pm={}, fake={id:g.id,type:g.type,config:g.config,createdAt:g.createdAt||k,name:g.name};
+      var k=todayKey(), pm={}, fake={id:g.id,type:g.type,config:g.config,createdAt:g.createdAt||k,name:g.name,emoji:g.emoji||'🎯'};
       g.rawProgress.forEach(function(r){ pm[r.date]=pm[r.date]||{}; pm[r.date][g.id]=r.value; });
       var p2=pctForeign(fake,g.history.filter(function(r){ return r.done; }).map(function(r){ return r.date; }),pm), tp=pm[k]&&pm[k][g.id]||{};
       var zt=0; if(g.type==='zikr'){ try{ var zs=zikrSteps(fake); zt=(zs[Math.min(tp.stepIndex||0,zs.length-1)]||{}).target||0; }catch(e){} }
       var note=p2>=100?'Выполнено · всего '+g.completedDays+' дн.':g.type==='zikr'&&tp.count!=null?'Счёт: '+tp.count+(zt?' из '+zt:''):g.type==='checklist'&&Array.isArray(tp.done)?'Пункты: '+tp.done.length+' из '+((g.config.items||[]).length):tp.goalAmount!=null?'Сегодня: '+tp.goalAmount+' '+((g.config.goal&&g.config.goal.unit)||''):tp.amount!=null?'Сегодня: '+tp.amount+' из '+(g.config.target||1)+' '+(g.config.unit||''):p2>0?'В процессе':'Сегодня не отмечено';
-      return {emoji:g.emoji||'🎯',name:g.name,pct:p2,info:note,attrs:''};
+      return {emoji:g.emoji||'🎯',name:g.name,pct:p2,info:note,attrs:'',raw:{h:fake,dates:g.history.filter(function(r){ return r.done; }).map(function(r){ return r.date; }),pm:pm}};
     }
     var today=todayKey(), done=g.history.some(function(r){ return r.done&&r.date===today; }), pt=g.progress.filter(function(r){ return r.date===today; })[0];
     var amount=g.totalAmount!=null?g.totalAmount:(pt?pt.amount:0), pct=done?100:g.target?amount/g.target*100:g.type==='checklist'&&g.itemCount&&pt?pt.doneCount/g.itemCount*100:0;
@@ -6285,7 +6314,7 @@ body:not(.communities-visible) .social-tabs{display:none;}
     var mine=friendVisibleHabits().map(function(h){ var pct=Math.max(0,Math.min(100,Math.round(habitPercent(h,today)))); return {emoji:habitDisplayEmoji(h)||h.emoji||'🎯',name:h.name,pct:pct,info:pct>=100?'Выполнено':pct>0?'В процессе':'Сегодня не отмечено',attrs:' role="button" tabindex="0" data-action="open-habit-card" data-id="'+escapeHtml(h.id)+'" data-date="'+today+'" data-habit-edit="'+escapeHtml(h.id)+'"'}; });
     function sum(p){ var n=p.items.length; p.done=p.items.filter(function(i){ return i.pct>=100; }).length; p.pct=n?Math.round(p.items.reduce(function(a,i){ return a+i.pct; },0)/n):0; return p; }
     var people=[sum({id:'me',me:true,name:'Вы',short:'Я',letter:'Я',color:0,items:mine,loaded:true})];
-    fr.forEach(function(u,i){ var d=friendGoalsData[u.id], nm=u.displayName||u.username; people.push(sum({id:String(u.id),name:nm,short:nm.split(' ')[0],letter:String(nm).trim().charAt(0).toUpperCase(),color:1+i%5,items:d?d.goals.map(fvGoalItem):[],loaded:!!d,chat:u.id})); });
+    fr.forEach(function(u,i){ var d=friendGoalsData[u.id], nm=u.displayName||u.username; people.push(sum({id:String(u.id),name:nm,short:nm.split(' ')[0],letter:String(nm).trim().charAt(0).toUpperCase(),color:1+i%5,items:d?d.goals.map(function(g){ var it=fvGoalItem(g); if(it.raw){ var key='f'+u.id+':'+g.id; foreignCards[key]={h:it.raw.h,dates:it.raw.dates,pm:it.raw.pm,who:nm}; it.fkey=key; it.attrs=' role="button" tabindex="0" data-foreign-card="'+key+'"'; } return it; }):[],loaded:!!d,chat:u.id})); });
     return people;
   }
   function fvRing(i){ return '<span class="fv-ring'+(i.pct>=100?' done':'')+'" style="--p:'+i.pct+'"><i>'+escapeHtml(i.emoji)+'</i></span>'; }
@@ -6311,7 +6340,7 @@ body:not(.communities-visible) .social-tabs{display:none;}
         '<div class="fv-hero fc'+sel.color+'"><span class="fv-big">'+sel.pct+'%</span><b>'+escapeHtml(sel.name)+'</b><small>'+fvCount(sel)+(sel.me?'':' · только просмотр')+'</small></div>'+fvTasks(sel)+(sel.me?fvAddBtn:'')+(friends.length?'':fvEmpty);
     } else if(friendsView===3){
       h='<div class="fv-sec">Мои задачи</div>'+(me.items.length?'<div class="fv-grid">'+me.items.map(function(i){ return '<div class="fv-mini"'+i.attrs+'><span class="fv-e">'+escapeHtml(i.emoji)+'</span><b>'+escapeHtml(i.name)+'</b>'+fvBar(i)+'</div>'; }).join('')+'</div>':fvTasks(me))+fvAddBtn+
-        '<div class="fv-sec">Друзья'+(friends.length?' · '+friends.length:'')+'</div>'+(friends.length?friends.map(function(p){ return '<div class="fv-tile fc'+p.color+'"><span class="fv-big">'+p.pct+'%</span><b>'+escapeHtml(p.name)+'</b><small>'+fvCount(p)+'</small><div class="fv-chips">'+(p.items.length?p.items.map(function(i){ return '<span class="fv-chip'+(i.pct>=100?' d':'')+'">'+(i.pct>=100?'✓ ':'')+escapeHtml(i.emoji)+' '+escapeHtml(i.name)+'</span>'; }).join(''):'<span class="fv-chip">'+(p.loaded?'Пока нет задач':'Загрузка…')+'</span>')+'</div>'+(p.chat?'<button type="button" class="fv-tile-chat" data-social-chat="'+p.chat+'" aria-label="Написать">💬</button>':'')+'</div>'; }).join(''):fvEmpty);
+        '<div class="fv-sec">Друзья'+(friends.length?' · '+friends.length:'')+'</div>'+(friends.length?friends.map(function(p){ return '<div class="fv-tile fc'+p.color+'"><span class="fv-big">'+p.pct+'%</span><b>'+escapeHtml(p.name)+'</b><small>'+fvCount(p)+'</small><div class="fv-chips">'+(p.items.length?p.items.map(function(i){ return '<span class="fv-chip'+(i.pct>=100?' d':'')+'"'+(i.fkey?' role="button" data-foreign-card="'+i.fkey+'"':'')+'>'+(i.pct>=100?'✓ ':'')+escapeHtml(i.emoji)+' '+escapeHtml(i.name)+'</span>'; }).join(''):'<span class="fv-chip">'+(p.loaded?'Пока нет задач':'Загрузка…')+'</span>')+'</div>'+(p.chat?'<button type="button" class="fv-tile-chat" data-social-chat="'+p.chat+'" aria-label="Написать">💬</button>':'')+'</div>'; }).join(''):fvEmpty);
     } else if(friendsView===4){
       var ranked=people.slice().sort(function(a,b){ return b.pct-a.pct||b.done-a.done; }), top=ranked.slice(0,3), order=top.length===3?[top[1],top[0],top[2]]:top, hs={0:78,1:54,2:40};
       h=(ranked.length>1?'<div class="fv-pod">'+order.map(function(p){ var r=ranked.indexOf(p); return '<div>'+fvAva(p,r===0?'lg':'')+'<small>'+escapeHtml(p.short)+'</small><span class="fv-step fc'+p.color+'" style="height:'+hs[r]+'px">'+(r===0?'🏆':r+1)+'</span></div>'; }).join('')+'</div>':'')+
