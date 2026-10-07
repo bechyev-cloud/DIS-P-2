@@ -1134,6 +1134,8 @@ body:not(.plus-v1) .dock-plus .dock-ring{display:none;}
 .fv-pod{display:flex;align-items:flex-end;justify-content:center;gap:10px;margin:4px 0 14px;} .fv-pod>div{text-align:center;} .fv-pod .fv-ava{margin:0 auto 4px;} .fv-pod small{display:block;font-size:11px;font-weight:700;max-width:76px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin:0 auto 4px;}
 .fv-step{display:block;width:76px;border-radius:12px 12px 0 0;color:#fff;font-weight:800;padding-top:6px;}
 @media (min-width:900px){.fv{max-width:720px;} .fv-grid{grid-template-columns:repeat(4,minmax(0,1fr));}}
+.rs-row{display:flex;align-items:center;gap:10px;} .rs-row small{flex:none;font-size:12px;color:var(--text-dim);width:16px;text-align:center;} .rs-row input[type=range]{flex:1;min-width:0;accent-color:var(--accent);height:28px;}
+.fv-task .fv-bar{margin-top:5px;}
 /* ---------- Тренер и ученики: сводка ---------- */
 .trainer-visible #view-mode-seg{display:none!important;} .trainer-visible #trainer-view-seg{order:9;}
 @media (max-width:520px){.trainer-visible .topbar{flex-wrap:wrap!important;row-gap:8px;} .trainer-visible .top-date-wrap{flex:1 0 100%;margin-right:0;} .trainer-visible .friend-actions.view-mode-seg{margin-left:0;} .trainer-visible #trainer-view-seg{margin-left:auto;}}
@@ -1151,6 +1153,14 @@ body:not(.plus-v1) .dock-plus .dock-ring{display:none;}
 .tv-table tr.me td{border-color:var(--accent);}
 .tv-dot{--p:0;display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--card-border);color:#fff;font-size:12px;} .tv-dot.y{background:#2f9e44;} .tv-dot.h{background:conic-gradient(var(--accent) calc(var(--p)*1%),var(--card-border) 0);} .tv-dot.na{background:none;color:var(--text-dim);}
 .tv-legend{display:flex;flex-direction:column;gap:6px;margin:4px 0 10px;} .tv-legend span{background:var(--card);border:1px solid var(--card-border);border-radius:14px;padding:9px 12px;font-size:13px;display:flex;justify-content:space-between;gap:10px;} .tv-legend b{flex:none;}
+/* окно выполнения задачи: на телефоне во всю ширину и на 85% высоты */
+@media (max-width:639px) and (orientation:portrait){
+  .modal-card.habit-sheet{width:100%;max-width:none;margin:0;height:85dvh;max-height:85dvh;border-radius:28px 28px 0 0;display:flex;flex-direction:column;padding-bottom:calc(16px + var(--safe-bottom,0px));}
+  .modal-card.habit-sheet::before{content:'';flex:none;align-self:center;width:44px;height:5px;border-radius:5px;background:var(--card-border);margin:-6px 0 12px;}
+  .modal-card.habit-sheet #habit-card-modal-body{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;display:flex;flex-direction:column;}
+  .modal-card.habit-sheet #habit-card-modal-body>*{margin-top:auto;margin-bottom:auto;flex:none;}
+  .modal-card.habit-sheet .modal-actions{flex:none;margin-top:12px;}
+}
 /* карточки «только просмотр» и политика */
 .watch-card{cursor:default;} .watch-list{margin-bottom:4px;}
 .watch-hist{padding:8px 0;border-bottom:1px solid var(--card-border);} .watch-hist:last-child{border-bottom:0;} .watch-hist b{display:block;font-size:13px;} .watch-hist small{display:block;font-size:12px;color:var(--text-dim);margin-top:2px;line-height:1.5;}
@@ -1627,6 +1637,13 @@ body:not(.communities-visible) .social-tabs{display:none;}
         </div>
         <div class="settings-group-title">Серверы</div>
         <div class="card srv-card" id="srv-card"></div>
+        <div class="card ntf-card" style="margin-bottom:12px;">
+          <div class="settings-row" style="flex-direction:column;align-items:stretch;gap:10px;">
+            <div><b>Обновление с сервером</b><span>Как часто приложение сверяет данные с сервером: <b id="refresh-sec-label" style="display:inline;color:var(--accent);">30 сек</b></span></div>
+            <div class="rs-row"><small>1</small><input type="range" id="refresh-sec" min="1" max="60" step="1" value="30" aria-label="Интервал обновления в секундах"><small>60</small></div>
+          </div>
+          <div class="settings-row"><div><b>Обновлять сразу при изменениях</b><span id="live-sync-detail">Выключено · данные обновляются по интервалу выше</span></div><label class="training-role-control"><input type="checkbox" role="switch" id="live-sync" aria-label="Обновлять сразу при изменениях на сервере"><span class="training-switch"></span></label></div>
+        </div>
         <div id="server-settings-slot"></div>
       </section>
 
@@ -1836,7 +1853,7 @@ body:not(.communities-visible) .social-tabs{display:none;}
   }
   function updateHabit(id, name, emoji, config){
     var h = state.habits.find(function(x){return x.id===id;});
-    if(h){ h.name=name; h.emoji=emoji; if(config) h.config=config; touch(); }
+    if(h){ h.name=name; h.emoji=emoji; if(config){ if(h.config&&h.config.shared&&config.shared===undefined) config.shared=true; h.config=config; } touch(); } // задача для друзей остаётся задачей для друзей и после правки
   }
   function deleteHabit(id){
     state.habits = state.habits.filter(function(h){return h.id!==id;});
@@ -2200,7 +2217,8 @@ body:not(.communities-visible) .social-tabs{display:none;}
   }
   function calendarTasks(){
     if(coachCalendarSelected())return coachCalendar.owner===calendarChoiceKey()?coachCalendar.tasks:[];
-    return state.habits.filter(function(h){return calendarFilter==='mine'?!h.assignedBy:!!h.assignedBy;});
+    // Три раздела не смешиваются: личные, с друзьями (добавленные в «Друзьях») и от тренера.
+    return state.habits.filter(function(h){var shared=!!(h.config&&h.config.shared);return calendarFilter==='mine'?!h.assignedBy&&!shared:calendarFilter==='friends'?!h.assignedBy&&shared:!!h.assignedBy;});
   }
   function loadCoachCalendar(force){
     if(!coachCalendarSelected())return;
@@ -2214,7 +2232,10 @@ body:not(.communities-visible) .social-tabs{display:none;}
   document.getElementById('calendar-source-trainer').addEventListener('click',function(){chooseCalendar('trainer');});
 
   function applyCalendarFilter(habits, filterMode){
-    if(filterMode==='mine') return habits.filter(function(h){ return !h.assignedBy; });
+    // Три раздела не смешиваются: личные, с друзьями (добавленные в «Друзьях») и от тренера.
+    function sh(h){ return !!(h.config&&h.config.shared); }
+    if(filterMode==='mine') return habits.filter(function(h){ return !h.assignedBy&&!sh(h); });
+    if(filterMode==='friends') return habits.filter(function(h){ return !h.assignedBy&&sh(h); });
     if(filterMode==='trainer') return habits.filter(function(h){ return !!h.assignedBy; });
     return habits;
   }
@@ -2461,7 +2482,6 @@ body:not(.communities-visible) .social-tabs{display:none;}
     var startOffset = (first.getDay()+6)%7; // Monday-first
     var daysInMonth = new Date(y,m+1,0).getDate();
     var tk = todayKey();
-    if(calendarFilter==='friends'&&typeof renderFriendsCalendar==='function'){ renderFriendsCalendar(y,m,startOffset,daysInMonth,tk); return; }
     var cells = '';
     for(var i=0;i<startOffset;i++) cells += '<div class="cal-day empty"></div>';
     for(var d=1; d<=daysInMonth; d++){
@@ -2485,7 +2505,8 @@ body:not(.communities-visible) .social-tabs{display:none;}
     grid.innerHTML = cells;
     grid.classList.toggle('trainer-mode', calendarFilter==='trainer');
     var monthTasks=calendarTasks().filter(function(h){for(var day=1;day<=daysInMonth;day++){if(tasksOnDate([h],y+'-'+pad(m+1)+'-'+pad(day)).length)return true;}return false;});
-    document.getElementById('calendar-month-tasks').innerHTML='<div class="section-title" style="margin-top:24px">'+(calendarFilter==='mine'?'Мои задачи':trainingMode()==='trainer'?'Задачи для учеников':'Задания от тренера')+' · '+monthTasks.length+'</div>'+monthTasks.map(function(h){var dates=[];for(var day=1;day<=daysInMonth;day++)if(tasksOnDate([h],y+'-'+pad(m+1)+'-'+pad(day)).length)dates.push(day);return '<button class="calendar-month-task" data-action="open-day" data-date="'+y+'-'+pad(m+1)+'-'+pad(dates[0])+'"><b>'+escapeHtml(h.emoji||'🎯')+' '+escapeHtml(h.name)+'</b><small>'+(coachCalendarSelected()?escapeHtml(h.groupName)+' · '+escapeHtml(h.targetName||'Вся группа')+'<br>':'')+'Дни: '+dates.join(', ')+'</small></button>';}).join('')+(monthTasks.length?'':'<p class="calendar-hint">В этом месяце задач пока нет.</p>');
+    document.getElementById('calendar-month-tasks').innerHTML='<div class="section-title" style="margin-top:24px">'+(calendarFilter==='mine'?'Личные задачи':calendarFilter==='friends'?'Мои задачи с друзьями':trainingMode()==='trainer'?'Задачи для учеников':'Задания от тренера')+' · '+monthTasks.length+'</div>'+monthTasks.map(function(h){var dates=[];for(var day=1;day<=daysInMonth;day++)if(tasksOnDate([h],y+'-'+pad(m+1)+'-'+pad(day)).length)dates.push(day);return '<button class="calendar-month-task" data-action="open-day" data-date="'+y+'-'+pad(m+1)+'-'+pad(dates[0])+'"><b>'+escapeHtml(h.emoji||'🎯')+' '+escapeHtml(h.name)+'</b><small>'+(coachCalendarSelected()?escapeHtml(h.groupName)+' · '+escapeHtml(h.targetName||'Вся группа')+'<br>':'')+'Дни: '+dates.join(', ')+'</small></button>';}).join('')+(monthTasks.length?'':'<p class="calendar-hint">В этом месяце задач пока нет.</p>');
+    if(calendarFilter==='friends'&&typeof friendsCalBlockHtml==='function') document.getElementById('calendar-month-tasks').insertAdjacentHTML('beforeend',friendsCalBlockHtml(y+'-'+pad(m+1)+'-'));
     if(calendarFilter==='trainer'&&isLoggedIn()) document.getElementById('calendar-month-tasks').insertAdjacentHTML('beforeend','<button type="button" class="btn btn-ghost btn-block" data-cal-group style="margin-top:10px;">👥 Участники и задания группы</button>');
     attachCalHold();
   }
@@ -2498,6 +2519,7 @@ body:not(.communities-visible) .social-tabs{display:none;}
     openModal(
       '<div class="day-dialog-heading"><h2>'+fmtLong(k)+'</h2><button type="button" class="btn btn-primary" data-action="open-habit-modal" data-date="'+k+'" aria-label="Добавить задачу на выбранный день">＋</button></div>' +
       '<div class="day-modal-list" id="day-modal-list">'+renderHabitRowsForDate(k, calendarFilter)+'</div>' +
+      (calendarFilter==='friends'&&typeof friendDoneOn==='function'?(function(){ var who=friendDoneOn(k); return '<div class="gm-sub">Друзья в этот день</div>'+(who.length?who.map(function(w){ return '<div class="cal-friend" style="padding:10px 12px;"><b style="font-size:13.5px;">'+escapeHtml(w.user.displayName||w.user.username)+'</b><div class="go-chips" style="margin-top:8px;">'+w.goals.map(function(g){ return '<span class="go-chip me">✓ '+escapeHtml(g.emoji||'')+' '+escapeHtml(g.name)+'</span>'; }).join('')+'</div></div>'; }).join(''):'<p class="gm-note">Никто из друзей ничего не отметил.</p>'); })():'') +
       '<div class="modal-actions"><button type="button" class="btn btn-ghost btn-block" data-action="close-modal">Закрыть</button></div>'
     );
   }
@@ -3373,7 +3395,7 @@ body:not(.communities-visible) .social-tabs{display:none;}
       closeModal();
       // Добавили задачу из выбранного дня календаря — остаёмся на этом дне и показываем «Мои задачи», чтобы её было видно.
       var fromDay=typeof newHabitStartDate!=='undefined'&&newHabitStartDate;
-      if(!existing&&fromDay&&typeof currentView!=='undefined'&&(currentView==='dayfull'||currentView==='calendar')&&typeof calendarFilter!=='undefined'&&calendarFilter!=='mine'){ calendarFilter='mine'; try{ localStorage.setItem(calendarChoiceKey(),'mine'); }catch(e){} syncCalendarChoice(); renderCurrentView(); }
+      if(!existing&&fromDay&&typeof currentView!=='undefined'&&(currentView==='dayfull'||currentView==='calendar')&&typeof calendarFilter!=='undefined'&&calendarFilter==='trainer'){ calendarFilter='mine'; try{ localStorage.setItem(calendarChoiceKey(),'mine'); }catch(e){} syncCalendarChoice(); renderCurrentView(); }
       showToast(existing ? 'Задача обновлена' : (fromDay&&start ? 'Задача добавлена на '+fmtShort(start) : 'Задача добавлена'));
     });
   }
@@ -3672,7 +3694,7 @@ body:not(.communities-visible) .social-tabs{display:none;}
     if(!navigator.onLine){ setSyncStatus('offline'); return; }
     setSyncStatus('connecting');
     clearTimeout(pushTimer);
-    pushTimer = setTimeout(pushRemote, 600);
+    pushTimer = setTimeout(pushRemote, 300);
   }
   function applyServerState(remote, skipRerender){
     var snap=function(){ try{ return JSON.stringify([state.habits,state.logs,state.workouts,state.progress,state.totals]); }catch(e){ return String(Math.random()); } }, before=snap();
@@ -3703,13 +3725,46 @@ body:not(.communities-visible) .social-tabs{display:none;}
     }).catch(function(e){
       if(owner!==queueKey())return;
       setSyncStatus(e.status===0||e.status===503?'offline':'error');
+      if(e.status===409&&typeof resolveSyncConflict==='function'){ resolveSyncConflict(); return; }
       if(e.status===400||e.status===409){var current=readOutbox();if(current[0]){current[0].blocked=e.message;writeOutbox(current);}showToast(e.message);}
     }).finally(function(){sendingState=false;var rest=readOutbox();if(rest.length&&!rest[0].blocked&&rest[0].payload.operationId!==item.payload.operationId)pushRemote();});
   }
+  // Конфликт версий (тот же аккаунт на другом устройстве или сервер был перезапущен): раньше отправка
+  // блокировалась навсегда и синхронизация молча останавливалась. Теперь берём свежие данные с сервера,
+  // накладываем на них локальные изменения и отправляем заново.
+  var syncConflictTries=0, syncConflictAt=0;
+  function mergeStates(remote,local){
+    var out={habits:[],logs:{},workouts:[],progress:{},totals:{}}, seen={};
+    (remote.habits||[]).forEach(function(h){ seen[h.id]=out.habits.length; out.habits.push(h); });
+    (local.habits||[]).forEach(function(h){ if(h.assignedBy) return; if(seen[h.id]!=null) out.habits[seen[h.id]]=out.habits[seen[h.id]].assignedBy?out.habits[seen[h.id]]:h; else out.habits.push(h); });
+    function mergeMap(a,b){ var r={}; [a||{},b||{}].forEach(function(src){ Object.keys(src).forEach(function(d){ r[d]=Object.assign(r[d]||{},src[d]||{}); }); }); return r; }
+    out.logs=mergeMap(remote.logs,local.logs); out.progress=mergeMap(remote.progress,local.progress);
+    var ws={}; (remote.workouts||[]).concat(local.workouts||[]).forEach(function(w){ ws[w&&w.id!=null?w.id:JSON.stringify(w)]=w; }); out.workouts=Object.keys(ws).map(function(k){ return ws[k]; });
+    var rt=remote.totals||{}, lt=local.totals||{}; Object.keys(Object.assign({},rt,lt)).forEach(function(k){ out.totals[k]=Math.max(Number(rt[k])||0,Number(lt[k])||0); });
+    return out;
+  }
+  function resolveSyncConflict(){
+    if(!isLoggedIn()) return; var now=Date.now(); if(now-syncConflictAt>60000) syncConflictTries=0; syncConflictAt=now;
+    if(++syncConflictTries>4){ setSyncStatus('error'); return; }
+    var owner=queueKey();
+    api.request('GET','/me/state').then(function(remote){
+      if(owner!==queueKey()) return;
+      var merged=mergeStates(remote,state);
+      applyingRemote=true; state.habits=merged.habits; state.logs=merged.logs; state.workouts=merged.workouts; state.progress=merged.progress; state.totals=Object.assign({zikrCount:0,timerSessions:0,timerMinutes:0,checklistDone:0},merged.totals); state.updatedAt=Date.now();
+      if(Number.isSafeInteger(remote.version)) localStorage.setItem(versionKey(),String(remote.version));
+      saveLocal(); applyingRemote=false; writeOutbox([]); renderCurrentView(); scheduleSync();
+    }).catch(function(){ setSyncStatus('offline'); });
+  }
+  // Уходя из приложения (свернули, заблокировали телефон) — отправляем изменения сразу, не дожидаясь паузы.
+  document.addEventListener('visibilitychange',function(){ if(document.hidden&&isLoggedIn()&&readOutbox().length){ clearTimeout(pushTimer); pushRemote(); } });
+  window.addEventListener('pagehide',function(){ if(isLoggedIn()&&readOutbox().length){ clearTimeout(pushTimer); pushRemote(); } });
+  // Снимаем старые «вечные» блокировки очереди, оставшиеся от прежних версий.
+  function unblockOutbox(){ try{ var q=readOutbox(); if(q.length&&q[0].blocked&&isLoggedIn()){ resolveSyncConflict(); } }catch(e){} }
   function pullRemote(){
     if(!isLoggedIn()) return Promise.resolve();
     if(sendingState)return Promise.resolve();
-    if(readOutbox().length)return pushRemote();
+    var qq=readOutbox(); if(qq.length&&qq[0].blocked){ resolveSyncConflict(); return Promise.resolve(); }
+    if(qq.length)return pushRemote();
     var owner=queueKey();
     return api.get('/me/state').then(function(data){
       if(owner!==queueKey()||readOutbox().length||sendingState)return;
@@ -3725,11 +3780,12 @@ body:not(.communities-visible) .social-tabs{display:none;}
     setSyncStatus('connecting');
     pullRemote();
     pollTimer = setInterval(function(){
-      if(isLoggedIn() && navigator.onLine && !document.hidden){
+      if(isLoggedIn() && navigator.onLine && !document.hidden && Date.now()-(window.__dpLastPull||0)>=(typeof dpRefreshMs==='function'?dpRefreshMs():30000)){
+        window.__dpLastPull=Date.now();
         pullRemote();
         refreshTrainerNotificationQuiet();
       }
-    }, 20000);
+    }, 1000);
   }
   window.addEventListener('online', function(){ if(isLoggedIn()) pullRemote(); else refreshChrome(); });
   window.addEventListener('offline', function(){ setSyncStatus('offline'); });
@@ -4651,6 +4707,7 @@ body:not(.communities-visible) .social-tabs{display:none;}
         if((hh.type||'simple')==='assignment') expandedAssignments[id] = true;
         openModal('<div id="habit-card-modal-body" '+(!hh.assignedBy?'data-habit-edit="'+escapeHtml(hh.id)+'"':'')+'>'+buildHabitCard(hh, dateAttr, true)+'</div>' +
           '<div class="modal-actions"><button type="button" class="btn btn-ghost btn-block" data-action="close-modal">Закрыть</button></div>');
+        modalCard.classList.add('habit-sheet'); activeModalCleanup=function(){ modalCard.classList.remove('habit-sheet'); };
       }
     }
     else if(action==='toggle-assignment-expand'){
@@ -5642,7 +5699,7 @@ body:not(.communities-visible) .social-tabs{display:none;}
 
   /* ---------- Экспорт / импорт текстом ---------- */
   (function(){
-    var PREFS=['disciplinePro:trainerView','disciplinePro:friendsView','disciplinePro:plusStyle','disciplinePro:notify','disciplinePro:theme','disciplinePro:fxSound','disciplinePro:fxHaptic','disciplinePro:goalStyle','disciplinePro:cardView','disciplinePro:servers','disciplinePro:serverStyle','disciplinePro:settingsOpen'];
+    var PREFS=['disciplinePro:liveSync','disciplinePro:refreshSec','disciplinePro:trainerView','disciplinePro:friendsView','disciplinePro:plusStyle','disciplinePro:notify','disciplinePro:theme','disciplinePro:fxSound','disciplinePro:fxHaptic','disciplinePro:goalStyle','disciplinePro:cardView','disciplinePro:servers','disciplinePro:serverStyle','disciplinePro:settingsOpen'];
     function buildText(){
       var prefs={}; PREFS.forEach(function(k){ try{ var v=localStorage.getItem(k); if(v!==null) prefs[k]=v; }catch(e){} });
       return JSON.stringify({app:'disciplinePro',version:1,date:new Date().toISOString(),state:state,prefs:prefs});
@@ -5793,7 +5850,7 @@ body:not(.communities-visible) .social-tabs{display:none;}
   var tvData=[], tvAt=0, tvBusy=false, tvOwner=0, tvGroup='all', tvSel='', tvOpen={};
   function loadTrainerOverview(force){
     if(!isLoggedIn()||tvBusy) return; if(tvOwner!==currentUser.id){ tvData=[]; tvAt=0; tvOwner=currentUser.id; }
-    if(!force&&Date.now()-tvAt<20000) return; tvBusy=true; var owner=currentUser.id, trainer=currentUser.role==='TRAINER'&&trainingMode()==='trainer';
+    if(!force&&Date.now()-tvAt<dpRefreshMs()) return; tvBusy=true; var owner=currentUser.id, trainer=currentUser.role==='TRAINER'&&trainingMode()==='trainer';
     api.request('GET',trainer?'/groups':'/groups/mine').then(function(d){ return Promise.all((d.groups||[]).map(function(g){ return api.request('GET','/groups/'+g.id+'/overview?date='+todayKey()).catch(function(){ return null; }); })); })
       .then(function(list){ if(!currentUser||currentUser.id!==owner) return; tvData=list.filter(Boolean); tvAt=Date.now(); }).catch(function(){})
       .then(function(){ tvBusy=false; if(currentView==='trainer'&&currentUser&&currentUser.id===owner) renderTrainerOverview(true); });
@@ -5811,16 +5868,17 @@ body:not(.communities-visible) .social-tabs{display:none;}
         g.habits.forEach(function(h){ var who=g.members.filter(function(m){ return !h.targetUserId||h.targetUserId===m.id; }); tasks.push({g:g,h:h,who:who}); });
         g.members.forEach(function(m){
           var k=String(m.id), p=people[k]; if(!p){ p=people[k]={id:k,me:m.me,name:m.me?'Вы':m.displayName,short:m.me?'Я':String(m.displayName).split(' ')[0],letter:m.me?'Я':String(m.displayName).trim().charAt(0).toUpperCase(),color:m.me?0:1+order.length%5,items:[],loaded:true}; order.push(p); }
-          g.habits.forEach(function(h){ if(h.targetUserId&&h.targetUserId!==m.id) return; var pct=g.cells[m.id+':'+h.id]||0;
+          g.habits.forEach(function(h){ if(h.targetUserId&&h.targetUserId!==m.id) return; var pct=g.cells[m.id+':'+h.id]||0, rw=g.raw&&g.raw[m.id+':'+h.id];
+            if(rw&&h.config){ var pm={}; pm[today]={}; if(rw.p) pm[today][h.id]=rw.p; if(rw.before>0){ pm['1970-01-01']={}; pm['1970-01-01'][h.id]={goalAmount:rw.before}; } pct=pctForeign({id:h.id,type:h.type,config:h.config,createdAt:'1970-01-01',name:h.name},rw.done?[today]:[],pm); g.cells[m.id+':'+h.id]=pct; }
             if(m.me){ var own=(state.habits||[]).filter(function(x){ return String(x.id)===String(h.id); })[0]; if(own) pct=Math.max(pct,Math.round(habitPercent(own,today))); }
-            p.items.push({emoji:h.emoji||'🎯',name:h.name,pct:pct,info:(pct>=100?'Выполнено':pct?'В процессе':'Сегодня не отмечено')+(groups.length>1?' · '+g.group.name:'')+(h.targetUserId?' · лично':''),attrs:m.me?' role="button" tabindex="0" data-action="open-habit-card" data-id="'+escapeHtml(h.id)+'" data-date="'+today+'"':'',hid:h.id}); });
+            p.items.push({emoji:h.emoji||'🎯',name:h.name,pct:pct,info:(pct>=100?'Выполнено':pct?'В процессе · '+pct+'%':'Сегодня не отмечено')+(groups.length>1?' · '+g.group.name:'')+(h.targetUserId?' · лично':''),attrs:m.me?' role="button" tabindex="0" data-action="open-habit-card" data-id="'+escapeHtml(h.id)+'" data-date="'+today+'"':'',hid:h.id}); });
         });
       });
       order.forEach(function(p){ var n=p.items.length; p.done=p.items.filter(function(i){ return i.pct>=100; }).length; p.pct=n?Math.round(p.items.reduce(function(a,i){ return a+i.pct; },0)/n):0; });
       var allItems=[].concat.apply([],order.map(function(p){ return p.items; })), doneAll=allItems.filter(function(i){ return i.pct>=100; }).length, pctAll=allItems.length?Math.round(allItems.reduce(function(a,i){ return a+i.pct; },0)/allItems.length):0;
       var chips=tvData.length>1?'<div class="tv-chips">'+tvData.map(function(g){ return '<button type="button" class="tv-chip'+(String(g.group.id)===tvGroup?' on':'')+'" data-tv-group="'+g.group.id+'">'+escapeHtml(g.group.name)+'</button>'; }).join('')+'<button type="button" class="tv-chip'+(tvGroup==='all'?' on':'')+'" data-tv-group="all">Все</button></div>':'<div class="fv-sec" style="margin-top:2px;">'+escapeHtml(tvData[0].group.name)+'</div>';
       var summary='<div class="tv-sum"><div><b>'+order.length+'</b><small>'+(order.length===1?'участник':'участников')+'</small></div><div><b>'+doneAll+' из '+allItems.length+'</b><small>выполнено</small></div><div><b class="'+(pctAll>=100?'ok':'')+'">'+pctAll+'%</b><small>группа сегодня</small></div></div>';
-      function personRow(p){ var open=!!tvOpen[p.id]; return '<div class="fv-person'+(open?' open':'')+(p.me?' me':'')+'"><div class="fv-row"><button type="button" class="fv-head" data-tv-toggle="'+p.id+'" aria-expanded="'+open+'">'+fvAva(p)+'<span class="fv-t"><b>'+escapeHtml(p.name)+'</b><small>'+p.done+' из '+p.items.length+' сегодня</small>'+fvBar(p)+'</span><span class="fv-pc'+(p.pct>=100?' ok':p.pct?'':' dim')+'">'+p.pct+'%</span></button></div>'+(open?'<div class="fv-sub">'+(p.items.length?p.items.map(fvTask).join(''):'<p class="gm-note">Заданий нет.</p>')+'</div>':'')+'</div>'; }
+      function personRow(p){ var open=!!tvOpen[p.id]; return '<div class="fv-person'+(open?' open':'')+(p.me?' me':'')+'"><div class="fv-row"><button type="button" class="fv-head" data-tv-toggle="'+p.id+'" aria-expanded="'+open+'">'+fvAva(p)+'<span class="fv-t"><b>'+escapeHtml(p.name)+'</b><small>'+fvCount(p)+'</small>'+fvBar(p)+'</span><span class="fv-pc'+(p.pct>=100?' ok':p.pct?'':' dim')+'">'+p.pct+'%</span></button></div>'+(open?'<div class="fv-sub">'+(p.items.length?p.items.map(fvTask).join(''):'<p class="gm-note">Заданий нет.</p>')+'</div>':'')+'</div>'; }
       var body;
       if(!order.length) body='<div class="gm-empty"><i>🎓</i><b>В группе пока нет участников</b><small>Нажмите «+» на карточке группы ниже, чтобы пригласить.</small></div>';
       else if(!tasks.length) body=summary+'<div class="gm-empty"><i>🎯</i><b>Заданий пока нет</b><small>Центральная кнопка «+» → «Добавить задачу».</small></div>';
@@ -5848,7 +5906,7 @@ body:not(.communities-visible) .social-tabs{display:none;}
     var t=e.target.closest('[data-tv-toggle]'); if(t){ var id=t.getAttribute('data-tv-toggle'); if(tvOpen[id]) delete tvOpen[id]; else tvOpen[id]=true; renderTrainerOverview(true); return; }
     var sl=e.target.closest('[data-tv-sel]'); if(sl){ tvSel=sl.getAttribute('data-tv-sel'); renderTrainerOverview(true); }
   });
-  setInterval(function(){ if(currentView==='trainer'&&!document.hidden&&isLoggedIn()) loadTrainerOverview(false); },25000);
+  setInterval(function(){ if(document.hidden||!isLoggedIn()) return; if(currentView==='trainer') loadTrainerOverview(false); else if(currentView==='friends'&&typeof loadAllFriendGoals==='function') loadAllFriendGoals(false); },1000);
 
   /* ---------- Политика обработки персональных данных (152-ФЗ) ---------- */
   function policyOperator(){ var c=window.DISCIPLINE_CONFIG||{}; return {name:c.operatorName||'Администрация приложения «Дисциплина Pro»',contact:c.operatorContact||'через раздел «Сообщения» в приложении'}; }
@@ -6067,6 +6125,14 @@ body:not(.communities-visible) .social-tabs{display:none;}
       .then(function(){ rec.loading=false; rec.at=Date.now(); if(currentUser&&currentUser.id===owner&&currentView==='calendar'&&calendarFilter==='friends') renderCalendar(); });
   }
   function friendDoneOn(k){ var out=[]; friendCal.list.forEach(function(f){ var g=f.goals.filter(function(x){ return x.history.some(function(r){ return r.done&&r.date===k; }); }); if(g.length) out.push({user:f.user,goals:g}); }); return out; }
+  function friendsCalBlockHtml(prefix){
+    if(!isLoggedIn()) return '<p class="calendar-hint">Войдите в аккаунт, чтобы видеть задачи друзей.</p>';
+    loadFriendCal(false);
+    return '<div class="section-title" style="margin-top:24px">Друзья · '+friendCal.list.length+'</div>'+(friendCal.list.length?friendCal.list.map(function(f){
+      var goals=f.goals.map(function(g){ var c=g.history.filter(function(r){ return r.done&&r.date.indexOf(prefix)===0; }).length; return '<span class="go-chip'+(c?' me':'')+'">'+escapeHtml(g.emoji||'🎯')+' '+escapeHtml(g.name)+' · '+c+' дн.</span>'; }).join('');
+      return '<div class="cal-friend"><div class="fp-row" style="margin:0;border:0;padding:0;background:none;"><span class="fp-ava">'+escapeHtml(f.user.avatarEmoji||'🙂')+'</span><span class="fp-t"><b>'+escapeHtml(f.user.displayName||f.user.username)+'</b><small>'+f.goals.length+' задач для друзей</small></span><button type="button" class="btn btn-primary btn-sm" data-social-goals="'+f.user.id+'">Прогресс</button></div>'+(goals?'<div class="go-chips" style="margin-top:10px;">'+goals+'</div>':'<p class="gm-note">Пока нет задач.</p>')+'</div>';
+    }).join(''):(friendCal.loading?'<p class="calendar-hint">Загружаем друзей…</p>':'<p class="calendar-hint">Друзей пока нет.</p>'));
+  }
   function renderFriendsCalendar(y,m,startOffset,daysInMonth,tk){
     var grid=document.getElementById('cal-grid'), box=document.getElementById('calendar-month-tasks'), status=document.getElementById('calendar-source-status');
     grid.classList.remove('trainer-mode');
@@ -6149,17 +6215,66 @@ body:not(.communities-visible) .social-tabs{display:none;}
       .catch(function(e){ friendGoalsCache[id]={html:'<p class="gm-note" style="color:var(--danger);">'+escapeHtml(e.message)+'</p>',at:0}; })
       .then(function(){ if(typeof renderSocialFriends==='function'&&currentView==='friends') renderSocialFriends(); });
   }
+  /* ---------- Интервал обновления данных друзей и учеников (1–30 секунд) ---------- */
+  function dpRefreshSec(){ var v=30; try{ v=Number(localStorage.getItem('disciplinePro:refreshSec'))||30; }catch(e){} return Math.max(1,Math.min(60,Math.round(v))); }
+  function dpRefreshMs(){ return dpRefreshSec()*1000; }
+  (function(){
+    var r=document.getElementById('refresh-sec'), l=document.getElementById('refresh-sec-label'); if(!r||!l) return;
+    function paint(){ var v=dpRefreshSec(); r.value=v; l.textContent=v+' сек'; }
+    r.addEventListener('input',function(){ try{ localStorage.setItem('disciplinePro:refreshSec',String(r.value)); }catch(e){} paint(); });
+    paint();
+  })();
+
+  /* ---------- Обновление сразу при изменениях на сервере (выключено по умолчанию) ---------- */
+  function dpRefreshEverything(){
+    if(!isLoggedIn()) return;
+    try{ window.__dpLastPull=Date.now(); pullRemote(); }catch(e){}
+    try{ if(typeof loadAllFriendGoals==='function') loadAllFriendGoals(true); }catch(e){}
+    try{ if(typeof loadTrainerOverview==='function'&&currentView==='trainer') loadTrainerOverview(true); }catch(e){}
+    try{ if(typeof friendCal!=='undefined'){ friendCal.at=0; if(currentView==='calendar'&&calendarFilter==='friends') loadFriendCal(true); } }catch(e){}
+    try{ if(typeof coachCalendar!=='undefined'){ coachCalendar.at=0; if(currentView==='calendar') loadCoachCalendar(true); } }catch(e){}
+    try{ pollFriendInvites(); refreshBillingAndInvites(); refreshTrainerNotificationQuiet(); checkAnnouncements(); if(typeof DPNotify!=='undefined') DPNotify.check(); }catch(e){}
+  }
+  (function(){
+    var KEY='disciplinePro:liveSync', cb=document.getElementById('live-sync'), det=document.getElementById('live-sync-detail'), last=null, busy=false;
+    function on(){ try{ return localStorage.getItem(KEY)==='on'; }catch(e){ return false; } }
+    function paint(){ if(cb) cb.checked=on(); if(det) det.textContent=on()?'Включено · любое изменение у вас, друга, тренера или ученика подтягивается за пару секунд':'Выключено · данные обновляются по интервалу выше'; }
+    if(cb) cb.addEventListener('change',function(){ try{ localStorage.setItem(KEY,cb.checked?'on':'off'); }catch(e){} last=null; paint(); });
+    paint();
+    setInterval(function(){
+      if(!on()||busy||document.hidden||!isLoggedIn()||!navigator.onLine) return; busy=true;
+      window.DPConnection.request('/changes',{method:'GET'}).then(function(r){ return r.ok?r.json():null; }).then(function(d){
+        if(!d||!d.seq) return; if(last!==null&&d.seq!==last) dpRefreshEverything(); last=d.seq;
+      }).catch(function(){}).then(function(){ busy=false; });
+    },2000);
+  })();
+
   /* ---------- Друзья: четыре вида раздела (Лента, Кружки, Карточки, Рейтинг) ---------- */
   var friendsView=(function(){ var v=1; try{ v=Number(localStorage.getItem('disciplinePro:friendsView'))||1; }catch(e){} return v>=1&&v<=4?v:1; })();
   var friendGoalsData={}, friendGoalsAt=0, friendGoalsBusy=false, friendsSel='me', fvOpen={};
   function loadAllFriendGoals(force){
-    if(!isLoggedIn()||friendGoalsBusy||(!force&&Date.now()-friendGoalsAt<30000)) return; friendGoalsBusy=true; var owner=currentUser.id;
-    var list=(serverFriendsCache&&serverFriendsCache.friends)||[];
-    Promise.all(list.map(function(u){ return api.request('GET','/friends/'+u.id+'/goals').then(function(d){ return [u.id,d]; }).catch(function(){ return null; }); })).then(function(rs){
+    if(!isLoggedIn()||friendGoalsBusy||(!force&&Date.now()-friendGoalsAt<dpRefreshMs())) return; friendGoalsBusy=true; var owner=currentUser.id;
+    api.request('GET','/friends').then(function(fd){ if(currentUser&&currentUser.id===owner){ serverFriendsCache=fd; if(typeof updateFriendBell==='function') updateFriendBell(); } return (fd.friends||[]); },function(){ return (serverFriendsCache&&serverFriendsCache.friends)||[]; }).then(function(list){ return Promise.all(list.map(function(u){ return api.request('GET','/friends/'+u.id+'/goals').then(function(d){ return [u.id,d]; }).catch(function(){ return null; }); })); }).then(function(rs){
       if(!currentUser||currentUser.id!==owner) return; rs.forEach(function(r){ if(r) friendGoalsData[r[0]]=r[1]; }); friendGoalsAt=Date.now();
-    }).then(function(){ friendGoalsBusy=false; if(currentView==='friends'&&typeof renderSocialFriends==='function') renderSocialFriends(); });
+    }).catch(function(){}).then(function(){ friendGoalsBusy=false; if(currentView==='friends'&&typeof renderSocialFriends==='function') renderSocialFriends(); });
+  }
+  // Процент чужой задачи считается тем же кодом, что и для своих: на время расчёта подставляем чужие отметки и прогресс.
+  function pctForeign(h,doneDates,progressMap){
+    var sl=state.logs, sp=state.progress, k=todayKey(), logs={};
+    (doneDates||[]).forEach(function(d){ logs[d]=logs[d]||{}; logs[d][h.id]=true; });
+    try{ state.logs=logs; state.progress=progressMap||{}; var v=Math.round(habitPercent(h,k)); if(logs[k]&&logs[k][h.id]&&!DPGoal.config(h)) v=100; return Math.max(0,Math.min(100,v||0)); }
+    catch(e){ return logs[k]&&logs[k][h.id]?100:0; }
+    finally{ state.logs=sl; state.progress=sp; }
   }
   function fvGoalItem(g){
+    if(g.config&&Array.isArray(g.rawProgress)){
+      var k=todayKey(), pm={}, fake={id:g.id,type:g.type,config:g.config,createdAt:g.createdAt||k,name:g.name};
+      g.rawProgress.forEach(function(r){ pm[r.date]=pm[r.date]||{}; pm[r.date][g.id]=r.value; });
+      var p2=pctForeign(fake,g.history.filter(function(r){ return r.done; }).map(function(r){ return r.date; }),pm), tp=pm[k]&&pm[k][g.id]||{};
+      var zt=0; if(g.type==='zikr'){ try{ var zs=zikrSteps(fake); zt=(zs[Math.min(tp.stepIndex||0,zs.length-1)]||{}).target||0; }catch(e){} }
+      var note=p2>=100?'Выполнено · всего '+g.completedDays+' дн.':g.type==='zikr'&&tp.count!=null?'Счёт: '+tp.count+(zt?' из '+zt:''):g.type==='checklist'&&Array.isArray(tp.done)?'Пункты: '+tp.done.length+' из '+((g.config.items||[]).length):tp.goalAmount!=null?'Сегодня: '+tp.goalAmount+' '+((g.config.goal&&g.config.goal.unit)||''):tp.amount!=null?'Сегодня: '+tp.amount+' из '+(g.config.target||1)+' '+(g.config.unit||''):p2>0?'В процессе':'Сегодня не отмечено';
+      return {emoji:g.emoji||'🎯',name:g.name,pct:p2,info:note,attrs:''};
+    }
     var today=todayKey(), done=g.history.some(function(r){ return r.done&&r.date===today; }), pt=g.progress.filter(function(r){ return r.date===today; })[0];
     var amount=g.totalAmount!=null?g.totalAmount:(pt?pt.amount:0), pct=done?100:g.target?amount/g.target*100:g.type==='checklist'&&g.itemCount&&pt?pt.doneCount/g.itemCount*100:0;
     pct=Math.max(0,Math.min(100,Math.round(pct)));
@@ -6167,18 +6282,18 @@ body:not(.communities-visible) .social-tabs{display:none;}
   }
   function fvPeople(){
     var today=todayKey(), fr=(serverFriendsCache&&serverFriendsCache.friends)||[];
-    var mine=friendVisibleHabits().map(function(h){ var pct=Math.max(0,Math.min(100,Math.round(habitPercent(h,today)))); return {emoji:habitDisplayEmoji(h)||h.emoji||'🎯',name:h.name,pct:pct,info:pct>=100?'Выполнено':'Сегодня не отмечено',attrs:' role="button" tabindex="0" data-action="open-habit-card" data-id="'+escapeHtml(h.id)+'" data-date="'+today+'" data-habit-edit="'+escapeHtml(h.id)+'"'}; });
+    var mine=friendVisibleHabits().map(function(h){ var pct=Math.max(0,Math.min(100,Math.round(habitPercent(h,today)))); return {emoji:habitDisplayEmoji(h)||h.emoji||'🎯',name:h.name,pct:pct,info:pct>=100?'Выполнено':pct>0?'В процессе':'Сегодня не отмечено',attrs:' role="button" tabindex="0" data-action="open-habit-card" data-id="'+escapeHtml(h.id)+'" data-date="'+today+'" data-habit-edit="'+escapeHtml(h.id)+'"'}; });
     function sum(p){ var n=p.items.length; p.done=p.items.filter(function(i){ return i.pct>=100; }).length; p.pct=n?Math.round(p.items.reduce(function(a,i){ return a+i.pct; },0)/n):0; return p; }
     var people=[sum({id:'me',me:true,name:'Вы',short:'Я',letter:'Я',color:0,items:mine,loaded:true})];
     fr.forEach(function(u,i){ var d=friendGoalsData[u.id], nm=u.displayName||u.username; people.push(sum({id:String(u.id),name:nm,short:nm.split(' ')[0],letter:String(nm).trim().charAt(0).toUpperCase(),color:1+i%5,items:d?d.goals.map(fvGoalItem):[],loaded:!!d,chat:u.id})); });
     return people;
   }
   function fvRing(i){ return '<span class="fv-ring'+(i.pct>=100?' done':'')+'" style="--p:'+i.pct+'"><i>'+escapeHtml(i.emoji)+'</i></span>'; }
-  function fvTask(i){ return '<div class="fv-row fv-task"'+i.attrs+'>'+fvRing(i)+'<span class="fv-t"><b>'+escapeHtml(i.name)+'</b><small>'+escapeHtml(i.info)+'</small></span><span class="fv-pc'+(i.pct>=100?' ok':i.pct?'':' dim')+'">'+(i.pct>=100?'✓':i.pct+'%')+'</span></div>'; }
+  function fvTask(i){ return '<div class="fv-row fv-task"'+i.attrs+'>'+fvRing(i)+'<span class="fv-t"><b>'+escapeHtml(i.name)+'</b><small>'+escapeHtml(i.info)+'</small>'+(i.pct>0&&i.pct<100?fvBar(i):'')+'</span><span class="fv-pc'+(i.pct>=100?' ok':i.pct?'':' dim')+'">'+(i.pct>=100?'✓':i.pct+'%')+'</span></div>'; }
   function fvTasks(p){ return p.items.length?p.items.map(fvTask).join(''):'<p class="gm-note">'+(p.loaded?(p.me?'Пока нет задач для друзей. Нажмите «+» → «Добавить задачу».':'У друга пока нет задач для друзей.'):'Загрузка…')+'</p>'; }
   function fvAva(p,cls){ return '<span class="fv-ava fc'+p.color+(cls?' '+cls:'')+'">'+escapeHtml(p.letter)+'</span>'; }
   function fvBar(p){ return '<div class="fv-bar"><i class="'+(p.pct>=100?'ok':'')+'" style="width:'+p.pct+'%"></i></div>'; }
-  function fvCount(p){ return p.loaded?p.done+' из '+p.items.length+' сегодня':'Загрузка…'; }
+  function fvCount(p){ if(!p.loaded) return 'Загрузка…'; var part=p.items.filter(function(i){ return i.pct>0&&i.pct<100; }).length; return 'Выполнено '+p.done+' из '+p.items.length+(part?' · в процессе '+part:''); }
   function fvChat(p){ return p.chat?'<button type="button" class="gm-ic" data-social-chat="'+p.chat+'" title="Написать" aria-label="Написать">💬</button>':''; }
   var fvAddBtn='<button type="button" class="btn btn-ghost btn-block" data-friends-add-task style="margin:6px 0 4px;">+ Добавить задачу</button>';
   var fvEmpty='<div class="card social-welcome"><h3>Ваши друзья будут здесь</h3><p>Нажмите «+» вверху, найдите человека по имени, коду, телефону или почте и отправьте приглашение.</p></div>';
